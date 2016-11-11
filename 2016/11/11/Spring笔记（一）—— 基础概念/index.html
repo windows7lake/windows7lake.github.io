@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="java,spring," />
 
 
 
@@ -92,15 +92,28 @@
 
 
 
-<meta name="description" content="No pains no gains, Believes oneself, Nothing impossible!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lio's Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="1. spring 2.0 和 2.5 的新特性1.1 简介JDK 版本要在 1.4.2 以上，Java 5 和 Java 6 都支持。Spring 框架继续保持对 Java EE 1.3 及以后版本的兼容，完全支持 Java EE 5。对服务器（应用服务器和Web服务器）的支持：    
+
+WebLogic：8.1、9.0、9.2、10
+WebSphere：5.1、6.0、6.1
+OC4J(Or">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring笔记（一）—— 基础概念">
+<meta property="og:url" content="http://yoursite.com/2016/11/11/Spring笔记（一）—— 基础概念/index.html">
 <meta property="og:site_name" content="Lio's Blog">
-<meta property="og:description" content="No pains no gains, Believes oneself, Nothing impossible!">
+<meta property="og:description" content="1. spring 2.0 和 2.5 的新特性1.1 简介JDK 版本要在 1.4.2 以上，Java 5 和 Java 6 都支持。Spring 框架继续保持对 Java EE 1.3 及以后版本的兼容，完全支持 Java EE 5。对服务器（应用服务器和Web服务器）的支持：    
+
+WebLogic：8.1、9.0、9.2、10
+WebSphere：5.1、6.0、6.1
+OC4J(Or">
+<meta property="og:updated_time" content="2016-11-11T17:04:19.320Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lio's Blog">
-<meta name="twitter:description" content="No pains no gains, Believes oneself, Nothing impossible!">
+<meta name="twitter:title" content="Spring笔记（一）—— 基础概念">
+<meta name="twitter:description" content="1. spring 2.0 和 2.5 的新特性1.1 简介JDK 版本要在 1.4.2 以上，Java 5 和 Java 6 都支持。Spring 框架继续保持对 Java EE 1.3 及以后版本的兼容，完全支持 Java EE 5。对服务器（应用服务器和Web服务器）的支持：    
+
+WebLogic：8.1、9.0、9.2、10
+WebSphere：5.1、6.0、6.1
+OC4J(Or">
 
 
 
@@ -121,10 +134,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/11/11/Spring笔记（一）—— 基础概念/"/>
 
 
-  <title> Lio's Blog </title>
+  <title> Spring笔记（一）—— 基础概念 | Lio's Blog </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -145,9 +158,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -267,9 +278,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -289,155 +300,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/11/11/Github与hexo搭建博客步骤/" itemprop="url">
-                  Github 与 Hexo 搭建博客步骤（使用 Next 主题）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-11T11:01:02+08:00" content="2016-11-11">
-              2016-11-11
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">hexo</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/11/11/Github与hexo搭建博客步骤/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/11/Github与hexo搭建博客步骤/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1-安装前的准备"><a href="#1-安装前的准备" class="headerlink" title="1. 安装前的准备"></a>1. 安装前的准备</h2><p>Hexo 是一个快速简单并且强大的博客框架，使用者可以使用 markdown 语法编写文章，然后通过 hexo 生成带有主题的静态文件，并上传到 github，生成的 html 文件可以在浏览器上访问。本安装教程是在 ubuntu 平台上进行的，其他平台请另寻他处。<br>安装前 Hexo 前需要先安装 Node.js 和 Git，在后面会描述其安装过程。</p>
-<h2 id="2-安装-Git"><a href="#2-安装-Git" class="headerlink" title="2. 安装 Git"></a>2. 安装 Git</h2><p>使用如下命令安装 Git，在这之后可以先了解 git 简单命令的使用，推荐：<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰的Git教程</a>。  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install git-core</div></pre></td></tr></table></figure>
-<h2 id="3-安装-Node-js"><a href="#3-安装-Node-js" class="headerlink" title="3. 安装 Node.js"></a>3. 安装 Node.js</h2><p>我们可以使用 nvm 来安装 Node.js ，方法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | sh</div></pre></td></tr></table></figure></p>
-<p>或<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ wget -qO- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | sh</div></pre></td></tr></table></figure></p>
-<p>安装完 nvm 之后重启窗口安装 Node.js：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ nvm install stable</div></pre></td></tr></table></figure></p>
-<p>如果不想使用命令安装可以直接下载 <a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a> 的安装包安装。<br>下载完 linux 下的压缩包后，将其复制到 /usr/local 目录下，并使用 tar -xvJf + 文件名，对压缩包进行解压，更改解压后的文件夹的权限为755。<br>修改环境变量，使用 vim 修改 /etc/profile，在文件末尾添加两行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># node.js</div><div class="line">export NODE=/usr/local/node-v6.9.1-linux-x64</div><div class="line">export PATH=$&#123;NODE&#125;/bin:$PATH</div></pre></td></tr></table></figure></p>
-<p>之后执行命令 source /etc/profile，使用 node -v 命令查看版本号。</p>
-<h2 id="4-安装-Hexo"><a href="#4-安装-Hexo" class="headerlink" title="4. 安装 Hexo"></a>4. 安装 Hexo</h2><p>使用 npm 安装 hexo：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install npm</div><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install nodejs-legacy</div><div class="line">$ sudo npm install -g hexo-cli</div></pre></td></tr></table></figure></p>
-<p>经过一段时间的等待，会在终端显示如下树状结果，hexo 安装完毕。</p>
-<p><img src="/posts_img/after_install_hexo.png" alt="after_install_hexo"></p>
-<p>当 hexo 安装完毕，使用如下命令初始化 hexo 目录并安装依赖，生成的目录在当前所在的目录之下。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ hexo init &lt;folder&gt; # 初始化 hexo 并创建目录</div><div class="line">$ cd &lt;folder&gt; # 切换到目录之下</div><div class="line">$ npm install # 安装依赖包</div></pre></td></tr></table></figure></p>
-<p>hexo 常用命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ hexo g #完整命令为hexo generate，用于生成静态文件</div><div class="line">$ hexo s #完整命令为hexo server，用于启动服务器，主要用来本地预览</div><div class="line">$ hexo d #完整命令为hexo deploy，用于将本地文件发布到github上</div><div class="line">$ hexo n #完整命令为hexo new，用于新建一篇文章</div></pre></td></tr></table></figure></p>
-<p>在本地开启博客，用浏览器访问 <a href="http://localhost:4000/：" target="_blank" rel="external">http://localhost:4000/：</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo g</div><div class="line">$ hexo s</div></pre></td></tr></table></figure></p>
-<h2 id="5-注册-Github-并创建-repository"><a href="#5-注册-Github-并创建-repository" class="headerlink" title="5. 注册 Github 并创建 repository"></a>5. 注册 Github 并创建 repository</h2><p>到 <a href="https://github.com/" target="_blank" rel="external">Github</a> 官网注册 Github 账号，登录进入个人主页选择 Repositories，再点击旁边的 NEW 按钮创建新的 repository，名字的格式必须为 name.github.io，例如：windows7lake.github.io。    </p>
-<p><img src="/posts_img/create_repository.png" alt="create_repository"></p>
-<h2 id="6-hexo-的配置"><a href="#6-hexo-的配置" class="headerlink" title="6. hexo 的配置"></a>6. hexo 的配置</h2><p>整个博客的配置文件，位于 <code>hexo\_config.yml</code>，通过它，我们可以对整个博客进行配置。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line"># Hexo Configuration</div><div class="line">## Docs: https://hexo.io/docs/configuration.html</div><div class="line">## Source: https://github.com/hexojs/hexo/</div><div class="line"></div><div class="line"># Site</div><div class="line">title: Lio's Blog	# 网站即博客的标题</div><div class="line">subtitle: No pains no gains! 	 	# 博客的副标题</div><div class="line">description: No pains no gains, Believes oneself, Nothing impossible!		# 博客的描述</div><div class="line">author: Lio Lin		# 作者</div><div class="line">language: zh-CN		# 语言</div><div class="line">timezone:</div><div class="line"></div><div class="line"># URL	设置自己的域名</div><div class="line">## If your site is put in a subdirectory,</div><div class="line">## set url as 'http://yoursite.com/child' and root as '/child/'</div><div class="line">url: http://yoursite.com</div><div class="line">root: /</div><div class="line">permalink: :year/:month/:day/:title/</div><div class="line">permalink_defaults:</div><div class="line"></div><div class="line"># Directory</div><div class="line">source_dir: source</div><div class="line">public_dir: public</div><div class="line">tag_dir: tags</div><div class="line">archive_dir: archives</div><div class="line">category_dir: categories</div><div class="line">code_dir: downloads/code</div><div class="line">i18n_dir: :lang</div><div class="line">skip_render:</div><div class="line"></div><div class="line"># Writing</div><div class="line">new_post_name: :title.md 	# 新创建的文章的默认文件名</div><div class="line">default_layout: post		</div><div class="line">titlecase: false 		# 将标题转换为标题大小写</div><div class="line">external_link: true 		# 在新的标签中打开外部连接</div><div class="line">filename_case: 0		# 0 为默认; 1 为小写; 2 为大写</div><div class="line">render_drafts: false		# 是否显示草稿</div><div class="line">post_asset_folder: false</div><div class="line">relative_link: false		# 是否创建相对于根文件夹的链接</div><div class="line">future: true</div><div class="line">highlight:			# 代码块设置</div><div class="line">  enable: true</div><div class="line">  line_number: true</div><div class="line">  auto_detect: false</div><div class="line">  tab_replace:</div><div class="line"></div><div class="line"># Category &amp; Tag</div><div class="line">default_category: uncategorized</div><div class="line">category_map:</div><div class="line">tag_map:</div><div class="line"></div><div class="line"># Date / Time format	时间格式</div><div class="line">## Hexo uses Moment.js to parse and display date</div><div class="line">## You can customize the date format as defined in</div><div class="line">## http://momentjs.com/docs/#/displaying/format/</div><div class="line">date_format: YYYY-MM-DD</div><div class="line">time_format: HH:mm:ss</div><div class="line"></div><div class="line"># Pagination</div><div class="line">## Set per_page to 0 to disable pagination</div><div class="line">per_page: 10		# 每页显示的文章数，0 表示不分页</div><div class="line">pagination_dir: page	# 分页目录</div><div class="line"></div><div class="line"># Extensions</div><div class="line">## Plugins: https://hexo.io/plugins/</div><div class="line">## Themes: https://hexo.io/themes/</div><div class="line">theme: landscape	# 主题名</div><div class="line"></div><div class="line"># Deployment	部署到 github 的配置</div><div class="line">## Docs: https://hexo.io/docs/deployment.html</div><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repository: https://github.com/windows7lake/windows7lake.github.io</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
-<p>使用如下命令克隆 Next 主题到我们的本地博客之下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd your-hexo-site</div><div class="line">$ git clone https://github.com/iissnan/hexo-theme-next themes/next</div></pre></td></tr></table></figure></p>
-<p>主题的配置文件，位于 <code>hexo\theme\主题名\_config.yml</code>，对主题的设置。<br>这里对主题的配置可以参考 <a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="external">NexT</a> 官网。</p>
-<h2 id="7-将本地-Hexo-发布到-Github"><a href="#7-将本地-Hexo-发布到-Github" class="headerlink" title="7. 将本地 Hexo 发布到 Github"></a>7. 将本地 Hexo 发布到 Github</h2><p>在本地创建 ssh key：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C &quot;your_email@youremail.com&quot;</div></pre></td></tr></table></figure></p>
-<p>后面的 <code>your_email@youremail.com</code> 改为自己的邮箱，之后会要求确认路径和输入密码，一路回车就行。成功的话会在 <code>~/</code> 下生成 <code>.ssh</code> 文件夹，进去，打开 <code>id_rsa.pub</code>，复制里面的 key。   </p>
-<p>回到 github，进入 Settings，选择 SSH and GPG Keys -&gt; New SSH Key，title 随便填，粘贴 key。为了验证是否成功，输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh -T git@github.com</div></pre></td></tr></table></figure></p>
-<p>如果是第一次的会提示是否 continue，输入 yes 就会看到：<code>You’ve successfully authenticated， but GitHub does not provide shell access</code> ，这就表示已成功连上 github。   </p>
-<p>接下来我们要做的就是把本地仓库传到 github 上去，在此之前还需要设置 username 和 email，因为 github 每次 commit 都会记录他们。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name &quot;your name&quot;  </div><div class="line">$ git config --global user.email &quot;your_email@youremail.com&quot;</div></pre></td></tr></table></figure></p>
-<p>发布本地博客内容到 Github，需切换到博客目录下，执行如下两条命令，执行如下的第二个命令，可能会要你输入用户名和密码，皆为注册 Github 时的数据，输入密码是不显示任何东西的，输入完毕回车即可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo g</div><div class="line">$ hexo d</div></pre></td></tr></table></figure></p>
-<p>如果输入 <code>hexo d</code> 后遇到 <code>ERROR Deployer not found: Git</code>，则使用命令 <code>npm install hexo-deployer-git –save</code> 即可。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/11/Spring笔记（一）—— 基础概念/" itemprop="url">
-                  Spring笔记（一）—— 基础概念
-                </a>
+                Spring笔记（一）—— 基础概念
               
             
           </h1>
@@ -492,6 +355,11 @@
           
 
           
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
         </div>
       </header>
     
@@ -503,9 +371,7 @@
       
 
       
-        
-          
-            <h2 id="1-spring-2-0-和-2-5-的新特性"><a href="#1-spring-2-0-和-2-5-的新特性" class="headerlink" title="1. spring 2.0 和 2.5 的新特性"></a>1. spring 2.0 和 2.5 的新特性</h2><h3 id="1-1-简介"><a href="#1-1-简介" class="headerlink" title="1.1 简介"></a>1.1 简介</h3><p>JDK 版本要在 1.4.2 以上，Java 5 和 Java 6 都支持。<br>Spring 框架继续保持对 Java EE 1.3 及以后版本的兼容，完全支持 Java EE 5。<br>对服务器（应用服务器和Web服务器）的支持：    </p>
+        <h2 id="1-spring-2-0-和-2-5-的新特性"><a href="#1-spring-2-0-和-2-5-的新特性" class="headerlink" title="1. spring 2.0 和 2.5 的新特性"></a>1. spring 2.0 和 2.5 的新特性</h2><h3 id="1-1-简介"><a href="#1-1-简介" class="headerlink" title="1.1 简介"></a>1.1 简介</h3><p>JDK 版本要在 1.4.2 以上，Java 5 和 Java 6 都支持。<br>Spring 框架继续保持对 Java EE 1.3 及以后版本的兼容，完全支持 Java EE 5。<br>对服务器（应用服务器和Web服务器）的支持：    </p>
 <ul>
 <li>WebLogic：8.1、9.0、9.2、10</li>
 <li>WebSphere：5.1、6.0、6.1</li>
@@ -676,171 +542,106 @@
 </ul>
 <h2 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h2><p><a href="http://jinnianshilongnian.iteye.com/blog/2102278" target="_blank" rel="external">开涛的博客–Spring 4.1 新特性——综述</a><br><a href="http://blog.csdn.net/z1049186181/article/details/51446643" target="_blank" rel="external">BigZ的专栏–Spring 4.0 新功能和增强</a><br><a href="https://github.com/waylau/spring-framework-4-reference" target="_blank" rel="external">中文翻译 Spring Framework 4.x参考文档</a></p>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/11/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-11T11:01:02+08:00" content="2016-11-11">
-              2016-11-11
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">hexo</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
+            <a href="/tags/java/" rel="tag">#java</a>
           
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/11/11/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/11/hello-world/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
+            <a href="/tags/spring/" rel="tag">#spring</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/11/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
 
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/11/Github与hexo搭建博客步骤/" rel="prev" title="Github 与 Hexo 搭建博客步骤（使用 Next 主题）">
+                Github 与 Hexo 搭建博客步骤（使用 Next 主题） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
 
 
           </div>
           
 
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/11/Spring笔记（一）—— 基础概念/"
+           data-title="Spring笔记（一）—— 基础概念" data-url="http://yoursite.com/2016/11/11/Spring笔记（一）—— 基础概念/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -860,8 +661,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -918,6 +728,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-spring-2-0-和-2-5-的新特性"><span class="nav-number">1.</span> <span class="nav-text">1. spring 2.0 和 2.5 的新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-简介"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-控制反转（IOC）容器"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 控制反转（IOC）容器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-新的-bean-作用域"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1 新的 bean 作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-2-更简单的-XML-配置"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2 更简单的 XML 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-3-可扩展的-XML-编写"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.2.3 可扩展的 XML 编写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-4-Annotation（注解）驱动配置"><span class="nav-number">1.2.4.</span> <span class="nav-text">1.2.4 Annotation（注解）驱动配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-5-在-classpath-中自动搜索组件"><span class="nav-number">1.2.5.</span> <span class="nav-text">1.2.5 在 classpath 中自动搜索组件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-面向切面编程（AOP）"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 面向切面编程（AOP）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-1-更加简单的-AOP-XML-配置"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.3.1 更加简单的 AOP XML 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-2-对-AspectJ-切面的支持"><span class="nav-number">1.3.2.</span> <span class="nav-text">1.3.2 对 @AspectJ 切面的支持</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-3-对-bean-命名-pointcut-的支持"><span class="nav-number">1.3.3.</span> <span class="nav-text">1.3.3 对 bean 命名 pointcut 的支持</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-4-对-AspectJ-装载时织入的支持"><span class="nav-number">1.3.4.</span> <span class="nav-text">1.3.4 对 AspectJ 装载时织入的支持</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-中间层"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 中间层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-1-在XML里更为简单的声明性事务配置"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.4.1 在XML里更为简单的声明性事务配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-2-对-Websphere-事务管理的完整支持"><span class="nav-number">1.4.2.</span> <span class="nav-text">1.4.2 对 Websphere 事务管理的完整支持</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-3-JPA"><span class="nav-number">1.4.3.</span> <span class="nav-text">1.4.3 JPA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-4-异步的JMS"><span class="nav-number">1.4.4.</span> <span class="nav-text">1.4.4 异步的JMS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-5-JDBC"><span class="nav-number">1.4.5.</span> <span class="nav-text">1.4.5 JDBC</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-Web-层"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 Web 层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-1-Spring-MVC-合理的默认值"><span class="nav-number">1.5.1.</span> <span class="nav-text">1.5.1 Spring MVC 合理的默认值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-2-Portlet-框架"><span class="nav-number">1.5.2.</span> <span class="nav-text">1.5.2 Portlet 框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-3-基于-Annotation-的控制器"><span class="nav-number">1.5.3.</span> <span class="nav-text">1.5.3 基于 Annotation 的控制器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-4-Spring-MVC-的表单标签库"><span class="nav-number">1.5.4.</span> <span class="nav-text">1.5.4 Spring MVC 的表单标签库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-5-对-Tiles-2，JSF-1-2，JAX-WS-支持"><span class="nav-number">1.5.5.</span> <span class="nav-text">1.5.5 对 Tiles 2，JSF 1.2，JAX-WS 支持</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-spring-3-x-的新特性"><span class="nav-number">2.</span> <span class="nav-text">2. spring 3.x 的新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-spring-3-0"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 spring 3.0</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-Spring3-0-以后分成多个-jar-包"><span class="nav-number">2.1.1.</span> <span class="nav-text">2.1.1 Spring3.0 以后分成多个 jar 包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-2-新增特性"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.1.2 新增特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-3-基于-Java-5-的核心API的更新"><span class="nav-number">2.1.3.</span> <span class="nav-text">2.1.3 基于 Java 5 的核心API的更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-4-Spring-表达式语言（简称SpEL）"><span class="nav-number">2.1.4.</span> <span class="nav-text">2.1.4 Spring 表达式语言（简称SpEL）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-5-增强的-IOC-和基于-java-的-bean-配置"><span class="nav-number">2.1.5.</span> <span class="nav-text">2.1.5 增强的 IOC 和基于 java 的 bean 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-6-通用类型转换系统和字段格式化系统"><span class="nav-number">2.1.6.</span> <span class="nav-text">2.1.6 通用类型转换系统和字段格式化系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-7-声明式模型验证"><span class="nav-number">2.1.7.</span> <span class="nav-text">2.1.7 声明式模型验证</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-spring-3-1"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 spring 3.1</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-新增特性"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1 新增特性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-spring-3-2"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 spring 3.2</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-新增特性"><span class="nav-number">2.3.1.</span> <span class="nav-text">2.3.1 新增特性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-spring-4-x-的新特性"><span class="nav-number">3.</span> <span class="nav-text">3. spring 4.x 的新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-spring-4-0"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 spring 4.0</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-1-新增特性"><span class="nav-number">3.1.1.</span> <span class="nav-text">3.1.1 新增特性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-spring-4-1"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 spring 4.1</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-新增特性"><span class="nav-number">3.2.1.</span> <span class="nav-text">3.2.1 新增特性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料："><span class="nav-number">4.</span> <span class="nav-text">参考资料：</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -1030,6 +851,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
 
   
 
