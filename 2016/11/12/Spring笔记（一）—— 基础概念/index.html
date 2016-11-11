@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="java,spring," />
 
 
 
@@ -98,7 +98,7 @@ WebLogic：8.1、9.0、9.2、10
 WebSphere：5.1、6.0、6.1
 OC4J(Or">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Lio's Blog">
+<meta property="og:title" content="Spring笔记（一）—— 基础概念">
 <meta property="og:url" content="http://yoursite.com/2016/11/12/Spring笔记（一）—— 基础概念/index.html">
 <meta property="og:site_name" content="Lio's Blog">
 <meta property="og:description" content="1. spring 2.0 和 2.5 的新特性1.1 简介JDK 版本要在 1.4.2 以上，Java 5 和 Java 6 都支持。Spring 框架继续保持对 Java EE 1.3 及以后版本的兼容，完全支持 Java EE 5。对服务器（应用服务器和Web服务器）的支持：    
@@ -106,9 +106,9 @@ OC4J(Or">
 WebLogic：8.1、9.0、9.2、10
 WebSphere：5.1、6.0、6.1
 OC4J(Or">
-<meta property="og:updated_time" content="2016-11-11T16:21:13.960Z">
+<meta property="og:updated_time" content="2016-11-11T17:06:42.536Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lio's Blog">
+<meta name="twitter:title" content="Spring笔记（一）—— 基础概念">
 <meta name="twitter:description" content="1. spring 2.0 和 2.5 的新特性1.1 简介JDK 版本要在 1.4.2 以上，Java 5 和 Java 6 都支持。Spring 框架继续保持对 Java EE 1.3 及以后版本的兼容，完全支持 Java EE 5。对服务器（应用服务器和Web服务器）的支持：    
 
 WebLogic：8.1、9.0、9.2、10
@@ -137,7 +137,7 @@ OC4J(Or">
   <link rel="canonical" href="http://yoursite.com/2016/11/12/Spring笔记（一）—— 基础概念/"/>
 
 
-  <title>  | Lio's Blog </title>
+  <title> Spring笔记（一）—— 基础概念 | Lio's Blog </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -300,7 +300,7 @@ OC4J(Or">
             
             
               
-                
+                Spring笔记（一）—— 基础概念
               
             
           </h1>
@@ -312,11 +312,30 @@ OC4J(Or">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-12T00:21:13+08:00" content="2016-11-12">
+            <time itemprop="dateCreated" datetime="2016-11-12T11:01:02+08:00" content="2016-11-12">
               2016-11-12
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -488,7 +507,40 @@ OC4J(Or">
 <li>Java 8 的支持，最低需要 Java 6</li>
 <li>使用 Java EE 6 或以上的版本来作为基线，同时包含了相关的 JPA2.0 和 Servlet3.0 的规范</li>
 <li>使用 Groovy 的 DSL（DomainSpecific Languages）来定义 Bean</li>
+<li>核心容器的改进<ul>
+<li>Spring 注入 Bean 的时候把泛型类型当成一种形式的限定符。使用 Spring DataRepository 可以方便的插入特定的实现：@Autowired Repository<customer> customerRepository。</customer></li>
+<li>使用 Spring 的元注解支持，可以开发自定义注解来公开源注解的特定属性。</li>
+<li>当自动装配到 lists 和 arrays 时，Beans 可以被排序，支持 @Order 注解和 Ordered 接口两种方式。 @Lazy 注解可以用在注入点以及 @Bean 定义上。</li>
+<li>引入 @Description 注解,开发人员可以使用基于Java 方式的配置。</li>
+<li>根据条件筛选 Beans 的广义模型通过 @Conditional 注解加入。这和@Profile支持的类似，但是允许以编程式开发用户定义的策略。</li>
+<li>基于 CGLIB 的代理类不在需要默认的构造方法。</li>
+<li>框架支持管理时区。</li>
 </ul>
+</li>
+<li>常规 Web 改进<ul>
+<li>在 Spring MVC 应用中使用新的 @RestController 注解时，不再需要给 @RequestMapping 的方法添加 @ResponseBody 注解。</li>
+<li>AsyncRestTemplate 类已被添加进来，当开发 REST 客户端时，允许非阻塞异步支持。</li>
+<li>当开发 Spring MVC 应用时，Spring 现在提供了全面的时区支持</li>
+</ul>
+</li>
+<li>WebSocket, SockJS 和 STOMP 消息</li>
+<li>测试改进，引入了几个用于单元测试和集成测试的新功能<ul>
+<li>几乎 spring-test 模块中所有的注解（例如：@ContextConfiguration、@WebAppConfiguration、@ContextHierarchy、@ActiveProfiles 等等)可以用作元注解来创建自定义的 composed annotations 并且可以减少测试套件的配置。</li>
+<li>现在可以以编程方式解决 Bean 定义配置文件的激活。只需要实现一个自定义的 ActiveProfilesResolver，并且通过 @ActiveProfiles的resolver 属性注册。</li>
+<li>新的 SocketUtils 类被引入到了 spring-core 模块。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-2-spring-4-1"><a href="#3-2-spring-4-1" class="headerlink" title="3.2 spring 4.1"></a>3.2 spring 4.1</h3><h4 id="3-2-1-新增特性"><a href="#3-2-1-新增特性" class="headerlink" title="3.2.1 新增特性"></a>3.2.1 新增特性</h4><ul>
+<li>核心部分基本上无变化，提供了 DirectFieldAccessor 用于直接字段访问、yaml 配置、SpEL 的字节码编译化、BackOff 退避算法的基本实现、Base64Utils、SmartInitializingSingleton等；</li>
+<li>在任务调度和事件机制上加入了异常处理部分；</li>
+<li>cache 部分加入 jcache 的集成、类级别的 @CacheConfig 的支持、CacheResolver；</li>
+<li>mvc 部分提供了一些视图解析器的 mvc 标签实现简化配置、提供了 GroovyWebApplicationContext 用于 Groovy web 集成、提供了 Gson、protobuf 的 HttpMessageConverter、静态资源处理方面添加了 resolver和 transformer、提供了对 groovy-templates 模板的支持、JSONP 的支持、对 Jackson 的 @JsonView 的支持等；</li>
+<li>提供了页面自动化测试框架 Spring MVC Test HtmlUnit；</li>
+<li>test 部分提供了更便利的 @sql 标签来执行测试脚本的初始化、MockRestServiceServer 对 AyncRestTemplate 支持、MockMvcConfigurer 来全局配置 MockMvc；</li>
+<li>提供了对 Java 8 Optional 的支持（ObjectToOptionalConverter 实现；可以在MVC中如 @RequestParam 等注解的绑定）、从Spring 4.1起 Ehcache 支持需要 EhCache 2.5 或更高版本、兼容 Quartz 2.1.4、支持 javax.annotation.Priority（等价于@Order）、JMS API的增强、SpringJUnit4ClassRunner 需要 JUnit 4.9或更高版本支持。</li>
+</ul>
+<h2 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h2><p><a href="http://jinnianshilongnian.iteye.com/blog/2102278" target="_blank" rel="external">开涛的博客–Spring 4.1 新特性——综述</a><br><a href="http://blog.csdn.net/z1049186181/article/details/51446643" target="_blank" rel="external">BigZ的专栏–Spring 4.0 新功能和增强</a><br><a href="https://github.com/waylau/spring-framework-4-reference" target="_blank" rel="external">中文翻译 Spring Framework 4.x参考文档</a></p>
 
       
     </div>
@@ -508,6 +560,14 @@ OC4J(Or">
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+            <a href="/tags/spring/" rel="tag">#spring</a>
+          
+        </div>
       
 
       
@@ -565,12 +625,15 @@ OC4J(Or">
           </div>
           
 
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
 
           
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/11/12/Spring笔记（一）—— 基础概念/"
-           data-title="" data-url="http://yoursite.com/2016/11/12/Spring笔记（一）—— 基础概念/">
+           data-title="Spring笔记（一）—— 基础概念" data-url="http://yoursite.com/2016/11/12/Spring笔记（一）—— 基础概念/">
       </div>
     
   </div>
@@ -623,7 +686,7 @@ OC4J(Or">
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -632,7 +695,7 @@ OC4J(Or">
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -668,7 +731,7 @@ OC4J(Or">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-spring-2-0-和-2-5-的新特性"><span class="nav-number">1.</span> <span class="nav-text">1. spring 2.0 和 2.5 的新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-简介"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-控制反转（IOC）容器"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 控制反转（IOC）容器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-新的-bean-作用域"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1 新的 bean 作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-2-更简单的-XML-配置"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2 更简单的 XML 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-3-可扩展的-XML-编写"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.2.3 可扩展的 XML 编写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-4-Annotation（注解）驱动配置"><span class="nav-number">1.2.4.</span> <span class="nav-text">1.2.4 Annotation（注解）驱动配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-5-在-classpath-中自动搜索组件"><span class="nav-number">1.2.5.</span> <span class="nav-text">1.2.5 在 classpath 中自动搜索组件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-面向切面编程（AOP）"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 面向切面编程（AOP）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-1-更加简单的-AOP-XML-配置"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.3.1 更加简单的 AOP XML 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-2-对-AspectJ-切面的支持"><span class="nav-number">1.3.2.</span> <span class="nav-text">1.3.2 对 @AspectJ 切面的支持</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-3-对-bean-命名-pointcut-的支持"><span class="nav-number">1.3.3.</span> <span class="nav-text">1.3.3 对 bean 命名 pointcut 的支持</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-4-对-AspectJ-装载时织入的支持"><span class="nav-number">1.3.4.</span> <span class="nav-text">1.3.4 对 AspectJ 装载时织入的支持</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-中间层"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 中间层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-1-在XML里更为简单的声明性事务配置"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.4.1 在XML里更为简单的声明性事务配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-2-对-Websphere-事务管理的完整支持"><span class="nav-number">1.4.2.</span> <span class="nav-text">1.4.2 对 Websphere 事务管理的完整支持</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-3-JPA"><span class="nav-number">1.4.3.</span> <span class="nav-text">1.4.3 JPA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-4-异步的JMS"><span class="nav-number">1.4.4.</span> <span class="nav-text">1.4.4 异步的JMS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-5-JDBC"><span class="nav-number">1.4.5.</span> <span class="nav-text">1.4.5 JDBC</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-Web-层"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 Web 层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-1-Spring-MVC-合理的默认值"><span class="nav-number">1.5.1.</span> <span class="nav-text">1.5.1 Spring MVC 合理的默认值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-2-Portlet-框架"><span class="nav-number">1.5.2.</span> <span class="nav-text">1.5.2 Portlet 框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-3-基于-Annotation-的控制器"><span class="nav-number">1.5.3.</span> <span class="nav-text">1.5.3 基于 Annotation 的控制器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-4-Spring-MVC-的表单标签库"><span class="nav-number">1.5.4.</span> <span class="nav-text">1.5.4 Spring MVC 的表单标签库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-5-对-Tiles-2，JSF-1-2，JAX-WS-支持"><span class="nav-number">1.5.5.</span> <span class="nav-text">1.5.5 对 Tiles 2，JSF 1.2，JAX-WS 支持</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-spring-3-x-的新特性"><span class="nav-number">2.</span> <span class="nav-text">2. spring 3.x 的新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-spring-3-0"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 spring 3.0</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-Spring3-0-以后分成多个-jar-包"><span class="nav-number">2.1.1.</span> <span class="nav-text">2.1.1 Spring3.0 以后分成多个 jar 包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-2-新增特性"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.1.2 新增特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-3-基于-Java-5-的核心API的更新"><span class="nav-number">2.1.3.</span> <span class="nav-text">2.1.3 基于 Java 5 的核心API的更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-4-Spring-表达式语言（简称SpEL）"><span class="nav-number">2.1.4.</span> <span class="nav-text">2.1.4 Spring 表达式语言（简称SpEL）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-5-增强的-IOC-和基于-java-的-bean-配置"><span class="nav-number">2.1.5.</span> <span class="nav-text">2.1.5 增强的 IOC 和基于 java 的 bean 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-6-通用类型转换系统和字段格式化系统"><span class="nav-number">2.1.6.</span> <span class="nav-text">2.1.6 通用类型转换系统和字段格式化系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-7-声明式模型验证"><span class="nav-number">2.1.7.</span> <span class="nav-text">2.1.7 声明式模型验证</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-spring-3-1"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 spring 3.1</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-新增特性"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1 新增特性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-spring-3-2"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 spring 3.2</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-新增特性"><span class="nav-number">2.3.1.</span> <span class="nav-text">2.3.1 新增特性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-spring-4-x-的新特性"><span class="nav-number">3.</span> <span class="nav-text">3. spring 4.x 的新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-spring-4-0"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 spring 4.0</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-1-新增特性"><span class="nav-number">3.1.1.</span> <span class="nav-text">3.1.1 新增特性</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-spring-2-0-和-2-5-的新特性"><span class="nav-number">1.</span> <span class="nav-text">1. spring 2.0 和 2.5 的新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-简介"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-控制反转（IOC）容器"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 控制反转（IOC）容器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-新的-bean-作用域"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1 新的 bean 作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-2-更简单的-XML-配置"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2 更简单的 XML 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-3-可扩展的-XML-编写"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.2.3 可扩展的 XML 编写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-4-Annotation（注解）驱动配置"><span class="nav-number">1.2.4.</span> <span class="nav-text">1.2.4 Annotation（注解）驱动配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-5-在-classpath-中自动搜索组件"><span class="nav-number">1.2.5.</span> <span class="nav-text">1.2.5 在 classpath 中自动搜索组件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-面向切面编程（AOP）"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 面向切面编程（AOP）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-1-更加简单的-AOP-XML-配置"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.3.1 更加简单的 AOP XML 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-2-对-AspectJ-切面的支持"><span class="nav-number">1.3.2.</span> <span class="nav-text">1.3.2 对 @AspectJ 切面的支持</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-3-对-bean-命名-pointcut-的支持"><span class="nav-number">1.3.3.</span> <span class="nav-text">1.3.3 对 bean 命名 pointcut 的支持</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-4-对-AspectJ-装载时织入的支持"><span class="nav-number">1.3.4.</span> <span class="nav-text">1.3.4 对 AspectJ 装载时织入的支持</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-中间层"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 中间层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-1-在XML里更为简单的声明性事务配置"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.4.1 在XML里更为简单的声明性事务配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-2-对-Websphere-事务管理的完整支持"><span class="nav-number">1.4.2.</span> <span class="nav-text">1.4.2 对 Websphere 事务管理的完整支持</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-3-JPA"><span class="nav-number">1.4.3.</span> <span class="nav-text">1.4.3 JPA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-4-异步的JMS"><span class="nav-number">1.4.4.</span> <span class="nav-text">1.4.4 异步的JMS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-5-JDBC"><span class="nav-number">1.4.5.</span> <span class="nav-text">1.4.5 JDBC</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-Web-层"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 Web 层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-1-Spring-MVC-合理的默认值"><span class="nav-number">1.5.1.</span> <span class="nav-text">1.5.1 Spring MVC 合理的默认值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-2-Portlet-框架"><span class="nav-number">1.5.2.</span> <span class="nav-text">1.5.2 Portlet 框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-3-基于-Annotation-的控制器"><span class="nav-number">1.5.3.</span> <span class="nav-text">1.5.3 基于 Annotation 的控制器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-4-Spring-MVC-的表单标签库"><span class="nav-number">1.5.4.</span> <span class="nav-text">1.5.4 Spring MVC 的表单标签库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-5-对-Tiles-2，JSF-1-2，JAX-WS-支持"><span class="nav-number">1.5.5.</span> <span class="nav-text">1.5.5 对 Tiles 2，JSF 1.2，JAX-WS 支持</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-spring-3-x-的新特性"><span class="nav-number">2.</span> <span class="nav-text">2. spring 3.x 的新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-spring-3-0"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 spring 3.0</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-Spring3-0-以后分成多个-jar-包"><span class="nav-number">2.1.1.</span> <span class="nav-text">2.1.1 Spring3.0 以后分成多个 jar 包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-2-新增特性"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.1.2 新增特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-3-基于-Java-5-的核心API的更新"><span class="nav-number">2.1.3.</span> <span class="nav-text">2.1.3 基于 Java 5 的核心API的更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-4-Spring-表达式语言（简称SpEL）"><span class="nav-number">2.1.4.</span> <span class="nav-text">2.1.4 Spring 表达式语言（简称SpEL）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-5-增强的-IOC-和基于-java-的-bean-配置"><span class="nav-number">2.1.5.</span> <span class="nav-text">2.1.5 增强的 IOC 和基于 java 的 bean 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-6-通用类型转换系统和字段格式化系统"><span class="nav-number">2.1.6.</span> <span class="nav-text">2.1.6 通用类型转换系统和字段格式化系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-7-声明式模型验证"><span class="nav-number">2.1.7.</span> <span class="nav-text">2.1.7 声明式模型验证</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-spring-3-1"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 spring 3.1</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-新增特性"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1 新增特性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-spring-3-2"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 spring 3.2</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-新增特性"><span class="nav-number">2.3.1.</span> <span class="nav-text">2.3.1 新增特性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-spring-4-x-的新特性"><span class="nav-number">3.</span> <span class="nav-text">3. spring 4.x 的新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-spring-4-0"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 spring 4.0</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-1-新增特性"><span class="nav-number">3.1.1.</span> <span class="nav-text">3.1.1 新增特性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-spring-4-1"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 spring 4.1</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-新增特性"><span class="nav-number">3.2.1.</span> <span class="nav-text">3.2.1 新增特性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料："><span class="nav-number">4.</span> <span class="nav-text">参考资料：</span></a></li></ol></div>
             
           </div>
         </section>
