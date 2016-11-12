@@ -290,8 +290,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/11/12/Spring笔记（一）—— 基础概念/" itemprop="url">
-                  Spring笔记（一）—— 基础概念
+                <a class="post-title-link" href="/2016/11/12/Spring笔记（一）—— 版本新特性/" itemprop="url">
+                  Spring笔记（一）—— 版本新特性
                 </a>
               
             
@@ -334,8 +334,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/11/12/Spring笔记（一）—— 基础概念/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/12/Spring笔记（一）—— 基础概念/" itemprop="commentsCount"></span>
+                <a href="/2016/11/12/Spring笔记（一）—— 版本新特性/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/12/Spring笔记（一）—— 版本新特性/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -359,8 +359,7 @@
 
       
         
-          
-            <h2 id="1-spring-2-0-和-2-5-的新特性"><a href="#1-spring-2-0-和-2-5-的新特性" class="headerlink" title="1. spring 2.0 和 2.5 的新特性"></a>1. spring 2.0 和 2.5 的新特性</h2><h3 id="1-1-简介"><a href="#1-1-简介" class="headerlink" title="1.1 简介"></a>1.1 简介</h3><p>JDK 版本要在 1.4.2 以上，Java 5 和 Java 6 都支持。<br>Spring 框架继续保持对 Java EE 1.3 及以后版本的兼容，完全支持 Java EE 5。<br>对服务器（应用服务器和Web服务器）的支持：    </p>
+          <h2 id="1-spring-2-0-和-2-5-的新特性"><a href="#1-spring-2-0-和-2-5-的新特性" class="headerlink" title="1. spring 2.0 和 2.5 的新特性"></a>1. spring 2.0 和 2.5 的新特性</h2><h3 id="1-1-简介"><a href="#1-1-简介" class="headerlink" title="1.1 简介"></a>1.1 简介</h3><p>JDK 版本要在 1.4.2 以上，Java 5 和 Java 6 都支持。<br>Spring 框架继续保持对 Java EE 1.3 及以后版本的兼容，完全支持 Java EE 5。<br>对服务器（应用服务器和Web服务器）的支持：    </p>
 <ul>
 <li>WebLogic：8.1、9.0、9.2、10</li>
 <li>WebSphere：5.1、6.0、6.1</li>
@@ -369,171 +368,12 @@
 <li>Tomcat：4.1、5.0、5.5、6.0</li>
 <li>Jetty：4.2、5.1、6.1</li>
 <li>Resin：2.1、3.0、3.1</li>
-<li>GlassFish：v1、v2</li>
-</ul>
-<h3 id="1-2-控制反转（IOC）容器"><a href="#1-2-控制反转（IOC）容器" class="headerlink" title="1.2 控制反转（IOC）容器"></a>1.2 控制反转（IOC）容器</h3><h4 id="1-2-1-新的-bean-作用域"><a href="#1-2-1-新的-bean-作用域" class="headerlink" title="1.2.1 新的 bean 作用域"></a>1.2.1 新的 bean 作用域</h4><p>Spring2.0：IoC 容器中只支持 singleton 和 prototype 两个不同的 bean 作用域。<br>Spring2.5：还支持 request、session、global session 三个在 web 环境下使用的 bean 作用域，且提供了hooks，可以让用户创建自己的作用域。</p>
-<h4 id="1-2-2-更简单的-XML-配置"><a href="#1-2-2-更简单的-XML-配置" class="headerlink" title="1.2.2 更简单的 XML 配置"></a>1.2.2 更简单的 XML 配置</h4><p>Spring2.5 对 Spring2.0 的 DTD 进行了更新，spring-beans-2.0.dtd 可在发布包下的 dist/resources 下找到。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"</span></div><div class="line">          "http://www.springframework.org/dtd/spring-beans-2.0.dtd"&gt;</div></pre></td></tr></table></figure></p>
-<h4 id="1-2-3-可扩展的-XML-编写"><a href="#1-2-3-可扩展的-XML-编写" class="headerlink" title="1.2.3 可扩展的 XML 编写"></a>1.2.3 可扩展的 XML 编写</h4><p>作为一个应用程序开发人员或第三方框架或产品的供应商，开发自定义标签，供其他开发人员把这些标签嵌入到自己的Spring配置文件里。</p>
-<h4 id="1-2-4-Annotation（注解）驱动配置"><a href="#1-2-4-Annotation（注解）驱动配置" class="headerlink" title="1.2.4 Annotation（注解）驱动配置"></a>1.2.4 Annotation（注解）驱动配置</h4><p>Spring 2.0 引入了一些用于配置的 annotation, 包括 <code>@Transactional, @Required, @PersistenceContext /@PersistenceUnit</code>。<br>Spring 2.5 引入了用于配置的完整的 Annotation 集合: <code>@Autowired</code>，以及对 JSR-250 注解 <code>@Resource, @PostConstruct, @PreDestroy</code> 的支持。</p>
-<h4 id="1-2-5-在-classpath-中自动搜索组件"><a href="#1-2-5-在-classpath-中自动搜索组件" class="headerlink" title="1.2.5 在 classpath 中自动搜索组件"></a>1.2.5 在 classpath 中自动搜索组件</h4><p>组件类会注解为 stereotype: <code>@Component, @Repository, @Service, @Controller</code>，取决于程序的上下文配置，这些组件会被自动搜索到，并且转变为 Spring bean 定义，而不需要为每个类都进行明确的配置。</p>
-<h3 id="1-3-面向切面编程（AOP）"><a href="#1-3-面向切面编程（AOP）" class="headerlink" title="1.3 面向切面编程（AOP）"></a>1.3 面向切面编程（AOP）</h3><h4 id="1-3-1-更加简单的-AOP-XML-配置"><a href="#1-3-1-更加简单的-AOP-XML-配置" class="headerlink" title="1.3.1 更加简单的 AOP XML 配置"></a>1.3.1 更加简单的 AOP XML 配置</h4><h4 id="1-3-2-对-AspectJ-切面的支持"><a href="#1-3-2-对-AspectJ-切面的支持" class="headerlink" title="1.3.2 对 @AspectJ 切面的支持"></a>1.3.2 对 @AspectJ 切面的支持</h4><h4 id="1-3-3-对-bean-命名-pointcut-的支持"><a href="#1-3-3-对-bean-命名-pointcut-的支持" class="headerlink" title="1.3.3 对 bean 命名 pointcut 的支持"></a>1.3.3 对 bean 命名 pointcut 的支持</h4><h4 id="1-3-4-对-AspectJ-装载时织入的支持"><a href="#1-3-4-对-AspectJ-装载时织入的支持" class="headerlink" title="1.3.4 对 AspectJ 装载时织入的支持"></a>1.3.4 对 AspectJ 装载时织入的支持</h4><h3 id="1-4-中间层"><a href="#1-4-中间层" class="headerlink" title="1.4 中间层"></a>1.4 中间层</h3><h4 id="1-4-1-在XML里更为简单的声明性事务配置"><a href="#1-4-1-在XML里更为简单的声明性事务配置" class="headerlink" title="1.4.1 在XML里更为简单的声明性事务配置"></a>1.4.1 在XML里更为简单的声明性事务配置</h4><p>Spring 2.5 支持方便的注解驱动的事务管理，通过 context:load-time-weaver 和 tx:annotation-driven mode=”aspectj” 的联合使用进行事务管理。</p>
-<h4 id="1-4-2-对-Websphere-事务管理的完整支持"><a href="#1-4-2-对-Websphere-事务管理的完整支持" class="headerlink" title="1.4.2 对 Websphere 事务管理的完整支持"></a>1.4.2 对 Websphere 事务管理的完整支持</h4><p>要自动探测底层的 JTA 事务平台，可以使用 Spring 2.5 的新 tx:jta-transaction-manager 配置元素。它会自动探测 BEA WebLogic 和 IBM WebSphere，注册正确的 PlatformTransactionManager。</p>
-<h4 id="1-4-3-JPA"><a href="#1-4-3-JPA" class="headerlink" title="1.4.3 JPA"></a>1.4.3 JPA</h4><p>Spring 2.5 对 OpenJPA 的支持升级到了 OpenJPA 1.0，支持 savepoint 这样的高级特性。</p>
-<h4 id="1-4-4-异步的JMS"><a href="#1-4-4-异步的JMS" class="headerlink" title="1.4.4 异步的JMS"></a>1.4.4 异步的JMS</h4><p>在 Spring 2.0 之前，Spring 的 JMS 的作用局限于发送消息和同步接收消息。<br>Spring 2.0 提供对异步消息接收的完整支持。<br>在 Spring 2.5 中， JCA 风格的异步消息监听器设置也通过 GenericMessageEndpointManager 工具得到了支持。</p>
-<h4 id="1-4-5-JDBC"><a href="#1-4-5-JDBC" class="headerlink" title="1.4.5 JDBC"></a>1.4.5 JDBC</h4><p>引入了新类，Spring 2.5 扩充了 SimpleJdbcTemplate 的功能，引入了 SimpleJdbcCall<br>和 SimpleJdbcInsert 操作对象。</p>
-<h3 id="1-5-Web-层"><a href="#1-5-Web-层" class="headerlink" title="1.5 Web 层"></a>1.5 Web 层</h3><h4 id="1-5-1-Spring-MVC-合理的默认值"><a href="#1-5-1-Spring-MVC-合理的默认值" class="headerlink" title="1.5.1 Spring MVC 合理的默认值"></a>1.5.1 Spring MVC 合理的默认值</h4><h4 id="1-5-2-Portlet-框架"><a href="#1-5-2-Portlet-框架" class="headerlink" title="1.5.2 Portlet 框架"></a>1.5.2 Portlet 框架</h4><h4 id="1-5-3-基于-Annotation-的控制器"><a href="#1-5-3-基于-Annotation-的控制器" class="headerlink" title="1.5.3 基于 Annotation 的控制器"></a>1.5.3 基于 Annotation 的控制器</h4><h4 id="1-5-4-Spring-MVC-的表单标签库"><a href="#1-5-4-Spring-MVC-的表单标签库" class="headerlink" title="1.5.4 Spring MVC 的表单标签库"></a>1.5.4 Spring MVC 的表单标签库</h4><h4 id="1-5-5-对-Tiles-2，JSF-1-2，JAX-WS-支持"><a href="#1-5-5-对-Tiles-2，JSF-1-2，JAX-WS-支持" class="headerlink" title="1.5.5 对 Tiles 2，JSF 1.2，JAX-WS 支持"></a>1.5.5 对 Tiles 2，JSF 1.2，JAX-WS 支持</h4><h2 id="2-spring-3-x-的新特性"><a href="#2-spring-3-x-的新特性" class="headerlink" title="2. spring 3.x 的新特性"></a>2. spring 3.x 的新特性</h2><h3 id="2-1-spring-3-0"><a href="#2-1-spring-3-0" class="headerlink" title="2.1 spring 3.0"></a>2.1 spring 3.0</h3><h4 id="2-1-1-Spring3-0-以后分成多个-jar-包"><a href="#2-1-1-Spring3-0-以后分成多个-jar-包" class="headerlink" title="2.1.1 Spring3.0 以后分成多个 jar 包"></a>2.1.1 Spring3.0 以后分成多个 jar 包</h4><ul>
-<li><code>org.springframework.aop</code>， 包含在应用中使用Spring的AOP特性时所需的类。</li>
-<li><code>org.springframework.asm</code>，Spring独立的asm程序，Spring2.5.6的时候需要  asm.jar 包，3.0开始提供自己独立的asm.jar</li>
-<li><code>org.springframework.aspects</code>，提供对AspectJ的支持，以方便的将面向切面的功能集成进IDE中，比如Eclipse AJDT.</li>
-<li><code>org.springframework.beans</code>，所有应用都要用到，它包含访问配置文件，创建和管理Bean以及进行反转共控制和依赖注入操作时所需的类</li>
-<li><code>org.springframework.context</code>，为 Spring 核心提供了大量扩展。可以找到使用Spring ApplicationContext 特性时所需的全部类，JDNI所需的全部类，UI方面的用来与模板（Templating）引擎如 Velocity、 FreeMarker、 JasperReports 集成的类， 以及校验 Validation 方面的相关类。</li>
-<li><code>org.springframework.context.support</code>，包含支持缓存Cache（ehcache）JCA、JMX、邮件服务（Java Mail、Mail）COS、任务计划Scheduling（Timer、Quartz）方面的类。</li>
-<li><code>org.springframework.core</code>，包含 Spring 框架基本的核心工具类，Spring 其它组件要都要使用到这个包里的 类，是其它组件的基本核心。</li>
-<li><code>org.springframework.expression</code>，包含Spring 表达式语言相关的类，应用使用到SpEL时需要添加这个jar包。</li>
-<li><code>org.springframework.instrument.tomcat</code>，Spring3.0对Tomcat的连接池的集成。</li>
-<li><code>org.springframework.instrument</code>，Spring3.0 对服务器的代理接口。</li>
-<li><code>org.springframework.jdbc</code>，包含对 Spring 对 JDBC 数据访问进行封装的所有类。</li>
-<li><code>org.springframework.jms</code>，提供了对JMS1.0.2/1.1 的支持类。</li>
-<li><code>org.springframework.orm</code>，包含Spring对DAO特性集进行了扩展，使其支持iBATIS、JDO、OJB、TopLink，因+ 为Hibernate已经独立成包了，现在不包含在这个包里了。这个jar文件里大部分的类都要依赖spring-dao.jar里的类，用这个包时你需要同时包含 spring-dao.jar包。</li>
-<li><code>org.springframework.oxm</code>，Spring 对 Object/XMl 的映射支持,可以让Java与XML之间来回切换。</li>
-<li><code>org.springframework.test</code>，对Junit等测试框架的简单封装。</li>
-<li><code>org.springframework.transaction</code>，为JDBC、Hibernate、JDO、JPA等提供的一致的声明式和编程式事务管理。</li>
-<li><code>org.springframework.web</code>，包含Web应用开发时，用到Spring框架时所需的核心类，包括自动载入WebApplicationContext特性的类、Struts与JSF集成类、文件上传的支持类、Filter类和大量工具辅助类。</li>
-<li><code>org.springframework.web.portlet</code>，对SpringMVC的增强，包含SpringMVC相关的类</li>
-<li><code>org.springframework.web.servlet</code>，对J2EE6.0的Servlet3.0的支持。</li>
-<li><code>org.springframework.web.struts</code>，对Struts框架支持，可以更方便更容易的集成Struts框架。</li>
-</ul>
-<h4 id="2-1-2-新增特性"><a href="#2-1-2-新增特性" class="headerlink" title="2.1.2 新增特性"></a>2.1.2 新增特性</h4><ul>
-<li>Spring 表达式语言</li>
-<li>增强的 IOC 和基于 java 的 Bean 元数据</li>
-<li>通用类型转换系统和字段格式</li>
-<li>来自于 Srping Web Services 项目的对象和 XML 之间的映射</li>
-<li>增强的 REST 支持</li>
-<li>@MVC additions （Spring的 MVC 注解增强）</li>
-<li>声明式模型验证</li>
-<li>提前对 JEE6 的支持</li>
-<li>嵌入式数据库的支持</li>
-</ul>
-<h4 id="2-1-3-基于-Java-5-的核心API的更新"><a href="#2-1-3-基于-Java-5-的核心API的更新" class="headerlink" title="2.1.3 基于 Java 5 的核心API的更新"></a>2.1.3 基于 Java 5 的核心API的更新</h4><ul>
-<li>BeanFactory接口尽可能的返回明确的实例：<ul>
-<li>T getBean(Class<t> requiredType)</t></li>
-<li>getBean(String name, Class<t> requiredType)</t></li>
-<li>Map<string, t=""> getBeansOfType(Class<t> type)</t></string,></li>
-</ul>
-</li>
-<li>Spring 的 TaskExecutor 继承 java.util.concurrent.Executor 接口<ul>
-<li>扩展的子接口 AsyncTaskExecutor 支持标准的具有返回结果 Futures 的 Callables</li>
-</ul>
-</li>
-<li>基于 Java5 的 API 和 SPI 转换器<ul>
-<li>无状态的 ConversionService 和 Converters</li>
-<li>取代标准的 JDK PropertyEditors</li>
-</ul>
-</li>
-<li>类型化的 ApplicationListener<e></e></li>
-</ul>
-<h4 id="2-1-4-Spring-表达式语言（简称SpEL）"><a href="#2-1-4-Spring-表达式语言（简称SpEL）" class="headerlink" title="2.1.4 Spring 表达式语言（简称SpEL）"></a>2.1.4 Spring 表达式语言（简称SpEL）</h4><p>SpEL 使得 java 具有动态语言的风格，可以在运行时获取表达式的值。依赖注入时可以使用 SpEL 表达式语言, 不再只是原来简单的属性文件变量(xml)。<br>示例：</p>
-<ul>
-<li><p>xml 配置：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"mycompany.RewardsTestDatabase"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"databaseName"</span></span></div><div class="line">        <span class="attr">value</span>=<span class="string">"#&#123;systemProperties.databaseName&#125;"</span>/&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"keyGenerator"</span></span></div><div class="line">        <span class="attr">value</span>=<span class="string">"#&#123;strategyBean.databaseKeyGenerator&#125;"</span>/&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>java 代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Repository</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RewardsTestDatabase</span> </span>&#123;</div><div class="line">    <span class="meta">@Value</span>(<span class="string">"#&#123;systemProperties.databaseName&#125;"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDatabaseName</span><span class="params">(String dbName)</span> </span>&#123; ... &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Value</span>(<span class="string">"#&#123;strategyBean.databaseKeyGenerator&#125;"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setKeyGenerator</span><span class="params">(KeyGenerator kg)</span> </span>&#123; ... &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="2-1-5-增强的-IOC-和基于-java-的-bean-配置"><a href="#2-1-5-增强的-IOC-和基于-java-的-bean-配置" class="headerlink" title="2.1.5 增强的 IOC 和基于 java 的 bean 配置"></a>2.1.5 增强的 IOC 和基于 java 的 bean 配置</h4><p>更多的注解的支持：<code>@Configuration，@Bean，@DependsOn， @Primary，@Lazy，@Import，@ImportResource，@Value</code><br>示例：</p>
-<ul>
-<li><p>xml 配置：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"org.example.config"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">util:properties</span> <span class="attr">id</span>=<span class="string">"jdbcProperties"</span></span></div><div class="line">      <span class="attr">location</span>=<span class="string">"classpath:org/example/config/jdbc.properties"</span>/&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>也可以使用如下代码来代替 xml 的配置：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ApplicationContext ctx = <span class="keyword">new</span> AnnotationConfigApplicationContext(AppConfig.class);  </div><div class="line">FooService fooService = ctx.getBean(FooService.class);</div></pre></td></tr></table></figure>
-</li>
-<li><p>java 代码：  </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> org.example.config;</div><div class="line">...</div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppConfig</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="meta">@Value</span>(<span class="string">"#&#123;jdbcProperties.url&#125;"</span>) String jdbcUrl;</div><div class="line">    <span class="keyword">private</span> <span class="meta">@Value</span>(<span class="string">"#&#123;jdbcProperties.username&#125;"</span>) String username;</div><div class="line">    <span class="keyword">private</span> <span class="meta">@Value</span>(<span class="string">"#&#123;jdbcProperties.password&#125;"</span>) String password;</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> FooService <span class="title">fooService</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> FooServiceImpl(fooRepository());</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> FooRepository <span class="title">fooRepository</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> HibernateFooRepository(sessionFactory());</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> SessionFactory <span class="title">sessionFactory</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// wire up a session factory</span></div><div class="line">        AnnotationSessionFactoryBean asFactoryBean = <span class="keyword">new</span> AnnotationSessionFactoryBean();</div><div class="line">        asFactoryBean.setDataSource(dataSource());</div><div class="line">        <span class="comment">// additional config</span></div><div class="line">        <span class="keyword">return</span> asFactoryBean.getObject();</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">dataSource</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> DriverManagerDataSource(jdbcUrl, username, password);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="2-1-6-通用类型转换系统和字段格式化系统"><a href="#2-1-6-通用类型转换系统和字段格式化系统" class="headerlink" title="2.1.6 通用类型转换系统和字段格式化系统"></a>2.1.6 通用类型转换系统和字段格式化系统</h4><p>Spring3.0 加入了一个通用的类型转换系统，它被 SpEL 用作类型转换，并且可能被一个 Spring 容器使用，用于当绑定 bean 的属性值时进行类型转换。此外还增加了一个字段格式化系统，它提供了更简单且强大的功能以替代在客户端环境下的 Javabean 的 PropertyEidtors。  </p>
-<h4 id="2-1-7-声明式模型验证"><a href="#2-1-7-声明式模型验证" class="headerlink" title="2.1.7 声明式模型验证"></a>2.1.7 声明式模型验证</h4><p>支持 JSR303，使用 Hibernate Validator 作为默认实现：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;  </div><div class="line">    <span class="meta">@NotNull</span>  </div><div class="line">    <span class="meta">@Max</span>(<span class="number">64</span>)  </div><div class="line">    <span class="keyword">private</span> String name;  </div><div class="line"></div><div class="line">    <span class="meta">@Min</span>(<span class="number">0</span>)  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="2-2-spring-3-1"><a href="#2-2-spring-3-1" class="headerlink" title="2.2 spring 3.1"></a>2.2 spring 3.1</h3><h4 id="2-2-1-新增特性"><a href="#2-2-1-新增特性" class="headerlink" title="2.2.1 新增特性"></a>2.2.1 新增特性</h4><ul>
-<li>Cache 抽象</li>
-<li>Bean 定义配置文件</li>
-<li>Environment 抽象</li>
-<li>PropertySource 抽象</li>
-<li>注解代替 xml 配置</li>
-<li>对 Hibernate 4.x 的支持</li>
-<li>TestContext 框架对 @Configuration 和 Bean 定义配置文件 的支持</li>
-<li>更为简洁的构造函数注入 c: namespace</li>
-<li>非标准 setter 类的注入</li>
-<li>Servlet 3 code-based configuration of Servlet Container 的支持</li>
-<li>Servlet 3 MultipartResolver 的支持</li>
-<li>改善了 O/R 映射支持，允许无persistence.xml的JPA包扫描</li>
-<li>可以在 controller 中，使用 annotation 临时指定特殊的 Mapping 或者 ExceptionHandler，而且整个体系更加灵活和可扩展。</li>
-</ul>
-<h3 id="2-3-spring-3-2"><a href="#2-3-spring-3-2" class="headerlink" title="2.3 spring 3.2"></a>2.3 spring 3.2</h3><h4 id="2-3-1-新增特性"><a href="#2-3-1-新增特性" class="headerlink" title="2.3.1 新增特性"></a>2.3.1 新增特性</h4><ul>
-<li>支持基于Servlet 3的异步请求处理</li>
-<li>Spring MVC Test框架</li>
-<li>内容协商（Content Negotiation）改进。ContentNeogtiationStrategy 现在可以根据传入请求确定请求的媒体类型。可用的实现是基于文件扩展名、查询参数、“Accept”头或者一个固定的内容类型。</li>
-<li>@ControllerAdvice</li>
-<li>矩阵变量（Matrix Variables），增加了 @MatrixVariable 用于从请求URI中提取矩阵变量。</li>
-<li>增加了一个抽象基础类用于支持基于代码的Servlet 3+容器初始化。</li>
-<li>ResponseEntityExceptionHandler，用于处理异常消息的转换，和 DefaultHandlerExceptionResolver 的区别在于，这个类返回 ModelAndView。</li>
-<li>RestTemplate 和 @RequestBody 的参数支持泛型。</li>
-<li>支持Jackson JSON 2</li>
-<li>支持Tiles 3</li>
-<li>改进 @RequestBody。@RequestBody 和 @RequestPart 的参数现在可以跟随Error参数，使它可以在 @RequestMapping 方法中处理验证的错误，@RequestBody 现在有一个 required 属性。</li>
-<li>HTTP PATCH 方法。HTTP PATCH方法现在可用于@RequestMapping</li>
-<li>拦截器（Interceptor）支持 URL patterns</li>
-<li>在注入点（Injection Point）和Bean方法定义中使用元注解</li>
-<li>初步支持JCache 0.5</li>
-<li>@DateTimeFormat不再依赖Joda Time</li>
-<li>全局日期时间格式化</li>
-<li>新的测试特性</li>
-<li>并发性的微调</li>
-<li>基于Gradle的构建系统，并迁移到GitHub</li>
-<li>支持Java SE 7和OpenJDK 7</li>
-</ul>
-<h2 id="3-spring-4-x-的新特性"><a href="#3-spring-4-x-的新特性" class="headerlink" title="3. spring 4.x 的新特性"></a>3. spring 4.x 的新特性</h2><h3 id="3-1-spring-4-0"><a href="#3-1-spring-4-0" class="headerlink" title="3.1 spring 4.0"></a>3.1 spring 4.0</h3><h4 id="3-1-1-新增特性"><a href="#3-1-1-新增特性" class="headerlink" title="3.1.1 新增特性"></a>3.1.1 新增特性</h4><ul>
-<li>删除了被丢弃的包和方法</li>
-<li>Java 8 的支持，最低需要 Java 6</li>
-<li>使用 Java EE 6 或以上的版本来作为基线，同时包含了相关的 JPA2.0 和 Servlet3.0 的规范</li>
-<li>使用 Groovy 的 DSL（DomainSpecific Languages）来定义 Bean</li>
-<li>核心容器的改进<ul>
-<li>Spring 注入 Bean 的时候把泛型类型当成一种形式的限定符。使用 Spring DataRepository 可以方便的插入特定的实现：@Autowired Repository<customer> customerRepository。</customer></li>
-<li>使用 Spring 的元注解支持，可以开发自定义注解来公开源注解的特定属性。</li>
-<li>当自动装配到 lists 和 arrays 时，Beans 可以被排序，支持 @Order 注解和 Ordered 接口两种方式。 @Lazy 注解可以用在注入点以及 @Bean 定义上。</li>
-<li>引入 @Description 注解,开发人员可以使用基于Java 方式的配置。</li>
-<li>根据条件筛选 Beans 的广义模型通过 @Conditional 注解加入。这和@Profile支持的类似，但是允许以编程式开发用户定义的策略。</li>
-<li>基于 CGLIB 的代理类不在需要默认的构造方法。</li>
-<li>框架支持管理时区。</li>
-</ul>
-</li>
-<li>常规 Web 改进<ul>
-<li>在 Spring MVC 应用中使用新的 @RestController 注解时，不再需要给 @RequestMapping 的方法添加 @ResponseBody 注解。</li>
-<li>AsyncRestTemplate 类已被添加进来，当开发 REST 客户端时，允许非阻塞异步支持。</li>
-<li>当开发 Spring MVC 应用时，Spring 现在提供了全面的时区支持</li>
-</ul>
-</li>
-<li>WebSocket, SockJS 和 STOMP 消息</li>
-<li>测试改进，引入了几个用于单元测试和集成测试的新功能<ul>
-<li>几乎 spring-test 模块中所有的注解（例如：@ContextConfiguration、@WebAppConfiguration、@ContextHierarchy、@ActiveProfiles 等等)可以用作元注解来创建自定义的 composed annotations 并且可以减少测试套件的配置。</li>
-<li>现在可以以编程方式解决 Bean 定义配置文件的激活。只需要实现一个自定义的 ActiveProfilesResolver，并且通过 @ActiveProfiles的resolver 属性注册。</li>
-<li>新的 SocketUtils 类被引入到了 spring-core 模块。</li>
-</ul>
-</li>
-</ul>
-<h3 id="3-2-spring-4-1"><a href="#3-2-spring-4-1" class="headerlink" title="3.2 spring 4.1"></a>3.2 spring 4.1</h3><h4 id="3-2-1-新增特性"><a href="#3-2-1-新增特性" class="headerlink" title="3.2.1 新增特性"></a>3.2.1 新增特性</h4><ul>
-<li>核心部分基本上无变化，提供了 DirectFieldAccessor 用于直接字段访问、yaml 配置、SpEL 的字节码编译化、BackOff 退避算法的基本实现、Base64Utils、SmartInitializingSingleton等；</li>
-<li>在任务调度和事件机制上加入了异常处理部分；</li>
-<li>cache 部分加入 jcache 的集成、类级别的 @CacheConfig 的支持、CacheResolver；</li>
-<li>mvc 部分提供了一些视图解析器的 mvc 标签实现简化配置、提供了 GroovyWebApplicationContext 用于 Groovy web 集成、提供了 Gson、protobuf 的 HttpMessageConverter、静态资源处理方面添加了 resolver和 transformer、提供了对 groovy-templates 模板的支持、JSONP 的支持、对 Jackson 的 @JsonView 的支持等；</li>
-<li>提供了页面自动化测试框架 Spring MVC Test HtmlUnit；</li>
-<li>test 部分提供了更便利的 @sql 标签来执行测试脚本的初始化、MockRestServiceServer 对 AyncRestTemplate 支持、MockMvcConfigurer 来全局配置 MockMvc；</li>
-<li>提供了对 Java 8 Optional 的支持（ObjectToOptionalConverter 实现；可以在MVC中如 @RequestParam 等注解的绑定）、从Spring 4.1起 Ehcache 支持需要 EhCache 2.5 或更高版本、兼容 Quartz 2.1.4、支持 javax.annotation.Priority（等价于@Order）、JMS API的增强、SpringJUnit4ClassRunner 需要 JUnit 4.9或更高版本支持。</li>
-</ul>
-<h2 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h2><p><a href="http://jinnianshilongnian.iteye.com/blog/2102278" target="_blank" rel="external">开涛的博客–Spring 4.1 新特性——综述</a><br><a href="http://blog.csdn.net/z1049186181/article/details/51446643" target="_blank" rel="external">BigZ的专栏–Spring 4.0 新功能和增强</a><br><a href="https://github.com/waylau/spring-framework-4-reference" target="_blank" rel="external">中文翻译 Spring Framework 4.x参考文档</a></p>
-
-          
+<li>GlassFish：v1、v2
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/12/Spring笔记（一）—— 版本新特性/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -650,35 +490,12 @@
 
       
         
-          
-            <h2 id="1-安装前的准备"><a href="#1-安装前的准备" class="headerlink" title="1. 安装前的准备"></a>1. 安装前的准备</h2><p>Hexo 是一个快速简单并且强大的博客框架，使用者可以使用 markdown 语法编写文章，然后通过 hexo 生成带有主题的静态文件，并上传到 github，生成的 html 文件可以在浏览器上访问。本安装教程是在 ubuntu 平台上进行的，其他平台请另寻他处。<br>安装前 Hexo 前需要先安装 Node.js 和 Git，在后面会描述其安装过程。</p>
-<h2 id="2-安装-Git"><a href="#2-安装-Git" class="headerlink" title="2. 安装 Git"></a>2. 安装 Git</h2><p>使用如下命令安装 Git，在这之后可以先了解 git 简单命令的使用，推荐：<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰的Git教程</a>。  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install git-core</div></pre></td></tr></table></figure>
-<h2 id="3-安装-Node-js"><a href="#3-安装-Node-js" class="headerlink" title="3. 安装 Node.js"></a>3. 安装 Node.js</h2><p>我们可以使用 nvm 来安装 Node.js ，方法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | sh</div></pre></td></tr></table></figure></p>
-<p>或<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ wget -qO- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | sh</div></pre></td></tr></table></figure></p>
-<p>安装完 nvm 之后重启窗口安装 Node.js：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ nvm install stable</div></pre></td></tr></table></figure></p>
-<p>如果不想使用命令安装可以直接下载 <a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a> 的安装包安装。<br>下载完 linux 下的压缩包后，将其复制到 /usr/local 目录下，并使用 tar -xvJf + 文件名，对压缩包进行解压，更改解压后的文件夹的权限为755。<br>修改环境变量，使用 vim 修改 /etc/profile，在文件末尾添加两行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># node.js</div><div class="line">export NODE=/usr/local/node-v6.9.1-linux-x64</div><div class="line">export PATH=$&#123;NODE&#125;/bin:$PATH</div></pre></td></tr></table></figure></p>
-<p>之后执行命令 source /etc/profile，使用 node -v 命令查看版本号。</p>
-<h2 id="4-安装-Hexo"><a href="#4-安装-Hexo" class="headerlink" title="4. 安装 Hexo"></a>4. 安装 Hexo</h2><p>使用 npm 安装 hexo：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install npm</div><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install nodejs-legacy</div><div class="line">$ sudo npm install -g hexo-cli</div></pre></td></tr></table></figure></p>
-<p>经过一段时间的等待，会在终端显示如下树状结果，hexo 安装完毕。</p>
-<p><img src="/posts_img/after_install_hexo.png" alt="after_install_hexo"></p>
-<p>当 hexo 安装完毕，使用如下命令初始化 hexo 目录并安装依赖，生成的目录在当前所在的目录之下。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ hexo init &lt;folder&gt; # 初始化 hexo 并创建目录</div><div class="line">$ cd &lt;folder&gt; # 切换到目录之下</div><div class="line">$ npm install # 安装依赖包</div></pre></td></tr></table></figure></p>
-<p>hexo 常用命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ hexo g #完整命令为hexo generate，用于生成静态文件</div><div class="line">$ hexo s #完整命令为hexo server，用于启动服务器，主要用来本地预览</div><div class="line">$ hexo d #完整命令为hexo deploy，用于将本地文件发布到github上</div><div class="line">$ hexo n #完整命令为hexo new，用于新建一篇文章</div></pre></td></tr></table></figure></p>
-<p>在本地开启博客，用浏览器访问 <a href="http://localhost:4000/：" target="_blank" rel="external">http://localhost:4000/：</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo g</div><div class="line">$ hexo s</div></pre></td></tr></table></figure></p>
-<h2 id="5-注册-Github-并创建-repository"><a href="#5-注册-Github-并创建-repository" class="headerlink" title="5. 注册 Github 并创建 repository"></a>5. 注册 Github 并创建 repository</h2><p>到 <a href="https://github.com/" target="_blank" rel="external">Github</a> 官网注册 Github 账号，登录进入个人主页选择 Repositories，再点击旁边的 NEW 按钮创建新的 repository，名字的格式必须为 name.github.io，例如：windows7lake.github.io。    </p>
-<p><img src="/posts_img/create_repository.png" alt="create_repository"></p>
-<h2 id="6-hexo-的配置"><a href="#6-hexo-的配置" class="headerlink" title="6. hexo 的配置"></a>6. hexo 的配置</h2><p>整个博客的配置文件，位于 <code>hexo\_config.yml</code>，通过它，我们可以对整个博客进行配置。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line"># Hexo Configuration</div><div class="line">## Docs: https://hexo.io/docs/configuration.html</div><div class="line">## Source: https://github.com/hexojs/hexo/</div><div class="line"></div><div class="line"># Site</div><div class="line">title: Lio's Blog	# 网站即博客的标题</div><div class="line">subtitle: No pains no gains! 	 	# 博客的副标题</div><div class="line">description: No pains no gains, Believes oneself, Nothing impossible!		# 博客的描述</div><div class="line">author: Lio Lin		# 作者</div><div class="line">language: zh-CN		# 语言</div><div class="line">timezone:</div><div class="line"></div><div class="line"># URL	设置自己的域名</div><div class="line">## If your site is put in a subdirectory,</div><div class="line">## set url as 'http://yoursite.com/child' and root as '/child/'</div><div class="line">url: http://yoursite.com</div><div class="line">root: /</div><div class="line">permalink: :year/:month/:day/:title/</div><div class="line">permalink_defaults:</div><div class="line"></div><div class="line"># Directory</div><div class="line">source_dir: source</div><div class="line">public_dir: public</div><div class="line">tag_dir: tags</div><div class="line">archive_dir: archives</div><div class="line">category_dir: categories</div><div class="line">code_dir: downloads/code</div><div class="line">i18n_dir: :lang</div><div class="line">skip_render:</div><div class="line"></div><div class="line"># Writing</div><div class="line">new_post_name: :title.md 	# 新创建的文章的默认文件名</div><div class="line">default_layout: post		</div><div class="line">titlecase: false 		# 将标题转换为标题大小写</div><div class="line">external_link: true 		# 在新的标签中打开外部连接</div><div class="line">filename_case: 0		# 0 为默认; 1 为小写; 2 为大写</div><div class="line">render_drafts: false		# 是否显示草稿</div><div class="line">post_asset_folder: false</div><div class="line">relative_link: false		# 是否创建相对于根文件夹的链接</div><div class="line">future: true</div><div class="line">highlight:			# 代码块设置</div><div class="line">  enable: true</div><div class="line">  line_number: true</div><div class="line">  auto_detect: false</div><div class="line">  tab_replace:</div><div class="line"></div><div class="line"># Category &amp; Tag</div><div class="line">default_category: uncategorized</div><div class="line">category_map:</div><div class="line">tag_map:</div><div class="line"></div><div class="line"># Date / Time format	时间格式</div><div class="line">## Hexo uses Moment.js to parse and display date</div><div class="line">## You can customize the date format as defined in</div><div class="line">## http://momentjs.com/docs/#/displaying/format/</div><div class="line">date_format: YYYY-MM-DD</div><div class="line">time_format: HH:mm:ss</div><div class="line"></div><div class="line"># Pagination</div><div class="line">## Set per_page to 0 to disable pagination</div><div class="line">per_page: 10		# 每页显示的文章数，0 表示不分页</div><div class="line">pagination_dir: page	# 分页目录</div><div class="line"></div><div class="line"># Extensions</div><div class="line">## Plugins: https://hexo.io/plugins/</div><div class="line">## Themes: https://hexo.io/themes/</div><div class="line">theme: landscape	# 主题名</div><div class="line"></div><div class="line"># Deployment	部署到 github 的配置</div><div class="line">## Docs: https://hexo.io/docs/deployment.html</div><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repository: https://github.com/windows7lake/windows7lake.github.io</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
-<p>使用如下命令克隆 Next 主题到我们的本地博客之下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd your-hexo-site</div><div class="line">$ git clone https://github.com/iissnan/hexo-theme-next themes/next</div></pre></td></tr></table></figure></p>
-<p>主题的配置文件，位于 <code>hexo\theme\主题名\_config.yml</code>，对主题的设置。<br>这里对主题的配置可以参考 <a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="external">NexT</a> 官网。</p>
-<h2 id="7-将本地-Hexo-发布到-Github"><a href="#7-将本地-Hexo-发布到-Github" class="headerlink" title="7. 将本地 Hexo 发布到 Github"></a>7. 将本地 Hexo 发布到 Github</h2><p>在本地创建 ssh key：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C &quot;your_email@youremail.com&quot;</div></pre></td></tr></table></figure></p>
-<p>后面的 <code>your_email@youremail.com</code> 改为自己的邮箱，之后会要求确认路径和输入密码，一路回车就行。成功的话会在 <code>~/</code> 下生成 <code>.ssh</code> 文件夹，进去，打开 <code>id_rsa.pub</code>，复制里面的 key。   </p>
-<p>回到 github，进入 Settings，选择 SSH and GPG Keys -&gt; New SSH Key，title 随便填，粘贴 key。为了验证是否成功，输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh -T git@github.com</div></pre></td></tr></table></figure></p>
-<p>如果是第一次的会提示是否 continue，输入 yes 就会看到：<code>You’ve successfully authenticated， but GitHub does not provide shell access</code> ，这就表示已成功连上 github。   </p>
-<p>接下来我们要做的就是把本地仓库传到 github 上去，在此之前还需要设置 username 和 email，因为 github 每次 commit 都会记录他们。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name &quot;your name&quot;  </div><div class="line">$ git config --global user.email &quot;your_email@youremail.com&quot;</div></pre></td></tr></table></figure></p>
-<p>发布本地博客内容到 Github，需切换到博客目录下，执行如下两条命令，执行如下的第二个命令，可能会要你输入用户名和密码，皆为注册 Github 时的数据，输入密码是不显示任何东西的，输入完毕回车即可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo g</div><div class="line">$ hexo d</div></pre></td></tr></table></figure></p>
-<p>如果输入 <code>hexo d</code> 后遇到 <code>ERROR Deployer not found: Git</code>，则使用命令 <code>npm install hexo-deployer-git –save</code> 即可。</p>
-
-          
+          <h2 id="1-安装前的准备"><a href="#1-安装前的准备" class="headerlink" title="1. 安装前的准备"></a>1. 安装前的准备</h2><p>Hexo 是一个快速简单并且强大的博客框架，使用者可以使用 markdown 语法编写文章，然后通过 hexo 生成带有主题的静态文件，并上传到 github，生成的 html 文件可以在浏览器上访问。本安装教程是在 ubuntu 平台上进行的，其他平台请另寻他处。<br>安装前 Hexo 前需要先安装 Node.js 和 Git，在后面会描述其安装过程。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/11/Github与hexo搭建博客步骤/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -795,18 +612,14 @@
 
       
         
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+          <p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-          
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a><br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/11/hello-world/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
