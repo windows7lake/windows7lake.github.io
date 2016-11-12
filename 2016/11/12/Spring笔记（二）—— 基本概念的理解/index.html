@@ -92,16 +92,16 @@
 
 
 
-<meta name="description" content="控制反转（IOC）控制反转（Inversion of Control），即依赖注入（Dependency Injection），它们两个是一个东西的两种不同的说法。依赖注入是一个程序设计模式和架构模型，是控制反转的特殊实现，它指一个对象应用另外一个对象来提供一个特殊的能力。IOC 是 Spring 的核心，理解它的时候可以分为控制和反转两步来理解。举个例子：你现在接到一份工作，但是你没空，你把工作">
+<meta name="description" content="控制反转（IOC）控制反转（Inversion of Control），即依赖注入（Dependency Injection），它们两个是一个东西的两种不同的说法。依赖注入是一个程序设计模式和架构模型，是控制反转的特殊实现，它指一个对象应用另外一个对象来提供一个特殊的能力。IOC 是 Spring 的核心，理解它的时候可以分为控制和反转两步来理解。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="page">
+<meta property="og:title" content="Spring笔记（二）—— 基本概念的理解">
 <meta property="og:url" content="http://yoursite.com/2016/11/12/Spring笔记（二）—— 基本概念的理解/index.html">
 <meta property="og:site_name" content="Lio's Blog">
-<meta property="og:description" content="控制反转（IOC）控制反转（Inversion of Control），即依赖注入（Dependency Injection），它们两个是一个东西的两种不同的说法。依赖注入是一个程序设计模式和架构模型，是控制反转的特殊实现，它指一个对象应用另外一个对象来提供一个特殊的能力。IOC 是 Spring 的核心，理解它的时候可以分为控制和反转两步来理解。举个例子：你现在接到一份工作，但是你没空，你把工作">
-<meta property="og:updated_time" content="2016-11-12T11:37:11.517Z">
+<meta property="og:description" content="控制反转（IOC）控制反转（Inversion of Control），即依赖注入（Dependency Injection），它们两个是一个东西的两种不同的说法。依赖注入是一个程序设计模式和架构模型，是控制反转的特殊实现，它指一个对象应用另外一个对象来提供一个特殊的能力。IOC 是 Spring 的核心，理解它的时候可以分为控制和反转两步来理解。">
+<meta property="og:updated_time" content="2016-11-12T11:39:19.337Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="page">
-<meta name="twitter:description" content="控制反转（IOC）控制反转（Inversion of Control），即依赖注入（Dependency Injection），它们两个是一个东西的两种不同的说法。依赖注入是一个程序设计模式和架构模型，是控制反转的特殊实现，它指一个对象应用另外一个对象来提供一个特殊的能力。IOC 是 Spring 的核心，理解它的时候可以分为控制和反转两步来理解。举个例子：你现在接到一份工作，但是你没空，你把工作">
+<meta name="twitter:title" content="Spring笔记（二）—— 基本概念的理解">
+<meta name="twitter:description" content="控制反转（IOC）控制反转（Inversion of Control），即依赖注入（Dependency Injection），它们两个是一个东西的两种不同的说法。依赖注入是一个程序设计模式和架构模型，是控制反转的特殊实现，它指一个对象应用另外一个对象来提供一个特殊的能力。IOC 是 Spring 的核心，理解它的时候可以分为控制和反转两步来理解。">
 
 
 
@@ -125,7 +125,7 @@
   <link rel="canonical" href="http://yoursite.com/2016/11/12/Spring笔记（二）—— 基本概念的理解/"/>
 
 
-  <title> page | Lio's Blog </title>
+  <title> Spring笔记（二）—— 基本概念的理解 | Lio's Blog </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -288,7 +288,7 @@
             
             
               
-                page
+                Spring笔记（二）—— 基本概念的理解
               
             
           </h1>
@@ -359,7 +359,7 @@
       
 
       
-        <h2 id="控制反转（IOC）"><a href="#控制反转（IOC）" class="headerlink" title="控制反转（IOC）"></a>控制反转（IOC）</h2><p>控制反转（Inversion of Control），即依赖注入（Dependency Injection），它们两个是一个东西的两种不同的说法。依赖注入是一个程序设计模式和架构模型，是控制反转的特殊实现，它指一个对象应用另外一个对象来提供一个特殊的能力。IOC 是 Spring 的核心，理解它的时候可以分为控制和反转两步来理解。<br>举个例子：你现在接到一份工作，但是你没空，你把工作交给你的好友来完成，你对工作如何完成已不关心，控制权移交到你的好友手中，他可以决定如何完成工作，你只需要等待结果即可。<br>如上所述，控制即对工作的控制权，反转可理解为原先你所掌握的工作的控制权移交到好友身上。在 Spring 中理解为某一接口具体实现类的控制权从调用类中移除，转而由第三方控制（类似对成员变量的赋值的控制权从代码移交到 xml 配置文件中）。依赖注入理解为让调用者对某一接口实现类的依赖关系由第三方（容器或协助类）注入，以移除调用类对某一接口实现类的依赖。</p>
+        <h2 id="控制反转（IOC）"><a href="#控制反转（IOC）" class="headerlink" title="控制反转（IOC）"></a>控制反转（IOC）</h2><p>控制反转（Inversion of Control），即依赖注入（Dependency Injection），它们两个是一个东西的两种不同的说法。依赖注入是一个程序设计模式和架构模型，是控制反转的特殊实现，它指一个对象应用另外一个对象来提供一个特殊的能力。IOC 是 Spring 的核心，理解它的时候可以分为控制和反转两步来理解。<br><a id="more"></a><br>举个例子：你现在接到一份工作，但是你没空，你把工作交给你的好友来完成，你对工作如何完成已不关心，控制权移交到你的好友手中，他可以决定如何完成工作，你只需要等待结果即可。<br>如上所述，控制即对工作的控制权，反转可理解为原先你所掌握的工作的控制权移交到好友身上。在 Spring 中理解为某一接口具体实现类的控制权从调用类中移除，转而由第三方控制（类似对成员变量的赋值的控制权从代码移交到 xml 配置文件中）。依赖注入理解为让调用者对某一接口实现类的依赖关系由第三方（容器或协助类）注入，以移除调用类对某一接口实现类的依赖。</p>
 <h2 id="面向切面编程（AOP）"><a href="#面向切面编程（AOP）" class="headerlink" title="面向切面编程（AOP）"></a>面向切面编程（AOP）</h2><p>面相切面编程（AOP）是对面相对象编程（OOP）的补充，OOP 主要的模块单元是 class (类)，而 AOP 是 aspect（切面），切面使得诸如事务管理等跨越多个类型和对象的关注点模块化。AOP 通过横向抽取机制，为无法通过纵向继承体系进行抽象的类的重复性代码提供了解决方案。</p>
 <h3 id="连接点（Join-point）"><a href="#连接点（Join-point）" class="headerlink" title="连接点（Join point）"></a>连接点（Join point）</h3><p>在程序执行过程中具有边界性质的特定点，比如某个类初始化前后、类的某个方法调用前后或者处理异常的时候。在 Spring AOP 中，一个连接点总是代表一个方法的执行。</p>
 <h3 id="增强（Advice）"><a href="#增强（Advice）" class="headerlink" title="增强（Advice）"></a>增强（Advice）</h3><p>在切面的某个特定的连接点上执行的动作。增强有各种类型，其中包括 around、before 和 after 等。Spring 以拦截器作增强模型，并维护一个以连接点为中心的拦截器链。</p>
@@ -579,7 +579,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/11/12/Spring笔记（二）—— 基本概念的理解/"
-           data-title="page" data-url="http://yoursite.com/2016/11/12/Spring笔记（二）—— 基本概念的理解/">
+           data-title="Spring笔记（二）—— 基本概念的理解" data-url="http://yoursite.com/2016/11/12/Spring笔记（二）—— 基本概念的理解/">
       </div>
     
   </div>
