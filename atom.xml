@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-11-19T15:16:21.169Z</updated>
+  <updated>2016-11-19T15:26:36.461Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Spring笔记（四）—— IOC 容器之依赖注入</title>
+    <title>Spring笔记（五）—— IOC 容器之依赖注入</title>
     <link href="http://yoursite.com/2016/11/17/Spring%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94%20IOC%20%E5%AE%B9%E5%99%A8%E4%B9%8B%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/"/>
     <id>http://yoursite.com/2016/11/17/Spring笔记（五）—— IOC 容器之依赖注入/</id>
     <published>2016-11-17T13:22:00.000Z</published>
-    <updated>2016-11-19T15:16:21.169Z</updated>
+    <updated>2016-11-19T15:26:36.461Z</updated>
     
     <content type="html"><![CDATA[<p>Spring 支持两种依赖注入方式，分别为构造函数注入和属性注入，此外还支持工厂方法注入方式。</p>
 <h2 id="构造函数注入"><a href="#构造函数注入" class="headerlink" title="构造函数注入"></a>构造函数注入</h2><p>构造函数注入由容器调用带参的构造函数来完成，与通过调用指定参数的静态工厂方法来构造 bean 相似。包含构造函数的类是一个没有依赖于容器指定的接口，基类或注释的 POJO，如下所示：<br><a id="more"></a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleMovieLister</span> </span>&#123;</div><div class="line">  <span class="comment">// the SimpleMovieLister has a dependency on a MovieFinder</span></div><div class="line">  <span class="keyword">private</span> MovieFinder movieFinder;</div><div class="line">  <span class="comment">// a constructor so that the Spring container can inject a MovieFinder</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">SimpleMovieLister</span><span class="params">(MovieFinder movieFinder)</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>.movieFinder = movieFinder;</div><div class="line">  &#125;</div><div class="line">  <span class="comment">// business logic that actually uses the injected MovieFinder is omitted...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
