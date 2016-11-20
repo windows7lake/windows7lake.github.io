@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-11-20T07:23:13.836Z</updated>
+  <updated>2016-11-20T07:25:44.776Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2016/11/18/Spring%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%20IOC%20%E5%AE%B9%E5%99%A8%E4%B9%8B%E4%B8%8D%E5%90%8C%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E5%BC%8F/"/>
     <id>http://yoursite.com/2016/11/18/Spring笔记（六）—— IOC 容器之不同的配置方式/</id>
     <published>2016-11-18T13:27:50.000Z</published>
-    <updated>2016-11-20T07:23:13.836Z</updated>
+    <updated>2016-11-20T07:25:44.776Z</updated>
     
     <content type="html"><![CDATA[<h2 id="基于注解的配置"><a href="#基于注解的配置" class="headerlink" title="基于注解的配置"></a>基于注解的配置</h2><p>XML 设置的替代方法是基于注释的配置，它依赖于字节码元数据来连接组件而不是角括号声明。开发人员通过使用相关类，方法或字段声明上的注释来将配置移动到组件类本身中，而不是使用 XML 来描述 bean 布线。例如，Spring2.0 引入了使用 @Required 注释实现 required 属性的可能性。Spring2.5 添加了对 JSR-250 注释的支持，例如 @PostConstruct 和 @PreDestroy。Spring3.0 增加了对 javax.inject 包中包含的 JSR-330（Java的依赖注入）注释的支持，例如 @Inject 和 @Named。<br><a id="more"></a></p>
 <h3 id="required"><a href="#required" class="headerlink" title="@required"></a>@required</h3><p>@Required 注释适用于 bean 属性的 setter 方法，此注释表示被标注的 bean 属性必须在配置时通过 bean 定义中的显式属性值或通过自动装配被填充，如果被标注的 bean 属性未被填充，容器将抛出异常。如下例子所示：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleMovieLister</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> MovieFinder movieFinder;</div><div class="line">    <span class="meta">@Required</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMovieFinder</span><span class="params">(MovieFinder movieFinder)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.movieFinder = movieFinder;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -66,7 +66,7 @@
 <h2 id="不同配置方式的比较"><a href="#不同配置方式的比较" class="headerlink" title="不同配置方式的比较"></a>不同配置方式的比较</h2><table>
 <thead>
 <tr>
-<th></th>
+<th>描述</th>
 <th>基于 XML 配置</th>
 <th>基于注解配置</th>
 <th>基于 Java 类配置</th>
