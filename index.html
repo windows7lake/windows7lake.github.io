@@ -290,6 +290,138 @@
             
               
                 
+                <a class="post-title-link" href="/2016/11/19/Spring笔记（七）—— AOP 之 @AspectJ 支持/" itemprop="url">
+                  Spring笔记（七）—— AOP 之 @AspectJ 支持
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-19T21:57:54+08:00" content="2016-11-19">
+              2016-11-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/19/Spring笔记（七）—— AOP 之 @AspectJ 支持/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/19/Spring笔记（七）—— AOP 之 @AspectJ 支持/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="开启-AspectJ-支持"><a href="#开启-AspectJ-支持" class="headerlink" title="开启 @AspectJ 支持"></a>开启 @AspectJ 支持</h2><p>@AspectJ 指的是使用注解标注的常规 Java 类的样式声明切面，@AspectJ 样式是 AspectJ 项目引入的，作为 AspectJ 5 版本的一部分。Spring 使用由 AspectJ 提供的库 aspectjweaver.jar（要求版本至少为 1.6.8），就能像 AspectJ 5 那样解析注解。</p>
+<h3 id="Java-配置方式"><a href="#Java-配置方式" class="headerlink" title="Java 配置方式"></a>Java 配置方式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableAspectJAutoProxy</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppConfig</span> </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="XML-配置方式"><a href="#XML-配置方式" class="headerlink" title="XML 配置方式"></a>XML 配置方式</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">aop:aspectj-autoproxy</span>/&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="声明切面"><a href="#声明切面" class="headerlink" title="声明切面"></a>声明切面</h2><p>当开启 @AspectJ 支持时，任何在应用程序上下文中使用类（包含 @Aspect 注解）定义的 bean 都会被 Spring 侦测到，并用于配置 Spring AOP。<br>如下为应用程序上下文中的常规 bean 定义，指向具有 @Aspect 注解的 bean 类：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"myAspect"</span> <span class="attr">class</span>=<span class="string">"org.xyz.NotVeryUsefulAspect"</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- configure properties of aspect here as normal --&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>还有具有 @Aspect 注解的 NotVeryUsefulAspect 类：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> org.xyz;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Aspect;</div><div class="line"><span class="meta">@Aspect</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NotVeryUsefulAspect</span> </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="声明切点"><a href="#声明切点" class="headerlink" title="声明切点"></a>声明切点</h2><p>切点能够定位特定的连接点，从而使我们能够控制何时执行增强操作。切点声明有两部分：一个包含方法名和任意参数的签名，以及一个切入点表达式（它标明要执行的方法的位置）。在 AOP 的 @AspectJ 注解风格中，切点签名由一个常规方法定义，切点表达式使用 @Pointcut 注解表示（用作切点签名的方法必须具有 void 返回类型）。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Pointcut</span>(<span class="string">"execution(* transfer(..))"</span>)<span class="comment">// the pointcut expression</span></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">anyOldTransfer</span><span class="params">()</span> </span>&#123;&#125;<span class="comment">// the pointcut signature</span></div></pre></td></tr></table></figure></p>
+<h3 id="切点表达式函数"><a href="#切点表达式函数" class="headerlink" title="切点表达式函数"></a>切点表达式函数</h3><p>Aspectj5 的切点表达式由关键字和操作参数组成，如 <code>execution(* transfer(..))</code>，<code>execution</code> 为关键字，<code>* transfer(..)</code> 为操作参数。在上面的例子中，<code>execution</code> 代表目标类执行某一方法，<code>* transfer(..)</code> 描述目标方法的匹配模式串，两个联合起来表示目标类 transfer() 方法的连接点。<br>Spring 支持 9 个 @Aspectj 切点表达式函数，它们用不同的方式描述目标类的连接点，根据描述对象的不同，大致分为 4 个类型：</p>
+<ul>
+<li>方法切点函数：通过描述目标类方法信息定义连接点。</li>
+<li>方法入参切点函数：通过描述目标类方法入参的信息定义连接点。</li>
+<li>目标类切点函数：通过描述目标类类型信息定义连接点。</li>
+<li>代理类切点函数：通过描述目标类的代理类的信息定义连接点。<br>切点表达式函数如下表所示：<br>| 类别 | 函数 | 入参 |  |  |</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/11/18/Spring笔记（六）—— IOC 容器之不同的配置方式/" itemprop="url">
                   Spring笔记（六）—— IOC 容器之不同的配置方式
                 </a>
@@ -758,128 +890,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/12/Spring笔记（二）—— 基本概念的理解/" itemprop="url">
-                  Spring笔记（二）—— 基本概念的理解
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-12T12:57:13+08:00" content="2016-11-12">
-              2016-11-12
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/11/12/Spring笔记（二）—— 基本概念的理解/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/12/Spring笔记（二）—— 基本概念的理解/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="控制反转（IOC）"><a href="#控制反转（IOC）" class="headerlink" title="控制反转（IOC）"></a>控制反转（IOC）</h2><p>控制反转（Inversion of Control），即依赖注入（Dependency Injection），它们两个是一个东西的两种不同的说法。依赖注入是一个程序设计模式和架构模型，是控制反转的特殊实现，它指一个对象应用另外一个对象来提供一个特殊的能力。IOC 是 Spring 的核心，理解它的时候可以分为控制和反转两步来理解。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/12/Spring笔记（二）—— 基本概念的理解/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -925,7 +935,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
