@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-11-21T09:04:00.894Z</updated>
+  <updated>2016-11-21T16:27:21.354Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,100 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spring笔记（九）—— AOP 之资源访问接口 Resource</title>
+    <link href="http://yoursite.com/2016/11/21/Spring%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89%E2%80%94%E2%80%94%20AOP%20%E4%B9%8B%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E6%8E%A5%E5%8F%A3%20Resource/"/>
+    <id>http://yoursite.com/2016/11/21/Spring笔记（九）—— AOP 之资源访问接口 Resource/</id>
+    <published>2016-11-21T13:00:22.000Z</published>
+    <updated>2016-11-21T16:27:21.354Z</updated>
+    
+    <content type="html"><![CDATA[<p>JDK 提供的访问资源的类（java.net.URL 和 File）不能满足各种底层资源的访问需求，比如缺少从类路径或 Web 容器的上下文中获取资源的操作类。因此，Spring 设计了一个 Resource 接口，为应用提供了更强的访问底层资源的能力。<br><a id="more"></a> </p>
+<h2 id="资源接口-Resource"><a href="#资源接口-Resource" class="headerlink" title="资源接口 Resource"></a>资源接口 Resource</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Resource</span> <span class="keyword">extends</span> <span class="title">InputStreamSource</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">exists</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isOpen</span><span class="params">()</span></span>;</div><div class="line">    <span class="function">URL <span class="title">getURL</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;</div><div class="line">    <span class="function">File <span class="title">getFile</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;</div><div class="line">    <span class="function">Resource <span class="title">createRelative</span><span class="params">(String relativePath)</span> <span class="keyword">throws</span> IOException</span>;</div><div class="line">    <span class="function">String <span class="title">getFilename</span><span class="params">()</span></span>;</div><div class="line">    <span class="function">String <span class="title">getDescription</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">InputStreamSource</span> </span>&#123;</div><div class="line">    <span class="function">InputStream <span class="title">getInputStream</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Resource 接口的主要方法：</p>
+<ul>
+<li>getInputStream()：返回资源对应的输入流。</li>
+<li>exists()：资源是否存在。</li>
+<li>isOpen()：资源是否打开。</li>
+<li>getDescription()：返回对资源的描述。</li>
+<li>getURL()：如果底层资源可以表示成URL，则返回对应的 URL 对象。</li>
+<li>getFile()：如果底层资源对应一个文件，则返回对应的 File 对象。</li>
+</ul>
+<h2 id="Resource-的具体实现类"><a href="#Resource-的具体实现类" class="headerlink" title="Resource 的具体实现类"></a>Resource 的具体实现类</h2><ul>
+<li>UrlResource：Url 封装了 java.net.URL，它使用户能够访问任何可以通过 URL 表示的资源，如文件系统的资源、HTTP 资源、FTP 资源等。</li>
+<li>ClassPathResource：类路径下的资源，资源以相对于类路径的方式表示。</li>
+<li>FileSystemResource：文件系统资源，资源以文件系统路径的方式表示。</li>
+<li>ServletContextResource：为访问 Web 容器上下文中的资源而设计的类，负责以相对于 Web 应用根目录的路径加载资源，它支持以流和 URL 的方式访问，在 WAR 解包的情况下，也可以通过 File 的方式访问，该类还可以直接从 JAR 包中访问资源。</li>
+<li>InputStreamResource：以输入流返回表示的资源。</li>
+<li>ByteArrayResource：二进制数组表示的资源，二进制数组资源可以在内存中通过程序构造。</li>
+</ul>
+<p>示例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.io.InputStream;</div><div class="line"><span class="keyword">import</span> org.springframework.core.io.ClassPathResource;</div><div class="line"><span class="keyword">import</span> org.springframework.core.io.FileSystemResource;</div><div class="line"><span class="keyword">import</span> org.springframework.core.io.Resource;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ResourceTest</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            String filePath = <span class="string">"D:/config/file.txt"</span>;</div><div class="line">            <span class="comment">// 使用系统文件路径方式加载文件</span></div><div class="line">            Resource res1 = <span class="keyword">new</span> FileSystemResource(filePath);</div><div class="line">            <span class="comment">// 使用类路径方式加载文件</span></div><div class="line">            Resource res1 = <span class="keyword">new</span> ClassPathResource(<span class="string">"conf/file.txt"</span>);</div><div class="line">            InputStream ins1 = res1.getInputStream();</div><div class="line">            InputStream ins2 = res2.getInputStream();</div><div class="line">        &#125; <span class="keyword">catch</span>(IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="资源地址表达式"><a href="#资源地址表达式" class="headerlink" title="资源地址表达式"></a>资源地址表达式</h2><p>Spring 提供了强大的加载资源的机制，不但能够通过 <code>classpath:</code>、<code>file:</code> 等资源地址前缀识别不同的资源类型，还支持 Ant 风格带通配符的资源地址。</p>
+<table>
+<thead>
+<tr>
+<th>地址前缀</th>
+<th>示例</th>
+<th>对应资源类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>classpath:</td>
+<td>classpath:com/myapp/config.xml</td>
+<td>从类路径中加载资源，资源文件可以在标准的文件系统中，也可以在 jar 或 zip 的类包中</td>
+</tr>
+<tr>
+<td>file:</td>
+<td>file://data/config.xml</td>
+<td>使用 UrlResource 从文件系统目录中装载资源，可采用绝对或相对路径</td>
+</tr>
+<tr>
+<td>http://</td>
+<td><a href="http://myserver/logo.png" target="_blank" rel="external">http://myserver/logo.png</a></td>
+<td>使用 UrlResource 从 Web 服务器中装载资源</td>
+</tr>
+<tr>
+<td>ftp://</td>
+<td>ftp://myserver/my.txt</td>
+<td>使用 UrlResource 从 FTP 服务器中装载资源</td>
+</tr>
+<tr>
+<td>没有前缀</td>
+<td>/data/config.xml</td>
+<td>根据 ApplicationContext 具体实现类采用对应的类型的 Resource</td>
+</tr>
+</tbody>
+</table>
+<p>Ant 风格资源地址支持 3 种匹配符：</p>
+<ul>
+<li><code>?</code>：匹配文件名中的一个字符</li>
+<li><code>*</code>：匹配文件名中任意个字符</li>
+<li><code>**</code>：匹配多层路径</li>
+</ul>
+<p>示例：</p>
+<ul>
+<li><code>classpath:com/t?st.xml</code>：匹配 com 类路径下 com/test.xml，com/tast.xml 或者 com/tdst.xml</li>
+<li><code>file:D:/conf/*.xml</code>：匹配文件系统 D:/conf 目录下所有以 xml 为后缀的文件</li>
+<li><code>classpath:com/**/test.xml</code>：匹配 com 类路径下（当前目录及其子孙目录）的 test.xml 文件</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;JDK 提供的访问资源的类（java.net.URL 和 File）不能满足各种底层资源的访问需求，比如缺少从类路径或 Web 容器的上下文中获取资源的操作类。因此，Spring 设计了一个 Resource 接口，为应用提供了更强的访问底层资源的能力。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="spring" scheme="http://yoursite.com/categories/spring/"/>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="spring" scheme="http://yoursite.com/tags/spring/"/>
+    
+  </entry>
   
   <entry>
     <title>Spring笔记（八）—— AOP 之基于 Schema 配置</title>

@@ -92,16 +92,16 @@
 
 
 
-<meta name="description" content="控制反转（IOC）控制反转（Inversion of Control），即依赖注入（Dependency Injection），它们两个是一个东西的两种不同的说法。依赖注入是一个程序设计模式和架构模型，是控制反转的特殊实现，它指一个对象应用另外一个对象来提供一个特殊的能力。IOC 是 Spring 的核心，理解它的时候可以分为控制和反转两步来理解。">
+<meta name="description" content="JDK 提供的访问资源的类（java.net.URL 和 File）不能满足各种底层资源的访问需求，比如缺少从类路径或 Web 容器的上下文中获取资源的操作类。因此，Spring 设计了一个 Resource 接口，为应用提供了更强的访问底层资源的能力。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring笔记（二）—— 基本概念的理解">
-<meta property="og:url" content="http://yoursite.com/2016/11/12/Spring笔记（二）—— 基本概念的理解/index.html">
+<meta property="og:title" content="Spring笔记（九）—— AOP 之资源访问接口 Resource">
+<meta property="og:url" content="http://yoursite.com/2016/11/21/Spring笔记（九）—— AOP 之资源访问接口 Resource/index.html">
 <meta property="og:site_name" content="Lio's Blog">
-<meta property="og:description" content="控制反转（IOC）控制反转（Inversion of Control），即依赖注入（Dependency Injection），它们两个是一个东西的两种不同的说法。依赖注入是一个程序设计模式和架构模型，是控制反转的特殊实现，它指一个对象应用另外一个对象来提供一个特殊的能力。IOC 是 Spring 的核心，理解它的时候可以分为控制和反转两步来理解。">
-<meta property="og:updated_time" content="2016-11-12T11:39:19.337Z">
+<meta property="og:description" content="JDK 提供的访问资源的类（java.net.URL 和 File）不能满足各种底层资源的访问需求，比如缺少从类路径或 Web 容器的上下文中获取资源的操作类。因此，Spring 设计了一个 Resource 接口，为应用提供了更强的访问底层资源的能力。">
+<meta property="og:updated_time" content="2016-11-21T16:27:21.354Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring笔记（二）—— 基本概念的理解">
-<meta name="twitter:description" content="控制反转（IOC）控制反转（Inversion of Control），即依赖注入（Dependency Injection），它们两个是一个东西的两种不同的说法。依赖注入是一个程序设计模式和架构模型，是控制反转的特殊实现，它指一个对象应用另外一个对象来提供一个特殊的能力。IOC 是 Spring 的核心，理解它的时候可以分为控制和反转两步来理解。">
+<meta name="twitter:title" content="Spring笔记（九）—— AOP 之资源访问接口 Resource">
+<meta name="twitter:description" content="JDK 提供的访问资源的类（java.net.URL 和 File）不能满足各种底层资源的访问需求，比如缺少从类路径或 Web 容器的上下文中获取资源的操作类。因此，Spring 设计了一个 Resource 接口，为应用提供了更强的访问底层资源的能力。">
 
 
 
@@ -122,10 +122,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/11/12/Spring笔记（二）—— 基本概念的理解/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/11/21/Spring笔记（九）—— AOP 之资源访问接口 Resource/"/>
 
 
-  <title> Spring笔记（二）—— 基本概念的理解 | Lio's Blog </title>
+  <title> Spring笔记（九）—— AOP 之资源访问接口 Resource | Lio's Blog </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -288,7 +288,7 @@
             
             
               
-                Spring笔记（二）—— 基本概念的理解
+                Spring笔记（九）—— AOP 之资源访问接口 Resource
               
             
           </h1>
@@ -300,8 +300,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-12T12:57:13+08:00" content="2016-11-12">
-              2016-11-12
+            <time itemprop="dateCreated" datetime="2016-11-21T21:00:22+08:00" content="2016-11-21">
+              2016-11-21
             </time>
           </span>
 
@@ -330,8 +330,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/11/12/Spring笔记（二）—— 基本概念的理解/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/12/Spring笔记（二）—— 基本概念的理解/" itemprop="commentsCount"></span>
+                <a href="/2016/11/21/Spring笔记（九）—— AOP 之资源访问接口 Resource/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/21/Spring笔记（九）—— AOP 之资源访问接口 Resource/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -359,134 +359,76 @@
       
 
       
-        <h2 id="控制反转（IOC）"><a href="#控制反转（IOC）" class="headerlink" title="控制反转（IOC）"></a>控制反转（IOC）</h2><p>控制反转（Inversion of Control），即依赖注入（Dependency Injection），它们两个是一个东西的两种不同的说法。依赖注入是一个程序设计模式和架构模型，是控制反转的特殊实现，它指一个对象应用另外一个对象来提供一个特殊的能力。IOC 是 Spring 的核心，理解它的时候可以分为控制和反转两步来理解。<br><a id="more"></a><br>举个例子：你现在接到一份工作，但是你没空，你把工作交给你的好友来完成，你对工作如何完成已不关心，控制权移交到你的好友手中，他可以决定如何完成工作，你只需要等待结果即可。<br>如上所述，控制即对工作的控制权，反转可理解为原先你所掌握的工作的控制权移交到好友身上。在 Spring 中理解为某一接口具体实现类的控制权从调用类中移除，转而由第三方控制（类似对成员变量的赋值的控制权从代码移交到 xml 配置文件中）。依赖注入理解为让调用者对某一接口实现类的依赖关系由第三方（容器或协助类）注入，以移除调用类对某一接口实现类的依赖。</p>
-<h2 id="面向切面编程（AOP）"><a href="#面向切面编程（AOP）" class="headerlink" title="面向切面编程（AOP）"></a>面向切面编程（AOP）</h2><p>面相切面编程（AOP）是对面相对象编程（OOP）的补充，OOP 主要的模块单元是 class (类)，而 AOP 是 aspect（切面），切面使得诸如事务管理等跨越多个类型和对象的关注点模块化。AOP 通过横向抽取机制，为无法通过纵向继承体系进行抽象的类的重复性代码提供了解决方案。</p>
-<h3 id="连接点（Join-point）"><a href="#连接点（Join-point）" class="headerlink" title="连接点（Join point）"></a>连接点（Join point）</h3><p>在程序执行过程中具有边界性质的特定点，比如某个类初始化前后、类的某个方法调用前后或者处理异常的时候。在 Spring AOP 中，一个连接点总是代表一个方法的执行。</p>
-<h3 id="增强（Advice）"><a href="#增强（Advice）" class="headerlink" title="增强（Advice）"></a>增强（Advice）</h3><p>在切面的某个特定的连接点上执行的动作。增强有各种类型，其中包括 around、before 和 after 等。Spring 以拦截器作增强模型，并维护一个以连接点为中心的拦截器链。</p>
-<h3 id="切点（Pointcut）"><a href="#切点（Pointcut）" class="headerlink" title="切点（Pointcut）"></a>切点（Pointcut）</h3><p>用来匹配连接点的断言。增强关联一个切点表达式，并在匹配这个切入点的连接点上运行。AOP 通过切点定位特定的连接点：Spring 默认使用切点语法 AspectJ。通过数据库查询的概念来理解切点和连接点：连接点相当于数据库中的记录，而切点相当于查询条件，一个切点可以匹配多个连接点。</p>
-<h3 id="切面（Aspect）"><a href="#切面（Aspect）" class="headerlink" title="切面（Aspect）"></a>切面（Aspect）</h3><p>切面由切点和增强组成，包括横切逻辑和连接点的定义。在 Spring AOP 中，切面可以使用通用类（schema-based 基于模式的风格）或者在普通类中以 @Aspect 注解（@AspectJ 注解样式）来实现。</p>
-<h3 id="引介（Introduction）"><a href="#引介（Introduction）" class="headerlink" title="引介（Introduction）"></a>引介（Introduction）</h3><p>引介是一种特殊的增强，它为类添加一些属性和方法。一个业务类原先没有实现某个接口，通过 AOP 的引介功能，可以动态地为该业务添加接口的实现逻辑，让业务类成为该接口的实现类。例如：使用一个引介来使 bean 实现 IsModified 接口，以便简化缓存机制。</p>
-<h3 id="目标对象（Target-object）"><a href="#目标对象（Target-object）" class="headerlink" title="目标对象（Target object）"></a>目标对象（Target object）</h3><p>被一个或多个切面所增强的对象。因为 Spring AOP 是使用运行时代理来实现的，所以这个对象总是一个代理对象。</p>
-<h3 id="代理（Proxy）"><a href="#代理（Proxy）" class="headerlink" title="代理（Proxy）"></a>代理（Proxy）</h3><p>一个类被 AOP 织入增强后，就生成一个结果类，它是融合了原类和增强逻辑的代理类。根据不同的代理方式，代理类既可能是和原类具有相同接口的类，也可能是原类的子类，所以我们可以采用调用原类相同的方式调用代理类。在 Spring 中，AOP 代理可以是 JDK 动态代理或者 CGLIB 代理。</p>
-<h3 id="织入（Weaving）"><a href="#织入（Weaving）" class="headerlink" title="织入（Weaving）"></a>织入（Weaving）</h3><p> 织入是将增强添加到目标类具体连接点上的过程。AOP 有三种织入方式：</p>
+        <p>JDK 提供的访问资源的类（java.net.URL 和 File）不能满足各种底层资源的访问需求，比如缺少从类路径或 Web 容器的上下文中获取资源的操作类。因此，Spring 设计了一个 Resource 接口，为应用提供了更强的访问底层资源的能力。<br><a id="more"></a> </p>
+<h2 id="资源接口-Resource"><a href="#资源接口-Resource" class="headerlink" title="资源接口 Resource"></a>资源接口 Resource</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Resource</span> <span class="keyword">extends</span> <span class="title">InputStreamSource</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">exists</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isOpen</span><span class="params">()</span></span>;</div><div class="line">    <span class="function">URL <span class="title">getURL</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;</div><div class="line">    <span class="function">File <span class="title">getFile</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;</div><div class="line">    <span class="function">Resource <span class="title">createRelative</span><span class="params">(String relativePath)</span> <span class="keyword">throws</span> IOException</span>;</div><div class="line">    <span class="function">String <span class="title">getFilename</span><span class="params">()</span></span>;</div><div class="line">    <span class="function">String <span class="title">getDescription</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">InputStreamSource</span> </span>&#123;</div><div class="line">    <span class="function">InputStream <span class="title">getInputStream</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Resource 接口的主要方法：</p>
 <ul>
-<li>编译期织入，要求特殊的 Java 编译器</li>
-<li>类装载期织入，要求使用特殊的类装载器</li>
-<li>动态代理织入，在运行期为目标类添加增强生成子类的方式    </li>
+<li>getInputStream()：返回资源对应的输入流。</li>
+<li>exists()：资源是否存在。</li>
+<li>isOpen()：资源是否打开。</li>
+<li>getDescription()：返回对资源的描述。</li>
+<li>getURL()：如果底层资源可以表示成URL，则返回对应的 URL 对象。</li>
+<li>getFile()：如果底层资源对应一个文件，则返回对应的 File 对象。</li>
 </ul>
-<p>Spring 采用动态代理织入（即在运行时完成织入），而 AspectJ 采用编译期和类装载期织入。</p>
-<h2 id="Spring-框架组件列表"><a href="#Spring-框架组件列表" class="headerlink" title="Spring 框架组件列表"></a>Spring 框架组件列表</h2><table>
+<h2 id="Resource-的具体实现类"><a href="#Resource-的具体实现类" class="headerlink" title="Resource 的具体实现类"></a>Resource 的具体实现类</h2><ul>
+<li>UrlResource：Url 封装了 java.net.URL，它使用户能够访问任何可以通过 URL 表示的资源，如文件系统的资源、HTTP 资源、FTP 资源等。</li>
+<li>ClassPathResource：类路径下的资源，资源以相对于类路径的方式表示。</li>
+<li>FileSystemResource：文件系统资源，资源以文件系统路径的方式表示。</li>
+<li>ServletContextResource：为访问 Web 容器上下文中的资源而设计的类，负责以相对于 Web 应用根目录的路径加载资源，它支持以流和 URL 的方式访问，在 WAR 解包的情况下，也可以通过 File 的方式访问，该类还可以直接从 JAR 包中访问资源。</li>
+<li>InputStreamResource：以输入流返回表示的资源。</li>
+<li>ByteArrayResource：二进制数组表示的资源，二进制数组资源可以在内存中通过程序构造。</li>
+</ul>
+<p>示例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.io.InputStream;</div><div class="line"><span class="keyword">import</span> org.springframework.core.io.ClassPathResource;</div><div class="line"><span class="keyword">import</span> org.springframework.core.io.FileSystemResource;</div><div class="line"><span class="keyword">import</span> org.springframework.core.io.Resource;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ResourceTest</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            String filePath = <span class="string">"D:/config/file.txt"</span>;</div><div class="line">            <span class="comment">// 使用系统文件路径方式加载文件</span></div><div class="line">            Resource res1 = <span class="keyword">new</span> FileSystemResource(filePath);</div><div class="line">            <span class="comment">// 使用类路径方式加载文件</span></div><div class="line">            Resource res1 = <span class="keyword">new</span> ClassPathResource(<span class="string">"conf/file.txt"</span>);</div><div class="line">            InputStream ins1 = res1.getInputStream();</div><div class="line">            InputStream ins2 = res2.getInputStream();</div><div class="line">        &#125; <span class="keyword">catch</span>(IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="资源地址表达式"><a href="#资源地址表达式" class="headerlink" title="资源地址表达式"></a>资源地址表达式</h2><p>Spring 提供了强大的加载资源的机制，不但能够通过 <code>classpath:</code>、<code>file:</code> 等资源地址前缀识别不同的资源类型，还支持 Ant 风格带通配符的资源地址。</p>
+<table>
 <thead>
 <tr>
-<th>GroupId</th>
-<th>ArtifactId</th>
-<th>描述</th>
+<th>地址前缀</th>
+<th>示例</th>
+<th>对应资源类型</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>org.springframework</td>
-<td>spring-aop</td>
-<td>支持基于代理的 AOP</td>
+<td>classpath:</td>
+<td>classpath:com/myapp/config.xml</td>
+<td>从类路径中加载资源，资源文件可以在标准的文件系统中，也可以在 jar 或 zip 的类包中</td>
 </tr>
 <tr>
-<td>org.springframework</td>
-<td>spring-aspects</td>
-<td>基于 AspectJ 的切面</td>
+<td>file:</td>
+<td>file://data/config.xml</td>
+<td>使用 UrlResource 从文件系统目录中装载资源，可采用绝对或相对路径</td>
 </tr>
 <tr>
-<td>org.springframework</td>
-<td>spring-beans</td>
-<td>包含 Groovy 的 Beans 支持</td>
+<td>http://</td>
+<td><a href="http://myserver/logo.png" target="_blank" rel="external">http://myserver/logo.png</a></td>
+<td>使用 UrlResource 从 Web 服务器中装载资源</td>
 </tr>
 <tr>
-<td>org.springframework</td>
-<td>spring-context</td>
-<td>应用程序上下文运行时，包括调度和远程抽象</td>
+<td>ftp://</td>
+<td>ftp://myserver/my.txt</td>
+<td>使用 UrlResource 从 FTP 服务器中装载资源</td>
 </tr>
 <tr>
-<td>org.springframework</td>
-<td>spring-context-support</td>
-<td>支持将常见的第三方库集成到 Spring 应用程序上下文的类中</td>
-</tr>
-<tr>
-<td>org.springframework</td>
-<td>spring-core</td>
-<td>Spring 核心，为其它模块所用</td>
-</tr>
-<tr>
-<td>org.springframework</td>
-<td>spring-expression</td>
-<td>Spring 表达式（SpEL）</td>
-</tr>
-<tr>
-<td>org.springframework</td>
-<td>spring-instrument</td>
-<td>JVM 引导用的代理工具</td>
-</tr>
-<tr>
-<td>org.springframework</td>
-<td>spring-instrument-tomcat</td>
-<td>Tomcat 的代理工具</td>
-</tr>
-<tr>
-<td>org.springframework</td>
-<td>spring-jdbc</td>
-<td>JDBC 支持包，包括 DataSource 设置和 JDBC 访问支持</td>
-</tr>
-<tr>
-<td>org.springframework</td>
-<td>spring-jms</td>
-<td>JMS 支持包，包括用于发送和接收 JMS 消息的帮助类</td>
-</tr>
-<tr>
-<td>org.springframework</td>
-<td>spring-messaging</td>
-<td>支持消息架构和协议</td>
-</tr>
-<tr>
-<td>org.springframework</td>
-<td>spring-orm</td>
-<td>对象/关系映射，包含对 JPA 和 Hibernate 支持</td>
-</tr>
-<tr>
-<td>org.springframework</td>
-<td>spring-oxm</td>
-<td>对象/XML映射</td>
-</tr>
-<tr>
-<td>org.springframework</td>
-<td>spring-test</td>
-<td>支持单元测试和集成测试的 Spring 组件</td>
-</tr>
-<tr>
-<td>org.springframework</td>
-<td>spring-tx</td>
-<td>事务基础设施，包括 DAO 支持和 JCA 集成</td>
-</tr>
-<tr>
-<td>org.springframework</td>
-<td>spring-web</td>
-<td>Web 支持包，包括客户端和 Web 远程处理</td>
-</tr>
-<tr>
-<td>org.springframework</td>
-<td>spring-webmvc</td>
-<td>REST Web 服务和 Web 应用程序实现的 model-view-controller</td>
-</tr>
-<tr>
-<td>org.springframework</td>
-<td>spring-webmvc-portlet</td>
-<td>MVC 实现在 Portlet 环境中的使用</td>
-</tr>
-<tr>
-<td>org.springframework</td>
-<td>spring-websocket</td>
-<td>WebSocket 和 SockJS 实现，包含 STOMP 支持</td>
+<td>没有前缀</td>
+<td>/data/config.xml</td>
+<td>根据 ApplicationContext 具体实现类采用对应的类型的 Resource</td>
 </tr>
 </tbody>
 </table>
-<h2 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h2><p><a href="https://github.com/waylau/spring-framework-4-reference/" target="_blank" rel="external">中文翻译《Spring Framework 4.x参考文档》</a></p>
+<p>Ant 风格资源地址支持 3 种匹配符：</p>
+<ul>
+<li><code>?</code>：匹配文件名中的一个字符</li>
+<li><code>*</code>：匹配文件名中任意个字符</li>
+<li><code>**</code>：匹配多层路径</li>
+</ul>
+<p>示例：</p>
+<ul>
+<li><code>classpath:com/t?st.xml</code>：匹配 com 类路径下 com/test.xml，com/tast.xml 或者 com/tdst.xml</li>
+<li><code>file:D:/conf/*.xml</code>：匹配文件系统 D:/conf 目录下所有以 xml 为后缀的文件</li>
+<li><code>classpath:com/**/test.xml</code>：匹配 com 类路径下（当前目录及其子孙目录）的 test.xml 文件</li>
+</ul>
 
       
     </div>
@@ -520,17 +462,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/12/Spring笔记（一）—— 版本新特性/" rel="next" title="Spring笔记（一）—— 版本新特性">
-                <i class="fa fa-chevron-left"></i> Spring笔记（一）—— 版本新特性
+              <a href="/2016/11/20/Spring笔记（八）—— AOP 之基于 Schema 的 AOP 支持/" rel="next" title="Spring笔记（八）—— AOP 之基于 Schema 配置">
+                <i class="fa fa-chevron-left"></i> Spring笔记（八）—— AOP 之基于 Schema 配置
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/13/Spring笔记（三）—— IOC 容器之 BeanFactory 和 ApplicationContext/" rel="prev" title="Spring笔记（三）—— IOC 容器之 BeanFactory 和 ApplicationContext">
-                Spring笔记（三）—— IOC 容器之 BeanFactory 和 ApplicationContext <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -582,8 +520,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/11/12/Spring笔记（二）—— 基本概念的理解/"
-           data-title="Spring笔记（二）—— 基本概念的理解" data-url="http://yoursite.com/2016/11/12/Spring笔记（二）—— 基本概念的理解/">
+      <div class="ds-thread" data-thread-key="2016/11/21/Spring笔记（九）—— AOP 之资源访问接口 Resource/"
+           data-title="Spring笔记（九）—— AOP 之资源访问接口 Resource" data-url="http://yoursite.com/2016/11/21/Spring笔记（九）—— AOP 之资源访问接口 Resource/">
       </div>
     
   </div>
@@ -681,7 +619,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#控制反转（IOC）"><span class="nav-number">1.</span> <span class="nav-text">控制反转（IOC）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向切面编程（AOP）"><span class="nav-number">2.</span> <span class="nav-text">面向切面编程（AOP）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#连接点（Join-point）"><span class="nav-number">2.1.</span> <span class="nav-text">连接点（Join point）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增强（Advice）"><span class="nav-number">2.2.</span> <span class="nav-text">增强（Advice）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#切点（Pointcut）"><span class="nav-number">2.3.</span> <span class="nav-text">切点（Pointcut）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#切面（Aspect）"><span class="nav-number">2.4.</span> <span class="nav-text">切面（Aspect）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引介（Introduction）"><span class="nav-number">2.5.</span> <span class="nav-text">引介（Introduction）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目标对象（Target-object）"><span class="nav-number">2.6.</span> <span class="nav-text">目标对象（Target object）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代理（Proxy）"><span class="nav-number">2.7.</span> <span class="nav-text">代理（Proxy）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#织入（Weaving）"><span class="nav-number">2.8.</span> <span class="nav-text">织入（Weaving）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-框架组件列表"><span class="nav-number">3.</span> <span class="nav-text">Spring 框架组件列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料："><span class="nav-number">4.</span> <span class="nav-text">参考资料：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#资源接口-Resource"><span class="nav-number">1.</span> <span class="nav-text">资源接口 Resource</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Resource-的具体实现类"><span class="nav-number">2.</span> <span class="nav-text">Resource 的具体实现类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#资源地址表达式"><span class="nav-number">3.</span> <span class="nav-text">资源地址表达式</span></a></li></ol></div>
             
           </div>
         </section>
