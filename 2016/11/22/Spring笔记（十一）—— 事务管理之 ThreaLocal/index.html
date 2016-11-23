@@ -93,18 +93,18 @@
 
 
 <meta name="description" content="按照传统的经验，如果某个对象是非线程安全的，在多线程环境下，对对象的访问必须采用 synchronized 进行线程同步，但线程同步机制会降低并发性，影响系统性能。ThreaLocal 可以改变这种方式。
-认识JDK 1.2 版本开始提供 java.lang.ThreaLocal，ThreaLocal 为解决多线程程序的并发问题提供了新的思路。ThreaLocal 是线程的一个本地化对象，当工作于">
+认识">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring笔记（十一）—— 事务管理之 ThreaLocal">
 <meta property="og:url" content="http://yoursite.com/2016/11/22/Spring笔记（十一）—— 事务管理之 ThreaLocal/index.html">
 <meta property="og:site_name" content="Lio's Blog">
 <meta property="og:description" content="按照传统的经验，如果某个对象是非线程安全的，在多线程环境下，对对象的访问必须采用 synchronized 进行线程同步，但线程同步机制会降低并发性，影响系统性能。ThreaLocal 可以改变这种方式。
-认识JDK 1.2 版本开始提供 java.lang.ThreaLocal，ThreaLocal 为解决多线程程序的并发问题提供了新的思路。ThreaLocal 是线程的一个本地化对象，当工作于">
-<meta property="og:updated_time" content="2016-11-23T08:22:32.982Z">
+认识">
+<meta property="og:updated_time" content="2016-11-23T08:39:35.354Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring笔记（十一）—— 事务管理之 ThreaLocal">
 <meta name="twitter:description" content="按照传统的经验，如果某个对象是非线程安全的，在多线程环境下，对对象的访问必须采用 synchronized 进行线程同步，但线程同步机制会降低并发性，影响系统性能。ThreaLocal 可以改变这种方式。
-认识JDK 1.2 版本开始提供 java.lang.ThreaLocal，ThreaLocal 为解决多线程程序的并发问题提供了新的思路。ThreaLocal 是线程的一个本地化对象，当工作于">
+认识">
 
 
 
@@ -363,7 +363,8 @@
 
       
         <p>按照传统的经验，如果某个对象是非线程安全的，在多线程环境下，对对象的访问必须采用 synchronized 进行线程同步，但线程同步机制会降低并发性，影响系统性能。ThreaLocal 可以改变这种方式。</p>
-<h2 id="认识"><a href="#认识" class="headerlink" title="认识"></a>认识</h2><p>JDK 1.2 版本开始提供 java.lang.ThreaLocal，ThreaLocal 为解决多线程程序的并发问题提供了新的思路。ThreaLocal 是线程的一个本地化对象，当工作于多线程中的对象使用 ThreadLocal 维护变量时，它会为每个使用该变量的线程分配一个独立的变量副本。所有每个线程都可以独立地改变自己的副本，而不会影响其他线程所对应的副本；从线程的角度看，这个变量就像是线程的本地变量。</p>
+<h2 id="认识"><a href="#认识" class="headerlink" title="认识"></a>认识</h2><a id="more"></a>
+<p>JDK 1.2 版本开始提供 java.lang.ThreaLocal，ThreaLocal 为解决多线程程序的并发问题提供了新的思路。ThreaLocal 是线程的一个本地化对象，当工作于多线程中的对象使用 ThreadLocal 维护变量时，它会为每个使用该变量的线程分配一个独立的变量副本。所有每个线程都可以独立地改变自己的副本，而不会影响其他线程所对应的副本；从线程的角度看，这个变量就像是线程的本地变量。</p>
 <h2 id="接口方法"><a href="#接口方法" class="headerlink" title="接口方法"></a>接口方法</h2><p>ThreadLocal 支持泛型，且有四个简单的接口：</p>
 <ul>
 <li>void set(T value)：设置当前线程的线程局部变量的值。</li>

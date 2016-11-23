@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-11-23T08:22:32.982Z</updated>
+  <updated>2016-11-23T08:39:35.354Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,10 +20,11 @@
     <link href="http://yoursite.com/2016/11/22/Spring%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%20%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86%E4%B9%8B%20ThreaLocal/"/>
     <id>http://yoursite.com/2016/11/22/Spring笔记（十一）—— 事务管理之 ThreaLocal/</id>
     <published>2016-11-22T14:55:01.000Z</published>
-    <updated>2016-11-23T08:22:32.982Z</updated>
+    <updated>2016-11-23T08:39:35.354Z</updated>
     
     <content type="html"><![CDATA[<p>按照传统的经验，如果某个对象是非线程安全的，在多线程环境下，对对象的访问必须采用 synchronized 进行线程同步，但线程同步机制会降低并发性，影响系统性能。ThreaLocal 可以改变这种方式。</p>
-<h2 id="认识"><a href="#认识" class="headerlink" title="认识"></a>认识</h2><p>JDK 1.2 版本开始提供 java.lang.ThreaLocal，ThreaLocal 为解决多线程程序的并发问题提供了新的思路。ThreaLocal 是线程的一个本地化对象，当工作于多线程中的对象使用 ThreadLocal 维护变量时，它会为每个使用该变量的线程分配一个独立的变量副本。所有每个线程都可以独立地改变自己的副本，而不会影响其他线程所对应的副本；从线程的角度看，这个变量就像是线程的本地变量。</p>
+<h2 id="认识"><a href="#认识" class="headerlink" title="认识"></a>认识</h2><a id="more"></a>
+<p>JDK 1.2 版本开始提供 java.lang.ThreaLocal，ThreaLocal 为解决多线程程序的并发问题提供了新的思路。ThreaLocal 是线程的一个本地化对象，当工作于多线程中的对象使用 ThreadLocal 维护变量时，它会为每个使用该变量的线程分配一个独立的变量副本。所有每个线程都可以独立地改变自己的副本，而不会影响其他线程所对应的副本；从线程的角度看，这个变量就像是线程的本地变量。</p>
 <h2 id="接口方法"><a href="#接口方法" class="headerlink" title="接口方法"></a>接口方法</h2><p>ThreadLocal 支持泛型，且有四个简单的接口：</p>
 <ul>
 <li>void set(T value)：设置当前线程的线程局部变量的值。</li>
@@ -41,7 +42,7 @@
     <summary type="html">
     
       &lt;p&gt;按照传统的经验，如果某个对象是非线程安全的，在多线程环境下，对对象的访问必须采用 synchronized 进行线程同步，但线程同步机制会降低并发性，影响系统性能。ThreaLocal 可以改变这种方式。&lt;/p&gt;
-&lt;h2 id=&quot;认识&quot;&gt;&lt;a href=&quot;#认识&quot; clas
+&lt;h2 id=&quot;认识&quot;&gt;&lt;a href=&quot;#认识&quot; class=&quot;headerlink&quot; title=&quot;认识&quot;&gt;&lt;/a&gt;认识&lt;/h2&gt;
     
     </summary>
     
@@ -1050,38 +1051,6 @@
   </entry>
   
   <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2016/11/11/hello-world/"/>
-    <id>http://yoursite.com/2016/11/11/hello-world/</id>
-    <published>2016-11-11T03:01:02.000Z</published>
-    <updated>2016-11-12T04:11:03.051Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<a id="more"></a>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="hexo" scheme="http://yoursite.com/categories/hexo/"/>
-    
-    
-      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Github 与 Hexo 搭建博客步骤（使用 Next 主题）</title>
     <link href="http://yoursite.com/2016/11/11/Github%E4%B8%8Ehexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E6%AD%A5%E9%AA%A4/"/>
     <id>http://yoursite.com/2016/11/11/Github与hexo搭建博客步骤/</id>
@@ -1119,6 +1088,38 @@
     <summary type="html">
     
       &lt;h2 id=&quot;1-安装前的准备&quot;&gt;&lt;a href=&quot;#1-安装前的准备&quot; class=&quot;headerlink&quot; title=&quot;1. 安装前的准备&quot;&gt;&lt;/a&gt;1. 安装前的准备&lt;/h2&gt;&lt;p&gt;Hexo 是一个快速简单并且强大的博客框架，使用者可以使用 markdown 语法编写文章，然后通过 hexo 生成带有主题的静态文件，并上传到 github，生成的 html 文件可以在浏览器上访问。本安装教程是在 ubuntu 平台上进行的，其他平台请另寻他处。&lt;br&gt;安装前 Hexo 前需要先安装 Node.js 和 Git，在后面会描述其安装过程。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="hexo" scheme="http://yoursite.com/categories/hexo/"/>
+    
+    
+      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2016/11/11/hello-world/"/>
+    <id>http://yoursite.com/2016/11/11/hello-world/</id>
+    <published>2016-11-11T03:01:02.000Z</published>
+    <updated>2016-11-12T04:11:03.051Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<a id="more"></a>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
     
     </summary>
     
