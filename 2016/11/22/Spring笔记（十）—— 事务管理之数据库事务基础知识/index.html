@@ -98,10 +98,16 @@
 <meta property="og:url" content="http://yoursite.com/2016/11/22/Spring笔记（十）—— 事务管理之数据库事务基础知识/index.html">
 <meta property="og:site_name" content="Lio's Blog">
 <meta property="og:description" content="概念数据库事务(Database Transaction)，是指作为单个逻辑工作单元执行的一系列操作（可理解为对数据库的简单操作，如：增删查改），要么完全地执行，要么完全地不执行。 事务处理可以确保除非事务性单元内的所有操作（将一组相关操作组合为一个单元）都成功完成，否则不会将数据库操作真正地写入数据库，如此简化错误恢复的实现，并使应用程序更加可靠。">
-<meta property="og:updated_time" content="2016-11-23T07:32:20.563Z">
+<meta property="og:image" content="http://yoursite.com/../posts_img/脏读.png">
+<meta property="og:image" content="http://yoursite.com/../posts_img/不可重复读.png">
+<meta property="og:image" content="http://yoursite.com/../posts_img/幻读.png">
+<meta property="og:image" content="http://yoursite.com/../posts_img/第一类丢失修改.png">
+<meta property="og:image" content="http://yoursite.com/../posts_img/第二类丢失修改.png">
+<meta property="og:updated_time" content="2016-11-23T08:48:29.614Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring笔记（十）—— 事务管理之数据库事务基础知识">
 <meta name="twitter:description" content="概念数据库事务(Database Transaction)，是指作为单个逻辑工作单元执行的一系列操作（可理解为对数据库的简单操作，如：增删查改），要么完全地执行，要么完全地不执行。 事务处理可以确保除非事务性单元内的所有操作（将一组相关操作组合为一个单元）都成功完成，否则不会将数据库操作真正地写入数据库，如此简化错误恢复的实现，并使应用程序更加可靠。">
+<meta name="twitter:image" content="http://yoursite.com/../posts_img/脏读.png">
 
 
 
@@ -367,11 +373,11 @@
 <li>持久性（Durability）：一旦事务提交成功后，事务中所有的数据操作都必须被持久化到数据库中，即使提交事务后，数据库马上崩溃，在数据库重启时，也必须能保证能够通过某种机制恢复数据。</li>
 </ul>
 <h2 id="数据并发"><a href="#数据并发" class="headerlink" title="数据并发"></a>数据并发</h2><p>多个客户端连接同一个数据库进行并发访问时，数据库中的同一个数据可能会被多个事务访问，这时需要采用适当的隔离措施，保护数据的完整性。</p>
-<h3 id="脏读"><a href="#脏读" class="headerlink" title="脏读"></a>脏读</h3><p>A 事务读取 B 事务尚未提交的更改数据，并在此基础上进行操作。当 B 进行事务回滚时，则 A 事务读取的数据不会被承认。<br>下图中黑点代表开始事务，白点表示提交事务。<br><a href="../posts_img/脏读.png">脏读</a></p>
-<h3 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h3><p>不可重复读指 A 事务读取数据后，B 事务执行更新操作，使 A 事务无法再现前一次读取结果。<br><a href="../posts_img/不可重复读.png">不可重复读</a></p>
-<h3 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h3><p>A 事务读取 B 事务提交的新增数据。幻读和不可重复读不一样，前者是指读到了其他已经提交事务的新增数据，后者指读到了已经提交事务的更改数据；防止读取到更改数据，只需要对操作的数据添加行级锁，阻止操作中的数据发生变化，而防止读取到新增数据，往往需要添加表级锁（将整个表锁定，防止新增数据）。<br><a href="../posts_img/幻读.png">幻读</a></p>
-<h3 id="第一类丢失修改"><a href="#第一类丢失修改" class="headerlink" title="第一类丢失修改"></a>第一类丢失修改</h3><p>A 事务撤销时，把已经提交的 B 事务的更新数据覆盖了。<br><a href="../posts_img/第一类丢失修改.png">第一类丢失修改</a></p>
-<h3 id="第二类丢失修改"><a href="#第二类丢失修改" class="headerlink" title="第二类丢失修改"></a>第二类丢失修改</h3><p>A 事务覆盖 B 事务已经提交的数据，造成 B 事务所做操作丢失。<br><a href="../posts_img/第二类丢失修改.png">第二类丢失修改</a></p>
+<h3 id="脏读"><a href="#脏读" class="headerlink" title="脏读"></a>脏读</h3><p>A 事务读取 B 事务尚未提交的更改数据，并在此基础上进行操作。当 B 进行事务回滚时，则 A 事务读取的数据不会被承认。<br>下图中黑点代表开始事务，白点表示提交事务。<br><img src="../posts_img/脏读.png" alt="脏读"></p>
+<h3 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h3><p>不可重复读指 A 事务读取数据后，B 事务执行更新操作，使 A 事务无法再现前一次读取结果。<br><img src="../posts_img/不可重复读.png" alt="不可重复读"></p>
+<h3 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h3><p>A 事务读取 B 事务提交的新增数据。幻读和不可重复读不一样，前者是指读到了其他已经提交事务的新增数据，后者指读到了已经提交事务的更改数据；防止读取到更改数据，只需要对操作的数据添加行级锁，阻止操作中的数据发生变化，而防止读取到新增数据，往往需要添加表级锁（将整个表锁定，防止新增数据）。<br><img src="../posts_img/幻读.png" alt="幻读"></p>
+<h3 id="第一类丢失修改"><a href="#第一类丢失修改" class="headerlink" title="第一类丢失修改"></a>第一类丢失修改</h3><p>A 事务撤销时，把已经提交的 B 事务的更新数据覆盖了。<br><img src="../posts_img/第一类丢失修改.png" alt="第一类丢失修改"></p>
+<h3 id="第二类丢失修改"><a href="#第二类丢失修改" class="headerlink" title="第二类丢失修改"></a>第二类丢失修改</h3><p>A 事务覆盖 B 事务已经提交的数据，造成 B 事务所做操作丢失。<br><img src="../posts_img/第二类丢失修改.png" alt="第二类丢失修改"></p>
 <h2 id="数据库锁机制"><a href="#数据库锁机制" class="headerlink" title="数据库锁机制"></a>数据库锁机制</h2><p>按锁定的对象的不同，一般可以分为表锁定和行锁定，前者对整个表进行锁定，而后者对表中特定行进行锁定。从并发事务锁定的关系上看，可以分为共享锁定和独占锁定。共享锁定会防止独占锁定，但允许其他的共享锁定；而独占锁定既防止其他的独占锁定，也防止其他的共享锁定。</p>
 <h2 id="事务隔离"><a href="#事务隔离" class="headerlink" title="事务隔离"></a>事务隔离</h2><p>数据库为用户提供了锁的 DML 操作方式，但直接使用锁管理比较麻烦，因此数据库为用户提供可自动锁机制。只要用户指定回话的事务隔离级别，数据库就会分析事务中的 SQL 语句，然后自动为事务操作的数据资源添加适当的锁。<br>ANISI/ISO SQL 92 标准定义了 4 个等级的事务隔离级别，在相同的数据环境下，使用相同的输入，执行相同的工作，根据不同的隔离级别，可以导致不同的结果。</p>
 <table>
