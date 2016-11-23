@@ -94,13 +94,13 @@
 
 <meta name="description" content="编程式的事务管理Spring 提供了两个模板类 TransactionTemplate 和 PlatformTransactionManager 来支持编程式事务管理，与其他的持久化模板一样，都是线程安全的。一般使用前者，后者类似与 JTA UserTransaction API。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring笔记（十一）—— 事务管理之不同方式的使用">
+<meta property="og:title" content="Spring笔记（十二）—— 事务管理之不同方式的使用">
 <meta property="og:url" content="http://yoursite.com/2016/11/23/Spring笔记（十二）—— 事务管理之不同方式的使用/index.html">
 <meta property="og:site_name" content="Lio's Blog">
 <meta property="og:description" content="编程式的事务管理Spring 提供了两个模板类 TransactionTemplate 和 PlatformTransactionManager 来支持编程式事务管理，与其他的持久化模板一样，都是线程安全的。一般使用前者，后者类似与 JTA UserTransaction API。">
-<meta property="og:updated_time" content="2016-11-23T17:28:26.277Z">
+<meta property="og:updated_time" content="2016-11-23T17:32:23.125Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring笔记（十一）—— 事务管理之不同方式的使用">
+<meta name="twitter:title" content="Spring笔记（十二）—— 事务管理之不同方式的使用">
 <meta name="twitter:description" content="编程式的事务管理Spring 提供了两个模板类 TransactionTemplate 和 PlatformTransactionManager 来支持编程式事务管理，与其他的持久化模板一样，都是线程安全的。一般使用前者，后者类似与 JTA UserTransaction API。">
 
 
@@ -125,7 +125,7 @@
   <link rel="canonical" href="http://yoursite.com/2016/11/23/Spring笔记（十二）—— 事务管理之不同方式的使用/"/>
 
 
-  <title> Spring笔记（十一）—— 事务管理之不同方式的使用 | Lio's Blog </title>
+  <title> Spring笔记（十二）—— 事务管理之不同方式的使用 | Lio's Blog </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -288,7 +288,7 @@
             
             
               
-                Spring笔记（十一）—— 事务管理之不同方式的使用
+                Spring笔记（十二）—— 事务管理之不同方式的使用
               
             
           </h1>
@@ -421,7 +421,7 @@
 <h3 id="回滚-XML-配置声明式事务"><a href="#回滚-XML-配置声明式事务" class="headerlink" title="回滚 XML 配置声明式事务"></a>回滚 XML 配置声明式事务</h3><p>在 Spring 框架中，事务回滚的推荐方法为：从当前在事务上下文中执行的代码中抛出异常。Spring 框架的事务基础结构代码将捕获任何未处理的异常，并确定是否将事务标记为回滚。在其默认配置中，Spring框架的事务基础结构代码只在发生 RuntimeException 和 unchecked 异常的情况下标记用于回滚的事务（即当抛出的异常是 RuntimeException 的实例或子类时）；从事务方法抛出的 checked 异常不会导致在默认配置中回滚。<br>我们可以自己配置通过哪些异常类型标记事务以进行回滚（包括检查异常），以下为 XML 配置的代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">tx:advice</span> <span class="attr">id</span>=<span class="string">"txAdvice"</span> <span class="attr">transaction-manager</span>=<span class="string">"txManager"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">tx:attributes</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"get*"</span> <span class="attr">read-only</span>=<span class="string">"true"</span> <span class="attr">rollback-for</span>=<span class="string">"NoProductInStockException"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"*"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">tx:attributes</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">tx:advice</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>也可以指定不进行事务回滚的异常，这样当应用程序抛出该异常时，不进行事务回滚：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">tx:advice</span> <span class="attr">id</span>=<span class="string">"txAdvice"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">tx:attributes</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"updateStock"</span> <span class="attr">no-rollback-for</span>=<span class="string">"InstrumentNotFoundException"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"*"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">tx:attributes</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">tx:advice</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>如下 XML 配置表示除了 InstrumentNotFoundException 之外，其余的异常都进行回滚：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">tx:advice</span> <span class="attr">id</span>=<span class="string">"txAdvice"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">tx:attributes</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"*"</span> <span class="attr">rollback-for</span>=<span class="string">"Throwable"</span> <span class="attr">no-rollback-for</span>=<span class="string">"InstrumentNotFoundException"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">tx:attributes</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">tx:advice</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<h3 id="lt-tx-advice-gt"><a href="#lt-tx-advice-gt" class="headerlink" title="&lt;tx:advice/&gt;"></a><code>&lt;tx:advice/&gt;</code></h3><p>事务的设置可以使用 <code>&lt;tx:advice/&gt;</code> 标签指定，其默认的 <code>&lt;tx:advice/&gt;</code> 设置为：</p>
+<h3 id="tx-advice-标签的属性"><a href="#tx-advice-标签的属性" class="headerlink" title="tx:advice 标签的属性"></a>tx:advice 标签的属性</h3><p>事务的设置可以使用 <code>&lt;tx:advice/&gt;</code> 标签指定，其默认的 <code>&lt;tx:advice/&gt;</code> 设置为：</p>
 <ul>
 <li>传播行为：REQUIRED；</li>
 <li>隔离级别：DEFAULT；</li>
@@ -611,7 +611,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/11/23/Spring笔记（十二）—— 事务管理之不同方式的使用/"
-           data-title="Spring笔记（十一）—— 事务管理之不同方式的使用" data-url="http://yoursite.com/2016/11/23/Spring笔记（十二）—— 事务管理之不同方式的使用/">
+           data-title="Spring笔记（十二）—— 事务管理之不同方式的使用" data-url="http://yoursite.com/2016/11/23/Spring笔记（十二）—— 事务管理之不同方式的使用/">
       </div>
     
   </div>
@@ -709,7 +709,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#编程式的事务管理"><span class="nav-number">1.</span> <span class="nav-text">编程式的事务管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-TransactionTemplate"><span class="nav-number">1.1.</span> <span class="nav-text">使用 TransactionTemplate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-PlatformTransactionManager"><span class="nav-number">1.2.</span> <span class="nav-text">使用 PlatformTransactionManager</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-XML-配置声明式事务管理"><span class="nav-number">2.</span> <span class="nav-text">使用 XML 配置声明式事务管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">2.1.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回滚-XML-配置声明式事务"><span class="nav-number">2.2.</span> <span class="nav-text">回滚 XML 配置声明式事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-tx-advice-gt"><span class="nav-number">2.3.</span> <span class="nav-text"><tx:advice/></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用注解配置声明式事务管理"><span class="nav-number">3.</span> <span class="nav-text">使用注解配置声明式事务管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-Transactional-注解"><span class="nav-number">3.1.</span> <span class="nav-text">使用 @Transactional 注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transactional-的属性"><span class="nav-number">3.2.</span> <span class="nav-text">@Transactional 的属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transactional-使用不同的事务管理器"><span class="nav-number">3.3.</span> <span class="nav-text">@Transactional 使用不同的事务管理器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料："><span class="nav-number">4.</span> <span class="nav-text">参考资料：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#编程式的事务管理"><span class="nav-number">1.</span> <span class="nav-text">编程式的事务管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-TransactionTemplate"><span class="nav-number">1.1.</span> <span class="nav-text">使用 TransactionTemplate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-PlatformTransactionManager"><span class="nav-number">1.2.</span> <span class="nav-text">使用 PlatformTransactionManager</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-XML-配置声明式事务管理"><span class="nav-number">2.</span> <span class="nav-text">使用 XML 配置声明式事务管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">2.1.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回滚-XML-配置声明式事务"><span class="nav-number">2.2.</span> <span class="nav-text">回滚 XML 配置声明式事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tx-advice-标签的属性"><span class="nav-number">2.3.</span> <span class="nav-text">tx:advice 标签的属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用注解配置声明式事务管理"><span class="nav-number">3.</span> <span class="nav-text">使用注解配置声明式事务管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-Transactional-注解"><span class="nav-number">3.1.</span> <span class="nav-text">使用 @Transactional 注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transactional-的属性"><span class="nav-number">3.2.</span> <span class="nav-text">@Transactional 的属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transactional-使用不同的事务管理器"><span class="nav-number">3.3.</span> <span class="nav-text">@Transactional 使用不同的事务管理器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料："><span class="nav-number">4.</span> <span class="nav-text">参考资料：</span></a></li></ol></div>
             
           </div>
         </section>
