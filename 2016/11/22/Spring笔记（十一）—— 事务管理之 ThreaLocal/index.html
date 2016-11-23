@@ -92,16 +92,19 @@
 
 
 
-<meta name="description" content="Initialization 回调org.springframework.beans.factory.InitializingBean 接口允许 bean 在容器设置完所有属性后执行初始化工作，初始化工作在实现 InitializingBean 的类中的 afterPropertiesSet() 方法中执行。此外，初始化工作也可通过 @PostConstruct 注解来指定执行初始化工作的方法；或">
+<meta name="description" content="按照传统的经验，如果某个对象是非线程安全的，在多线程环境下，对对象的访问必须采用 synchronized 进行线程同步，但线程同步机制会降低并发性，影响系统性能。ThreaLocal 可以改变这种方式。
+认识JDK 1.2 版本开始提供 java.lang.ThreaLocal，ThreaLocal 为解决多线程程序的并发问题提供了新的思路。ThreaLocal 是线程的一个本地化对象，当工作于">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring笔记（四）—— IOC 容器之 Bean 的生命周期">
-<meta property="og:url" content="http://yoursite.com/2016/11/16/Spring笔记（四）—— IOC 容器之 Bean 的生命周期/index.html">
+<meta property="og:title" content="Spring笔记（十一）—— 事务管理之 ThreaLocal">
+<meta property="og:url" content="http://yoursite.com/2016/11/22/Spring笔记（十一）—— 事务管理之 ThreaLocal/index.html">
 <meta property="og:site_name" content="Lio's Blog">
-<meta property="og:description" content="Initialization 回调org.springframework.beans.factory.InitializingBean 接口允许 bean 在容器设置完所有属性后执行初始化工作，初始化工作在实现 InitializingBean 的类中的 afterPropertiesSet() 方法中执行。此外，初始化工作也可通过 @PostConstruct 注解来指定执行初始化工作的方法；或">
-<meta property="og:updated_time" content="2016-11-20T07:16:07.920Z">
+<meta property="og:description" content="按照传统的经验，如果某个对象是非线程安全的，在多线程环境下，对对象的访问必须采用 synchronized 进行线程同步，但线程同步机制会降低并发性，影响系统性能。ThreaLocal 可以改变这种方式。
+认识JDK 1.2 版本开始提供 java.lang.ThreaLocal，ThreaLocal 为解决多线程程序的并发问题提供了新的思路。ThreaLocal 是线程的一个本地化对象，当工作于">
+<meta property="og:updated_time" content="2016-11-23T08:22:32.982Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring笔记（四）—— IOC 容器之 Bean 的生命周期">
-<meta name="twitter:description" content="Initialization 回调org.springframework.beans.factory.InitializingBean 接口允许 bean 在容器设置完所有属性后执行初始化工作，初始化工作在实现 InitializingBean 的类中的 afterPropertiesSet() 方法中执行。此外，初始化工作也可通过 @PostConstruct 注解来指定执行初始化工作的方法；或">
+<meta name="twitter:title" content="Spring笔记（十一）—— 事务管理之 ThreaLocal">
+<meta name="twitter:description" content="按照传统的经验，如果某个对象是非线程安全的，在多线程环境下，对对象的访问必须采用 synchronized 进行线程同步，但线程同步机制会降低并发性，影响系统性能。ThreaLocal 可以改变这种方式。
+认识JDK 1.2 版本开始提供 java.lang.ThreaLocal，ThreaLocal 为解决多线程程序的并发问题提供了新的思路。ThreaLocal 是线程的一个本地化对象，当工作于">
 
 
 
@@ -122,10 +125,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/11/16/Spring笔记（四）—— IOC 容器之 Bean 的生命周期/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/11/22/Spring笔记（十一）—— 事务管理之 ThreaLocal/"/>
 
 
-  <title> Spring笔记（四）—— IOC 容器之 Bean 的生命周期 | Lio's Blog </title>
+  <title> Spring笔记（十一）—— 事务管理之 ThreaLocal | Lio's Blog </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -288,7 +291,7 @@
             
             
               
-                Spring笔记（四）—— IOC 容器之 Bean 的生命周期
+                Spring笔记（十一）—— 事务管理之 ThreaLocal
               
             
           </h1>
@@ -300,8 +303,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-16T20:04:00+08:00" content="2016-11-16">
-              2016-11-16
+            <time itemprop="dateCreated" datetime="2016-11-22T22:55:01+08:00" content="2016-11-22">
+              2016-11-22
             </time>
           </span>
 
@@ -330,8 +333,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/11/16/Spring笔记（四）—— IOC 容器之 Bean 的生命周期/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/16/Spring笔记（四）—— IOC 容器之 Bean 的生命周期/" itemprop="commentsCount"></span>
+                <a href="/2016/11/22/Spring笔记（十一）—— 事务管理之 ThreaLocal/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/22/Spring笔记（十一）—— 事务管理之 ThreaLocal/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -359,22 +362,20 @@
       
 
       
-        <h2 id="Initialization-回调"><a href="#Initialization-回调" class="headerlink" title="Initialization 回调"></a>Initialization 回调</h2><p>org.springframework.beans.factory.InitializingBean 接口允许 bean 在容器设置完所有属性后执行初始化工作，初始化工作在实现 InitializingBean 的类中的 afterPropertiesSet() 方法中执行。此外，初始化工作也可通过 @PostConstruct 注解来指定执行初始化工作的方法；或者指定一个 POJO 的初始化方法，然后在 XML 文件中使用 init-method 属性指定在该方法中执行初始化操作。<br><a id="more"></a>  </p>
-<h3 id="实现-InitializingBean-接口"><a href="#实现-InitializingBean-接口" class="headerlink" title="实现 InitializingBean 接口"></a>实现 InitializingBean 接口</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"exampleInitBean"</span> <span class="attr">class</span>=<span class="string">"examples.ExampleBean"</span>/&gt;</span></div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleBean</span> <span class="keyword">implements</span> <span class="title">InitializingBean</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterPropertiesSet</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// do some initialization work</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="使用-PostConstruct-注解"><a href="#使用-PostConstruct-注解" class="headerlink" title="使用 @PostConstruct 注解"></a>使用 @PostConstruct 注解</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CachingMovieLister</span> </span>&#123;</div><div class="line">    <span class="meta">@PostConstruct</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">populateMovieCache</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// populates the movie cache upon initialization...</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="使用-init-method-属性"><a href="#使用-init-method-属性" class="headerlink" title="使用 init-method 属性"></a>使用 init-method 属性</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"exampleInitBean"</span> <span class="attr">class</span>=<span class="string">"examples.ExampleBean"</span> <span class="attr">init-method</span>=<span class="string">"init"</span>/&gt;</span></div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleBean</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// do some initialization work</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="Destroy-回调"><a href="#Destroy-回调" class="headerlink" title="Destroy 回调"></a>Destroy 回调</h2><p>org.springframework.beans.factory.DisposableBean 接口允许 bean 使用销毁回调，销毁工作在实现 DisposableBean 的类中的 destroy() 方法中执行。注解方法使用 @PreDestroy，XML 文件指定 destroy-method 属性即可。</p>
-<h3 id="实现-InitializingBean-接口-1"><a href="#实现-InitializingBean-接口-1" class="headerlink" title="实现 InitializingBean 接口"></a>实现 InitializingBean 接口</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"exampleInitBean"</span> <span class="attr">class</span>=<span class="string">"examples.ExampleBean"</span>/&gt;</span></div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleBean</span> <span class="keyword">implements</span> <span class="title">InitializingBean</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// do some destruction work (like releasing pooled connections)</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="使用-PostConstruct-注解-1"><a href="#使用-PostConstruct-注解-1" class="headerlink" title="使用 @PostConstruct 注解"></a>使用 @PostConstruct 注解</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CachingMovieLister</span> </span>&#123;</div><div class="line">    <span class="meta">@PreDestroy</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">clearMovieCache</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// clears the movie cache upon destruction...</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="使用-init-method-属性-1"><a href="#使用-init-method-属性-1" class="headerlink" title="使用 init-method 属性"></a>使用 init-method 属性</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"exampleInitBean"</span> <span class="attr">class</span>=<span class="string">"examples.ExampleBean"</span> <span class="attr">destroy-method</span>=<span class="string">"cleanup"</span>/&gt;</span></div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleBean</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cleanup</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// do some destruction work (like releasing pooled connections)</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="默认的-initialization-和-destroy-方法"><a href="#默认的-initialization-和-destroy-方法" class="headerlink" title="默认的 initialization 和 destroy 方法"></a>默认的 initialization 和 destroy 方法</h2><p>当做 initialization 和 destroy 工作时，使用 init(), initialize(), dispose() 等类似的方法名有助于我们识别方法的作用。每次我们都需要为每个 bean 设置 init-method 或 destroy-method 属性指定生命周期的回调方法，有一个更加简便的方法，即在 <beans> 元素中使用 default-init-method 属性指定初始化的方法，则默认 <beans> 元素下的所有 bean 的初始化方法均为 init()。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">default-init-method</span>=<span class="string">"init"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"blogService"</span> <span class="attr">class</span>=<span class="string">"com.foo.DefaultBlogService"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"blogDao"</span> <span class="attr">ref</span>=<span class="string">"blogDao"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure></beans></beans></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DefaultBlogService</span> <span class="keyword">implements</span> <span class="title">BlogService</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> BlogDao blogDao;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBlogDao</span><span class="params">(BlogDao blogDao)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.blogDao = blogDao;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// this is (unsurprisingly) the initialization callback method</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.blogDao == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"The [blogDao] property must be set."</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>default-destroy-method 属性的使用方法也和 default-init-method 一样。</p>
-<h2 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h2><p><a href="http://baike.baidu.com/link?url=d7y8v6ipdY1kKXBOoV4NU3MyMZi62nekBGBPcnSN0-LbJ7I5DxGU4C5njmcFPFVXP_JdA_tpAwSOFNOXUoc1a_jPFyg3iDCBPWR-sC3-_OtiW9ZFavHunQzgbXk4Ju-UuIepOOdH2gzsWDznpcvRQ8IgWWk9VW0WFJoZNfC60-AbKDdFV6VK-xNeyXw6EdEy" target="_blank" rel="external">Spring 3.x 企业应用开发实战</a><br><a href="http://docs.spring.io/spring/docs/4.3.5.BUILD-SNAPSHOT/spring-framework-reference/htmlsingle/" target="_blank" rel="external">Spring Framework Reference Documentation</a></p>
+        <p>按照传统的经验，如果某个对象是非线程安全的，在多线程环境下，对对象的访问必须采用 synchronized 进行线程同步，但线程同步机制会降低并发性，影响系统性能。ThreaLocal 可以改变这种方式。</p>
+<h2 id="认识"><a href="#认识" class="headerlink" title="认识"></a>认识</h2><p>JDK 1.2 版本开始提供 java.lang.ThreaLocal，ThreaLocal 为解决多线程程序的并发问题提供了新的思路。ThreaLocal 是线程的一个本地化对象，当工作于多线程中的对象使用 ThreadLocal 维护变量时，它会为每个使用该变量的线程分配一个独立的变量副本。所有每个线程都可以独立地改变自己的副本，而不会影响其他线程所对应的副本；从线程的角度看，这个变量就像是线程的本地变量。</p>
+<h2 id="接口方法"><a href="#接口方法" class="headerlink" title="接口方法"></a>接口方法</h2><p>ThreadLocal 支持泛型，且有四个简单的接口：</p>
+<ul>
+<li>void set(T value)：设置当前线程的线程局部变量的值。</li>
+<li>public T get()：该方法返回当前线程所对应的线程局部变量。</li>
+<li>public void remove()：将当前线程局部变量的值删除，目的是为了减少内存的占用（JDK 5.0 新增）。当线程结束后，对应该线程的局部变量将会自动被垃圾回收，所以显示调用该方法清除线程的局部变量并不是必须的操作，但它可以加快内存回收的速度。</li>
+<li>protected T initialValue()：返回该线程局部变量的初始值，该方法是一个 protected 方法，为了让子类覆盖而设计。</li>
+</ul>
+<p>ThreadLocal 的实现思路：在 ThreadLocal 内部有一个 Map，用于存储每一个线程的变量副本，Map 中的元素的 key 为线程对象，value 为对应线程的变量副本。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SequenceNumber</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">TestClient</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> SequenceNumber sn;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">TestClient</span><span class="params">(SequenceNumber sn)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.sn = sn;</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</div><div class="line">                System.out.println(<span class="string">"Thread["</span> + Thread.currentThread().getName()</div><div class="line">                + <span class="string">"] sn["</span> + sn.getNextNum() + <span class="string">"]"</span>)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ThreadLocal&lt;Integer&gt; seqNum = <span class="keyword">new</span> ThreadLocal&lt;Integer&gt;() &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> Integer <span class="title">initialValue</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNextNum</span><span class="params">()</span> </span>&#123;</div><div class="line">        seqNum.set(seqNum.get() + <span class="number">1</span>);</div><div class="line">        <span class="keyword">return</span> seqNum.get();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        SequenceNumber sn = <span class="keyword">new</span> SequenceNumber();</div><div class="line">        TestClient t1 = <span class="keyword">new</span> TestClient(sn);</div><div class="line">        TestClient t2 = <span class="keyword">new</span> TestClient(sn);</div><div class="line">        TestClient t3 = <span class="keyword">new</span> TestClient(sn);</div><div class="line">        t1.start();</div><div class="line">        t2.start();</div><div class="line">        t3.start();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Thread[Thread-2] sn[1]</div><div class="line">Thread[Thread-0] sn[1]</div><div class="line">Thread[Thread-1] sn[1]</div><div class="line">Thread[Thread-2] sn[2]</div><div class="line">Thread[Thread-0] sn[2]</div><div class="line">Thread[Thread-1] sn[2]</div><div class="line">Thread[Thread-2] sn[3]</div><div class="line">Thread[Thread-0] sn[3]</div><div class="line">Thread[Thread-1] sn[3]</div></pre></td></tr></table></figure></p>
+<p>从输出结果上看，由于 ThreadLocal 为每一个线程提供了单独的副本，所以每个线程所产生的序号虽然都共享同一个 SequenceNumber 实例，但它们没有发生相互干扰的情况，而是各自产生独立的序列号。</p>
+<h2 id="与线程同步机制的比较"><a href="#与线程同步机制的比较" class="headerlink" title="与线程同步机制的比较"></a>与线程同步机制的比较</h2><p>在线程同步机制中，通过对象的锁机制保证同一时间只有一个线程访问变量。这时该变量是多个线程共享的，使用同步机制要求程序解决什么时候对变量进行读写，什么时候需要锁定某个对象，什么时候释放对象锁等复杂的问题。<br>ThreadLocal 从另一个角度解决多线程的并发访问，为每个线程提供独立的变量副本，从而隔离了多个线程对访问数据的冲突。因为每一个线程都拥有自己的变量副本，从而也就没有必要对变量进行同步。ThreadLocal 提供了线程安全的对象封装，在编写多线程代码时，可以把部安全的变量封装进 ThreadLocal。<br>总的来说，同步机制采用“以时间换空间”的方式：访问串行化，对象共享化；而 ThreadLocal 采用“以空间换时间”的方式：访问并行化，对象独享化。</p>
 
       
     </div>
@@ -408,17 +409,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/13/Spring笔记（三）—— IOC 容器之 BeanFactory 和 ApplicationContext/" rel="next" title="Spring笔记（三）—— IOC 容器之 BeanFactory 和 ApplicationContext">
-                <i class="fa fa-chevron-left"></i> Spring笔记（三）—— IOC 容器之 BeanFactory 和 ApplicationContext
+              <a href="/2016/11/22/Spring笔记（十）—— 事务管理之数据库事务基础知识/" rel="next" title="Spring笔记（十）—— 事务管理之数据库事务基础知识">
+                <i class="fa fa-chevron-left"></i> Spring笔记（十）—— 事务管理之数据库事务基础知识
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/17/Spring笔记（五）—— IOC 容器之依赖注入/" rel="prev" title="Spring笔记（五）—— IOC 容器之依赖注入">
-                Spring笔记（五）—— IOC 容器之依赖注入 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -470,8 +467,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/11/16/Spring笔记（四）—— IOC 容器之 Bean 的生命周期/"
-           data-title="Spring笔记（四）—— IOC 容器之 Bean 的生命周期" data-url="http://yoursite.com/2016/11/16/Spring笔记（四）—— IOC 容器之 Bean 的生命周期/">
+      <div class="ds-thread" data-thread-key="2016/11/22/Spring笔记（十一）—— 事务管理之 ThreaLocal/"
+           data-title="Spring笔记（十一）—— 事务管理之 ThreaLocal" data-url="http://yoursite.com/2016/11/22/Spring笔记（十一）—— 事务管理之 ThreaLocal/">
       </div>
     
   </div>
@@ -569,7 +566,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Initialization-回调"><span class="nav-number">1.</span> <span class="nav-text">Initialization 回调</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现-InitializingBean-接口"><span class="nav-number">1.1.</span> <span class="nav-text">实现 InitializingBean 接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-PostConstruct-注解"><span class="nav-number">1.2.</span> <span class="nav-text">使用 @PostConstruct 注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-init-method-属性"><span class="nav-number">1.3.</span> <span class="nav-text">使用 init-method 属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Destroy-回调"><span class="nav-number">2.</span> <span class="nav-text">Destroy 回调</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现-InitializingBean-接口-1"><span class="nav-number">2.1.</span> <span class="nav-text">实现 InitializingBean 接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-PostConstruct-注解-1"><span class="nav-number">2.2.</span> <span class="nav-text">使用 @PostConstruct 注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-init-method-属性-1"><span class="nav-number">2.3.</span> <span class="nav-text">使用 init-method 属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#默认的-initialization-和-destroy-方法"><span class="nav-number">3.</span> <span class="nav-text">默认的 initialization 和 destroy 方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料："><span class="nav-number">4.</span> <span class="nav-text">参考资料：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#认识"><span class="nav-number">1.</span> <span class="nav-text">认识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口方法"><span class="nav-number">2.</span> <span class="nav-text">接口方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">3.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与线程同步机制的比较"><span class="nav-number">4.</span> <span class="nav-text">与线程同步机制的比较</span></a></li></ol></div>
             
           </div>
         </section>

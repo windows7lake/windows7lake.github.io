@@ -92,16 +92,16 @@
 
 
 
-<meta name="description" content="Initialization 回调org.springframework.beans.factory.InitializingBean 接口允许 bean 在容器设置完所有属性后执行初始化工作，初始化工作在实现 InitializingBean 的类中的 afterPropertiesSet() 方法中执行。此外，初始化工作也可通过 @PostConstruct 注解来指定执行初始化工作的方法；或">
+<meta name="description" content="概念数据库事务(Database Transaction)，是指作为单个逻辑工作单元执行的一系列操作（可理解为对数据库的简单操作，如：增删查改），要么完全地执行，要么完全地不执行。 事务处理可以确保除非事务性单元内的所有操作（将一组相关操作组合为一个单元）都成功完成，否则不会将数据库操作真正地写入数据库，如此简化错误恢复的实现，并使应用程序更加可靠。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring笔记（四）—— IOC 容器之 Bean 的生命周期">
-<meta property="og:url" content="http://yoursite.com/2016/11/16/Spring笔记（四）—— IOC 容器之 Bean 的生命周期/index.html">
+<meta property="og:title" content="Spring笔记（十）—— 事务管理之数据库事务基础知识">
+<meta property="og:url" content="http://yoursite.com/2016/11/22/Spring笔记（十）—— 事务管理之数据库事务基础知识/index.html">
 <meta property="og:site_name" content="Lio's Blog">
-<meta property="og:description" content="Initialization 回调org.springframework.beans.factory.InitializingBean 接口允许 bean 在容器设置完所有属性后执行初始化工作，初始化工作在实现 InitializingBean 的类中的 afterPropertiesSet() 方法中执行。此外，初始化工作也可通过 @PostConstruct 注解来指定执行初始化工作的方法；或">
-<meta property="og:updated_time" content="2016-11-20T07:16:07.920Z">
+<meta property="og:description" content="概念数据库事务(Database Transaction)，是指作为单个逻辑工作单元执行的一系列操作（可理解为对数据库的简单操作，如：增删查改），要么完全地执行，要么完全地不执行。 事务处理可以确保除非事务性单元内的所有操作（将一组相关操作组合为一个单元）都成功完成，否则不会将数据库操作真正地写入数据库，如此简化错误恢复的实现，并使应用程序更加可靠。">
+<meta property="og:updated_time" content="2016-11-23T07:32:20.563Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring笔记（四）—— IOC 容器之 Bean 的生命周期">
-<meta name="twitter:description" content="Initialization 回调org.springframework.beans.factory.InitializingBean 接口允许 bean 在容器设置完所有属性后执行初始化工作，初始化工作在实现 InitializingBean 的类中的 afterPropertiesSet() 方法中执行。此外，初始化工作也可通过 @PostConstruct 注解来指定执行初始化工作的方法；或">
+<meta name="twitter:title" content="Spring笔记（十）—— 事务管理之数据库事务基础知识">
+<meta name="twitter:description" content="概念数据库事务(Database Transaction)，是指作为单个逻辑工作单元执行的一系列操作（可理解为对数据库的简单操作，如：增删查改），要么完全地执行，要么完全地不执行。 事务处理可以确保除非事务性单元内的所有操作（将一组相关操作组合为一个单元）都成功完成，否则不会将数据库操作真正地写入数据库，如此简化错误恢复的实现，并使应用程序更加可靠。">
 
 
 
@@ -122,10 +122,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/11/16/Spring笔记（四）—— IOC 容器之 Bean 的生命周期/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/11/22/Spring笔记（十）—— 事务管理之数据库事务基础知识/"/>
 
 
-  <title> Spring笔记（四）—— IOC 容器之 Bean 的生命周期 | Lio's Blog </title>
+  <title> Spring笔记（十）—— 事务管理之数据库事务基础知识 | Lio's Blog </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -288,7 +288,7 @@
             
             
               
-                Spring笔记（四）—— IOC 容器之 Bean 的生命周期
+                Spring笔记（十）—— 事务管理之数据库事务基础知识
               
             
           </h1>
@@ -300,8 +300,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-16T20:04:00+08:00" content="2016-11-16">
-              2016-11-16
+            <time itemprop="dateCreated" datetime="2016-11-22T21:50:32+08:00" content="2016-11-22">
+              2016-11-22
             </time>
           </span>
 
@@ -330,8 +330,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/11/16/Spring笔记（四）—— IOC 容器之 Bean 的生命周期/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/16/Spring笔记（四）—— IOC 容器之 Bean 的生命周期/" itemprop="commentsCount"></span>
+                <a href="/2016/11/22/Spring笔记（十）—— 事务管理之数据库事务基础知识/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/22/Spring笔记（十）—— 事务管理之数据库事务基础知识/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -359,22 +359,67 @@
       
 
       
-        <h2 id="Initialization-回调"><a href="#Initialization-回调" class="headerlink" title="Initialization 回调"></a>Initialization 回调</h2><p>org.springframework.beans.factory.InitializingBean 接口允许 bean 在容器设置完所有属性后执行初始化工作，初始化工作在实现 InitializingBean 的类中的 afterPropertiesSet() 方法中执行。此外，初始化工作也可通过 @PostConstruct 注解来指定执行初始化工作的方法；或者指定一个 POJO 的初始化方法，然后在 XML 文件中使用 init-method 属性指定在该方法中执行初始化操作。<br><a id="more"></a>  </p>
-<h3 id="实现-InitializingBean-接口"><a href="#实现-InitializingBean-接口" class="headerlink" title="实现 InitializingBean 接口"></a>实现 InitializingBean 接口</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"exampleInitBean"</span> <span class="attr">class</span>=<span class="string">"examples.ExampleBean"</span>/&gt;</span></div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleBean</span> <span class="keyword">implements</span> <span class="title">InitializingBean</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterPropertiesSet</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// do some initialization work</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="使用-PostConstruct-注解"><a href="#使用-PostConstruct-注解" class="headerlink" title="使用 @PostConstruct 注解"></a>使用 @PostConstruct 注解</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CachingMovieLister</span> </span>&#123;</div><div class="line">    <span class="meta">@PostConstruct</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">populateMovieCache</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// populates the movie cache upon initialization...</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="使用-init-method-属性"><a href="#使用-init-method-属性" class="headerlink" title="使用 init-method 属性"></a>使用 init-method 属性</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"exampleInitBean"</span> <span class="attr">class</span>=<span class="string">"examples.ExampleBean"</span> <span class="attr">init-method</span>=<span class="string">"init"</span>/&gt;</span></div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleBean</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// do some initialization work</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="Destroy-回调"><a href="#Destroy-回调" class="headerlink" title="Destroy 回调"></a>Destroy 回调</h2><p>org.springframework.beans.factory.DisposableBean 接口允许 bean 使用销毁回调，销毁工作在实现 DisposableBean 的类中的 destroy() 方法中执行。注解方法使用 @PreDestroy，XML 文件指定 destroy-method 属性即可。</p>
-<h3 id="实现-InitializingBean-接口-1"><a href="#实现-InitializingBean-接口-1" class="headerlink" title="实现 InitializingBean 接口"></a>实现 InitializingBean 接口</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"exampleInitBean"</span> <span class="attr">class</span>=<span class="string">"examples.ExampleBean"</span>/&gt;</span></div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleBean</span> <span class="keyword">implements</span> <span class="title">InitializingBean</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// do some destruction work (like releasing pooled connections)</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="使用-PostConstruct-注解-1"><a href="#使用-PostConstruct-注解-1" class="headerlink" title="使用 @PostConstruct 注解"></a>使用 @PostConstruct 注解</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CachingMovieLister</span> </span>&#123;</div><div class="line">    <span class="meta">@PreDestroy</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">clearMovieCache</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// clears the movie cache upon destruction...</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="使用-init-method-属性-1"><a href="#使用-init-method-属性-1" class="headerlink" title="使用 init-method 属性"></a>使用 init-method 属性</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"exampleInitBean"</span> <span class="attr">class</span>=<span class="string">"examples.ExampleBean"</span> <span class="attr">destroy-method</span>=<span class="string">"cleanup"</span>/&gt;</span></div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleBean</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cleanup</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// do some destruction work (like releasing pooled connections)</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="默认的-initialization-和-destroy-方法"><a href="#默认的-initialization-和-destroy-方法" class="headerlink" title="默认的 initialization 和 destroy 方法"></a>默认的 initialization 和 destroy 方法</h2><p>当做 initialization 和 destroy 工作时，使用 init(), initialize(), dispose() 等类似的方法名有助于我们识别方法的作用。每次我们都需要为每个 bean 设置 init-method 或 destroy-method 属性指定生命周期的回调方法，有一个更加简便的方法，即在 <beans> 元素中使用 default-init-method 属性指定初始化的方法，则默认 <beans> 元素下的所有 bean 的初始化方法均为 init()。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">default-init-method</span>=<span class="string">"init"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"blogService"</span> <span class="attr">class</span>=<span class="string">"com.foo.DefaultBlogService"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"blogDao"</span> <span class="attr">ref</span>=<span class="string">"blogDao"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure></beans></beans></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DefaultBlogService</span> <span class="keyword">implements</span> <span class="title">BlogService</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> BlogDao blogDao;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBlogDao</span><span class="params">(BlogDao blogDao)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.blogDao = blogDao;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// this is (unsurprisingly) the initialization callback method</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.blogDao == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"The [blogDao] property must be set."</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>default-destroy-method 属性的使用方法也和 default-init-method 一样。</p>
-<h2 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h2><p><a href="http://baike.baidu.com/link?url=d7y8v6ipdY1kKXBOoV4NU3MyMZi62nekBGBPcnSN0-LbJ7I5DxGU4C5njmcFPFVXP_JdA_tpAwSOFNOXUoc1a_jPFyg3iDCBPWR-sC3-_OtiW9ZFavHunQzgbXk4Ju-UuIepOOdH2gzsWDznpcvRQ8IgWWk9VW0WFJoZNfC60-AbKDdFV6VK-xNeyXw6EdEy" target="_blank" rel="external">Spring 3.x 企业应用开发实战</a><br><a href="http://docs.spring.io/spring/docs/4.3.5.BUILD-SNAPSHOT/spring-framework-reference/htmlsingle/" target="_blank" rel="external">Spring Framework Reference Documentation</a></p>
+        <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>数据库事务(Database Transaction)，是指作为单个逻辑工作单元执行的一系列操作（可理解为对数据库的简单操作，如：增删查改），要么完全地执行，要么完全地不执行。 事务处理可以确保除非事务性单元内的所有操作（将一组相关操作组合为一个单元）都成功完成，否则不会将数据库操作真正地写入数据库，如此简化错误恢复的实现，并使应用程序更加可靠。<br><a id="more"></a><br>数据库事务必须满足 4 大特性（简称 ACID）：</p>
+<ul>
+<li>原子性（Atomic）：表示包含多个数据库操作的事务只有所有操作都成功，整个事务才提交；若其中一个操作失败，则撤销所有操作，让数据库返回初始状态。</li>
+<li>一致性（Consistency）：事务操作成功后，数据库整体状态与业务规则一致。如 A 转账 100 给 B，不论操作是否成功，A 和 B 的存款总额不变。</li>
+<li>隔离性（Isolation）：并发操作中，不同事务拥有各自的数据空间，且彼此的操作不会相互干扰。</li>
+<li>持久性（Durability）：一旦事务提交成功后，事务中所有的数据操作都必须被持久化到数据库中，即使提交事务后，数据库马上崩溃，在数据库重启时，也必须能保证能够通过某种机制恢复数据。</li>
+</ul>
+<h2 id="数据并发"><a href="#数据并发" class="headerlink" title="数据并发"></a>数据并发</h2><p>多个客户端连接同一个数据库进行并发访问时，数据库中的同一个数据可能会被多个事务访问，这时需要采用适当的隔离措施，保护数据的完整性。</p>
+<h3 id="脏读"><a href="#脏读" class="headerlink" title="脏读"></a>脏读</h3><p>A 事务读取 B 事务尚未提交的更改数据，并在此基础上进行操作。当 B 进行事务回滚时，则 A 事务读取的数据不会被承认。<br>下图中黑点代表开始事务，白点表示提交事务。<br><a href="../posts_img/脏读.png">脏读</a></p>
+<h3 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h3><p>不可重复读指 A 事务读取数据后，B 事务执行更新操作，使 A 事务无法再现前一次读取结果。<br><a href="../posts_img/不可重复读.png">不可重复读</a></p>
+<h3 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h3><p>A 事务读取 B 事务提交的新增数据。幻读和不可重复读不一样，前者是指读到了其他已经提交事务的新增数据，后者指读到了已经提交事务的更改数据；防止读取到更改数据，只需要对操作的数据添加行级锁，阻止操作中的数据发生变化，而防止读取到新增数据，往往需要添加表级锁（将整个表锁定，防止新增数据）。<br><a href="../posts_img/幻读.png">幻读</a></p>
+<h3 id="第一类丢失修改"><a href="#第一类丢失修改" class="headerlink" title="第一类丢失修改"></a>第一类丢失修改</h3><p>A 事务撤销时，把已经提交的 B 事务的更新数据覆盖了。<br><a href="../posts_img/第一类丢失修改.png">第一类丢失修改</a></p>
+<h3 id="第二类丢失修改"><a href="#第二类丢失修改" class="headerlink" title="第二类丢失修改"></a>第二类丢失修改</h3><p>A 事务覆盖 B 事务已经提交的数据，造成 B 事务所做操作丢失。<br><a href="../posts_img/第二类丢失修改.png">第二类丢失修改</a></p>
+<h2 id="数据库锁机制"><a href="#数据库锁机制" class="headerlink" title="数据库锁机制"></a>数据库锁机制</h2><p>按锁定的对象的不同，一般可以分为表锁定和行锁定，前者对整个表进行锁定，而后者对表中特定行进行锁定。从并发事务锁定的关系上看，可以分为共享锁定和独占锁定。共享锁定会防止独占锁定，但允许其他的共享锁定；而独占锁定既防止其他的独占锁定，也防止其他的共享锁定。</p>
+<h2 id="事务隔离"><a href="#事务隔离" class="headerlink" title="事务隔离"></a>事务隔离</h2><p>数据库为用户提供了锁的 DML 操作方式，但直接使用锁管理比较麻烦，因此数据库为用户提供可自动锁机制。只要用户指定回话的事务隔离级别，数据库就会分析事务中的 SQL 语句，然后自动为事务操作的数据资源添加适当的锁。<br>ANISI/ISO SQL 92 标准定义了 4 个等级的事务隔离级别，在相同的数据环境下，使用相同的输入，执行相同的工作，根据不同的隔离级别，可以导致不同的结果。</p>
+<table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th>脏读</th>
+<th>不可重复读</th>
+<th>幻读</th>
+<th>第一类丢失修改</th>
+<th>第二类丢失修改</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>READ UNCOMMITTED</td>
+<td>允许</td>
+<td>允许</td>
+<td>允许</td>
+<td>不允许</td>
+<td>允许</td>
+</tr>
+<tr>
+<td>READ COMMITTED</td>
+<td>不允许</td>
+<td>允许</td>
+<td>允许</td>
+<td>不允许</td>
+<td>允许</td>
+</tr>
+<tr>
+<td>REPEATABLE READ</td>
+<td>不允许</td>
+<td>不允许</td>
+<td>允许</td>
+<td>不允许</td>
+<td>不允许</td>
+</tr>
+<tr>
+<td>SERIALIZABLE</td>
+<td>不允许</td>
+<td>不允许</td>
+<td>不允许</td>
+<td>不允许</td>
+<td>不允许</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -408,16 +453,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/13/Spring笔记（三）—— IOC 容器之 BeanFactory 和 ApplicationContext/" rel="next" title="Spring笔记（三）—— IOC 容器之 BeanFactory 和 ApplicationContext">
-                <i class="fa fa-chevron-left"></i> Spring笔记（三）—— IOC 容器之 BeanFactory 和 ApplicationContext
+              <a href="/2016/11/21/Spring笔记（九）—— AOP 之资源访问接口 Resource/" rel="next" title="Spring笔记（九）—— AOP 之资源访问接口 Resource">
+                <i class="fa fa-chevron-left"></i> Spring笔记（九）—— AOP 之资源访问接口 Resource
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/11/17/Spring笔记（五）—— IOC 容器之依赖注入/" rel="prev" title="Spring笔记（五）—— IOC 容器之依赖注入">
-                Spring笔记（五）—— IOC 容器之依赖注入 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/11/22/Spring笔记（十一）—— 事务管理之 ThreaLocal/" rel="prev" title="Spring笔记（十一）—— 事务管理之 ThreaLocal">
+                Spring笔记（十一）—— 事务管理之 ThreaLocal <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -470,8 +515,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/11/16/Spring笔记（四）—— IOC 容器之 Bean 的生命周期/"
-           data-title="Spring笔记（四）—— IOC 容器之 Bean 的生命周期" data-url="http://yoursite.com/2016/11/16/Spring笔记（四）—— IOC 容器之 Bean 的生命周期/">
+      <div class="ds-thread" data-thread-key="2016/11/22/Spring笔记（十）—— 事务管理之数据库事务基础知识/"
+           data-title="Spring笔记（十）—— 事务管理之数据库事务基础知识" data-url="http://yoursite.com/2016/11/22/Spring笔记（十）—— 事务管理之数据库事务基础知识/">
       </div>
     
   </div>
@@ -569,7 +614,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Initialization-回调"><span class="nav-number">1.</span> <span class="nav-text">Initialization 回调</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现-InitializingBean-接口"><span class="nav-number">1.1.</span> <span class="nav-text">实现 InitializingBean 接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-PostConstruct-注解"><span class="nav-number">1.2.</span> <span class="nav-text">使用 @PostConstruct 注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-init-method-属性"><span class="nav-number">1.3.</span> <span class="nav-text">使用 init-method 属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Destroy-回调"><span class="nav-number">2.</span> <span class="nav-text">Destroy 回调</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现-InitializingBean-接口-1"><span class="nav-number">2.1.</span> <span class="nav-text">实现 InitializingBean 接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-PostConstruct-注解-1"><span class="nav-number">2.2.</span> <span class="nav-text">使用 @PostConstruct 注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-init-method-属性-1"><span class="nav-number">2.3.</span> <span class="nav-text">使用 init-method 属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#默认的-initialization-和-destroy-方法"><span class="nav-number">3.</span> <span class="nav-text">默认的 initialization 和 destroy 方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料："><span class="nav-number">4.</span> <span class="nav-text">参考资料：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据并发"><span class="nav-number">2.</span> <span class="nav-text">数据并发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#脏读"><span class="nav-number">2.1.</span> <span class="nav-text">脏读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不可重复读"><span class="nav-number">2.2.</span> <span class="nav-text">不可重复读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#幻读"><span class="nav-number">2.3.</span> <span class="nav-text">幻读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一类丢失修改"><span class="nav-number">2.4.</span> <span class="nav-text">第一类丢失修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二类丢失修改"><span class="nav-number">2.5.</span> <span class="nav-text">第二类丢失修改</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库锁机制"><span class="nav-number">3.</span> <span class="nav-text">数据库锁机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务隔离"><span class="nav-number">4.</span> <span class="nav-text">事务隔离</span></a></li></ol></div>
             
           </div>
         </section>

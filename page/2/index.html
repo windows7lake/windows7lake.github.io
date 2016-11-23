@@ -290,6 +290,251 @@
             
               
                 
+                <a class="post-title-link" href="/2016/11/18/Spring笔记（六）—— IOC 容器之不同的配置方式/" itemprop="url">
+                  Spring笔记（六）—— IOC 容器之不同的配置方式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-18T21:27:50+08:00" content="2016-11-18">
+              2016-11-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/18/Spring笔记（六）—— IOC 容器之不同的配置方式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/18/Spring笔记（六）—— IOC 容器之不同的配置方式/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="基于注解的配置"><a href="#基于注解的配置" class="headerlink" title="基于注解的配置"></a>基于注解的配置</h2><p>XML 设置的替代方法是基于注释的配置，它依赖于字节码元数据来连接组件而不是角括号声明。开发人员通过使用相关类，方法或字段声明上的注释来将配置移动到组件类本身中，而不是使用 XML 来描述 bean 布线。例如，Spring2.0 引入了使用 @Required 注释实现 required 属性的可能性。Spring2.5 添加了对 JSR-250 注释的支持，例如 @PostConstruct 和 @PreDestroy。Spring3.0 增加了对 javax.inject 包中包含的 JSR-330（Java的依赖注入）注释的支持，例如 @Inject 和 @Named。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/18/Spring笔记（六）—— IOC 容器之不同的配置方式/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/17/Spring笔记（五）—— IOC 容器之依赖注入/" itemprop="url">
+                  Spring笔记（五）—— IOC 容器之依赖注入
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-17T21:22:00+08:00" content="2016-11-17">
+              2016-11-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/17/Spring笔记（五）—— IOC 容器之依赖注入/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/17/Spring笔记（五）—— IOC 容器之依赖注入/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Spring 支持两种依赖注入方式，分别为构造函数注入和属性注入，此外还支持工厂方法注入方式。</p>
+<h2 id="构造函数注入"><a href="#构造函数注入" class="headerlink" title="构造函数注入"></a>构造函数注入</h2><p>构造函数注入由容器调用带参的构造函数来完成，与通过调用指定参数的静态工厂方法来构造 bean 相似。包含构造函数的类是一个没有依赖于容器指定的接口，基类或注释的 POJO，如下所示：<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/17/Spring笔记（五）—— IOC 容器之依赖注入/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/11/16/Spring笔记（四）—— IOC 容器之 Bean 的生命周期/" itemprop="url">
                   Spring笔记（四）—— IOC 容器之 Bean 的生命周期
                 </a>
@@ -635,250 +880,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/12/Spring笔记（一）—— 版本新特性/" itemprop="url">
-                  Spring笔记（一）—— 版本新特性
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-12T11:01:02+08:00" content="2016-11-12">
-              2016-11-12
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/11/12/Spring笔记（一）—— 版本新特性/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/12/Spring笔记（一）—— 版本新特性/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="1-spring-2-0-和-2-5-的新特性"><a href="#1-spring-2-0-和-2-5-的新特性" class="headerlink" title="1. spring 2.0 和 2.5 的新特性"></a>1. spring 2.0 和 2.5 的新特性</h2><h3 id="1-1-简介"><a href="#1-1-简介" class="headerlink" title="1.1 简介"></a>1.1 简介</h3><p>JDK 版本要在 1.4.2 以上，Java 5 和 Java 6 都支持。<br>Spring 框架继续保持对 Java EE 1.3 及以后版本的兼容，完全支持 Java EE 5。<br>对服务器（应用服务器和Web服务器）的支持：<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/12/Spring笔记（一）—— 版本新特性/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/11/Github与hexo搭建博客步骤/" itemprop="url">
-                  Github 与 Hexo 搭建博客步骤（使用 Next 主题）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-11T11:01:02+08:00" content="2016-11-11">
-              2016-11-11
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">hexo</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/11/11/Github与hexo搭建博客步骤/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/11/Github与hexo搭建博客步骤/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="1-安装前的准备"><a href="#1-安装前的准备" class="headerlink" title="1. 安装前的准备"></a>1. 安装前的准备</h2><p>Hexo 是一个快速简单并且强大的博客框架，使用者可以使用 markdown 语法编写文章，然后通过 hexo 生成带有主题的静态文件，并上传到 github，生成的 html 文件可以在浏览器上访问。本安装教程是在 ubuntu 平台上进行的，其他平台请另寻他处。<br>安装前 Hexo 前需要先安装 Node.js 和 Git，在后面会描述其安装过程。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/11/Github与hexo搭建博客步骤/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -924,7 +925,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

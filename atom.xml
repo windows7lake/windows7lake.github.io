@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-11-21T16:27:21.354Z</updated>
+  <updated>2016-11-23T08:22:32.982Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,13 +16,137 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Spring笔记（十一）—— 事务管理之 ThreaLocal</title>
+    <link href="http://yoursite.com/2016/11/22/Spring%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%20%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86%E4%B9%8B%20ThreaLocal/"/>
+    <id>http://yoursite.com/2016/11/22/Spring笔记（十一）—— 事务管理之 ThreaLocal/</id>
+    <published>2016-11-22T14:55:01.000Z</published>
+    <updated>2016-11-23T08:22:32.982Z</updated>
+    
+    <content type="html"><![CDATA[<p>按照传统的经验，如果某个对象是非线程安全的，在多线程环境下，对对象的访问必须采用 synchronized 进行线程同步，但线程同步机制会降低并发性，影响系统性能。ThreaLocal 可以改变这种方式。</p>
+<h2 id="认识"><a href="#认识" class="headerlink" title="认识"></a>认识</h2><p>JDK 1.2 版本开始提供 java.lang.ThreaLocal，ThreaLocal 为解决多线程程序的并发问题提供了新的思路。ThreaLocal 是线程的一个本地化对象，当工作于多线程中的对象使用 ThreadLocal 维护变量时，它会为每个使用该变量的线程分配一个独立的变量副本。所有每个线程都可以独立地改变自己的副本，而不会影响其他线程所对应的副本；从线程的角度看，这个变量就像是线程的本地变量。</p>
+<h2 id="接口方法"><a href="#接口方法" class="headerlink" title="接口方法"></a>接口方法</h2><p>ThreadLocal 支持泛型，且有四个简单的接口：</p>
+<ul>
+<li>void set(T value)：设置当前线程的线程局部变量的值。</li>
+<li>public T get()：该方法返回当前线程所对应的线程局部变量。</li>
+<li>public void remove()：将当前线程局部变量的值删除，目的是为了减少内存的占用（JDK 5.0 新增）。当线程结束后，对应该线程的局部变量将会自动被垃圾回收，所以显示调用该方法清除线程的局部变量并不是必须的操作，但它可以加快内存回收的速度。</li>
+<li>protected T initialValue()：返回该线程局部变量的初始值，该方法是一个 protected 方法，为了让子类覆盖而设计。</li>
+</ul>
+<p>ThreadLocal 的实现思路：在 ThreadLocal 内部有一个 Map，用于存储每一个线程的变量副本，Map 中的元素的 key 为线程对象，value 为对应线程的变量副本。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SequenceNumber</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">TestClient</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> SequenceNumber sn;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">TestClient</span><span class="params">(SequenceNumber sn)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.sn = sn;</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</div><div class="line">                System.out.println(<span class="string">"Thread["</span> + Thread.currentThread().getName()</div><div class="line">                + <span class="string">"] sn["</span> + sn.getNextNum() + <span class="string">"]"</span>)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ThreadLocal&lt;Integer&gt; seqNum = <span class="keyword">new</span> ThreadLocal&lt;Integer&gt;() &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> Integer <span class="title">initialValue</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNextNum</span><span class="params">()</span> </span>&#123;</div><div class="line">        seqNum.set(seqNum.get() + <span class="number">1</span>);</div><div class="line">        <span class="keyword">return</span> seqNum.get();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        SequenceNumber sn = <span class="keyword">new</span> SequenceNumber();</div><div class="line">        TestClient t1 = <span class="keyword">new</span> TestClient(sn);</div><div class="line">        TestClient t2 = <span class="keyword">new</span> TestClient(sn);</div><div class="line">        TestClient t3 = <span class="keyword">new</span> TestClient(sn);</div><div class="line">        t1.start();</div><div class="line">        t2.start();</div><div class="line">        t3.start();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Thread[Thread-2] sn[1]</div><div class="line">Thread[Thread-0] sn[1]</div><div class="line">Thread[Thread-1] sn[1]</div><div class="line">Thread[Thread-2] sn[2]</div><div class="line">Thread[Thread-0] sn[2]</div><div class="line">Thread[Thread-1] sn[2]</div><div class="line">Thread[Thread-2] sn[3]</div><div class="line">Thread[Thread-0] sn[3]</div><div class="line">Thread[Thread-1] sn[3]</div></pre></td></tr></table></figure></p>
+<p>从输出结果上看，由于 ThreadLocal 为每一个线程提供了单独的副本，所以每个线程所产生的序号虽然都共享同一个 SequenceNumber 实例，但它们没有发生相互干扰的情况，而是各自产生独立的序列号。</p>
+<h2 id="与线程同步机制的比较"><a href="#与线程同步机制的比较" class="headerlink" title="与线程同步机制的比较"></a>与线程同步机制的比较</h2><p>在线程同步机制中，通过对象的锁机制保证同一时间只有一个线程访问变量。这时该变量是多个线程共享的，使用同步机制要求程序解决什么时候对变量进行读写，什么时候需要锁定某个对象，什么时候释放对象锁等复杂的问题。<br>ThreadLocal 从另一个角度解决多线程的并发访问，为每个线程提供独立的变量副本，从而隔离了多个线程对访问数据的冲突。因为每一个线程都拥有自己的变量副本，从而也就没有必要对变量进行同步。ThreadLocal 提供了线程安全的对象封装，在编写多线程代码时，可以把部安全的变量封装进 ThreadLocal。<br>总的来说，同步机制采用“以时间换空间”的方式：访问串行化，对象共享化；而 ThreadLocal 采用“以空间换时间”的方式：访问并行化，对象独享化。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;按照传统的经验，如果某个对象是非线程安全的，在多线程环境下，对对象的访问必须采用 synchronized 进行线程同步，但线程同步机制会降低并发性，影响系统性能。ThreaLocal 可以改变这种方式。&lt;/p&gt;
+&lt;h2 id=&quot;认识&quot;&gt;&lt;a href=&quot;#认识&quot; clas
+    
+    </summary>
+    
+      <category term="spring" scheme="http://yoursite.com/categories/spring/"/>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="spring" scheme="http://yoursite.com/tags/spring/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring笔记（十）—— 事务管理之数据库事务基础知识</title>
+    <link href="http://yoursite.com/2016/11/22/Spring%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%EF%BC%89%E2%80%94%E2%80%94%20%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    <id>http://yoursite.com/2016/11/22/Spring笔记（十）—— 事务管理之数据库事务基础知识/</id>
+    <published>2016-11-22T13:50:32.000Z</published>
+    <updated>2016-11-23T07:32:20.563Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>数据库事务(Database Transaction)，是指作为单个逻辑工作单元执行的一系列操作（可理解为对数据库的简单操作，如：增删查改），要么完全地执行，要么完全地不执行。 事务处理可以确保除非事务性单元内的所有操作（将一组相关操作组合为一个单元）都成功完成，否则不会将数据库操作真正地写入数据库，如此简化错误恢复的实现，并使应用程序更加可靠。<br><a id="more"></a><br>数据库事务必须满足 4 大特性（简称 ACID）：</p>
+<ul>
+<li>原子性（Atomic）：表示包含多个数据库操作的事务只有所有操作都成功，整个事务才提交；若其中一个操作失败，则撤销所有操作，让数据库返回初始状态。</li>
+<li>一致性（Consistency）：事务操作成功后，数据库整体状态与业务规则一致。如 A 转账 100 给 B，不论操作是否成功，A 和 B 的存款总额不变。</li>
+<li>隔离性（Isolation）：并发操作中，不同事务拥有各自的数据空间，且彼此的操作不会相互干扰。</li>
+<li>持久性（Durability）：一旦事务提交成功后，事务中所有的数据操作都必须被持久化到数据库中，即使提交事务后，数据库马上崩溃，在数据库重启时，也必须能保证能够通过某种机制恢复数据。</li>
+</ul>
+<h2 id="数据并发"><a href="#数据并发" class="headerlink" title="数据并发"></a>数据并发</h2><p>多个客户端连接同一个数据库进行并发访问时，数据库中的同一个数据可能会被多个事务访问，这时需要采用适当的隔离措施，保护数据的完整性。</p>
+<h3 id="脏读"><a href="#脏读" class="headerlink" title="脏读"></a>脏读</h3><p>A 事务读取 B 事务尚未提交的更改数据，并在此基础上进行操作。当 B 进行事务回滚时，则 A 事务读取的数据不会被承认。<br>下图中黑点代表开始事务，白点表示提交事务。<br><a href="../posts_img/脏读.png">脏读</a></p>
+<h3 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h3><p>不可重复读指 A 事务读取数据后，B 事务执行更新操作，使 A 事务无法再现前一次读取结果。<br><a href="../posts_img/不可重复读.png">不可重复读</a></p>
+<h3 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h3><p>A 事务读取 B 事务提交的新增数据。幻读和不可重复读不一样，前者是指读到了其他已经提交事务的新增数据，后者指读到了已经提交事务的更改数据；防止读取到更改数据，只需要对操作的数据添加行级锁，阻止操作中的数据发生变化，而防止读取到新增数据，往往需要添加表级锁（将整个表锁定，防止新增数据）。<br><a href="../posts_img/幻读.png">幻读</a></p>
+<h3 id="第一类丢失修改"><a href="#第一类丢失修改" class="headerlink" title="第一类丢失修改"></a>第一类丢失修改</h3><p>A 事务撤销时，把已经提交的 B 事务的更新数据覆盖了。<br><a href="../posts_img/第一类丢失修改.png">第一类丢失修改</a></p>
+<h3 id="第二类丢失修改"><a href="#第二类丢失修改" class="headerlink" title="第二类丢失修改"></a>第二类丢失修改</h3><p>A 事务覆盖 B 事务已经提交的数据，造成 B 事务所做操作丢失。<br><a href="../posts_img/第二类丢失修改.png">第二类丢失修改</a></p>
+<h2 id="数据库锁机制"><a href="#数据库锁机制" class="headerlink" title="数据库锁机制"></a>数据库锁机制</h2><p>按锁定的对象的不同，一般可以分为表锁定和行锁定，前者对整个表进行锁定，而后者对表中特定行进行锁定。从并发事务锁定的关系上看，可以分为共享锁定和独占锁定。共享锁定会防止独占锁定，但允许其他的共享锁定；而独占锁定既防止其他的独占锁定，也防止其他的共享锁定。</p>
+<h2 id="事务隔离"><a href="#事务隔离" class="headerlink" title="事务隔离"></a>事务隔离</h2><p>数据库为用户提供了锁的 DML 操作方式，但直接使用锁管理比较麻烦，因此数据库为用户提供可自动锁机制。只要用户指定回话的事务隔离级别，数据库就会分析事务中的 SQL 语句，然后自动为事务操作的数据资源添加适当的锁。<br>ANISI/ISO SQL 92 标准定义了 4 个等级的事务隔离级别，在相同的数据环境下，使用相同的输入，执行相同的工作，根据不同的隔离级别，可以导致不同的结果。</p>
+<table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th>脏读</th>
+<th>不可重复读</th>
+<th>幻读</th>
+<th>第一类丢失修改</th>
+<th>第二类丢失修改</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>READ UNCOMMITTED</td>
+<td>允许</td>
+<td>允许</td>
+<td>允许</td>
+<td>不允许</td>
+<td>允许</td>
+</tr>
+<tr>
+<td>READ COMMITTED</td>
+<td>不允许</td>
+<td>允许</td>
+<td>允许</td>
+<td>不允许</td>
+<td>允许</td>
+</tr>
+<tr>
+<td>REPEATABLE READ</td>
+<td>不允许</td>
+<td>不允许</td>
+<td>允许</td>
+<td>不允许</td>
+<td>不允许</td>
+</tr>
+<tr>
+<td>SERIALIZABLE</td>
+<td>不允许</td>
+<td>不允许</td>
+<td>不允许</td>
+<td>不允许</td>
+<td>不允许</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot; title=&quot;概念&quot;&gt;&lt;/a&gt;概念&lt;/h2&gt;&lt;p&gt;数据库事务(Database Transaction)，是指作为单个逻辑工作单元执行的一系列操作（可理解为对数据库的简单操作，如：增删查改），要么完全地执行，要么完全地不执行。 事务处理可以确保除非事务性单元内的所有操作（将一组相关操作组合为一个单元）都成功完成，否则不会将数据库操作真正地写入数据库，如此简化错误恢复的实现，并使应用程序更加可靠。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="spring" scheme="http://yoursite.com/categories/spring/"/>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="spring" scheme="http://yoursite.com/tags/spring/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Spring笔记（九）—— AOP 之资源访问接口 Resource</title>
     <link href="http://yoursite.com/2016/11/21/Spring%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89%E2%80%94%E2%80%94%20AOP%20%E4%B9%8B%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E6%8E%A5%E5%8F%A3%20Resource/"/>
     <id>http://yoursite.com/2016/11/21/Spring笔记（九）—— AOP 之资源访问接口 Resource/</id>
     <published>2016-11-21T13:00:22.000Z</published>
-    <updated>2016-11-21T16:27:21.354Z</updated>
+    <updated>2016-11-23T07:32:10.899Z</updated>
     
-    <content type="html"><![CDATA[<p>JDK 提供的访问资源的类（java.net.URL 和 File）不能满足各种底层资源的访问需求，比如缺少从类路径或 Web 容器的上下文中获取资源的操作类。因此，Spring 设计了一个 Resource 接口，为应用提供了更强的访问底层资源的能力。<br><a id="more"></a> </p>
+    <content type="html"><![CDATA[<p>JDK 提供的访问资源的类（java.net.URL 和 File）不能满足各种底层资源的访问需求，比如缺少从类路径或 Web 容器的上下文中获取资源的操作类。因此，Spring 设计了一个 Resource 接口，为应用提供了更强的访问底层资源的能力。<br><a id="more"></a></p>
 <h2 id="资源接口-Resource"><a href="#资源接口-Resource" class="headerlink" title="资源接口 Resource"></a>资源接口 Resource</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Resource</span> <span class="keyword">extends</span> <span class="title">InputStreamSource</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">exists</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isOpen</span><span class="params">()</span></span>;</div><div class="line">    <span class="function">URL <span class="title">getURL</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;</div><div class="line">    <span class="function">File <span class="title">getFile</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;</div><div class="line">    <span class="function">Resource <span class="title">createRelative</span><span class="params">(String relativePath)</span> <span class="keyword">throws</span> IOException</span>;</div><div class="line">    <span class="function">String <span class="title">getFilename</span><span class="params">()</span></span>;</div><div class="line">    <span class="function">String <span class="title">getDescription</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">InputStreamSource</span> </span>&#123;</div><div class="line">    <span class="function">InputStream <span class="title">getInputStream</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>Resource 接口的主要方法：</p>
@@ -926,6 +1050,38 @@
   </entry>
   
   <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2016/11/11/hello-world/"/>
+    <id>http://yoursite.com/2016/11/11/hello-world/</id>
+    <published>2016-11-11T03:01:02.000Z</published>
+    <updated>2016-11-12T04:11:03.051Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<a id="more"></a>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="hexo" scheme="http://yoursite.com/categories/hexo/"/>
+    
+    
+      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Github 与 Hexo 搭建博客步骤（使用 Next 主题）</title>
     <link href="http://yoursite.com/2016/11/11/Github%E4%B8%8Ehexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E6%AD%A5%E9%AA%A4/"/>
     <id>http://yoursite.com/2016/11/11/Github与hexo搭建博客步骤/</id>
@@ -963,38 +1119,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;1-安装前的准备&quot;&gt;&lt;a href=&quot;#1-安装前的准备&quot; class=&quot;headerlink&quot; title=&quot;1. 安装前的准备&quot;&gt;&lt;/a&gt;1. 安装前的准备&lt;/h2&gt;&lt;p&gt;Hexo 是一个快速简单并且强大的博客框架，使用者可以使用 markdown 语法编写文章，然后通过 hexo 生成带有主题的静态文件，并上传到 github，生成的 html 文件可以在浏览器上访问。本安装教程是在 ubuntu 平台上进行的，其他平台请另寻他处。&lt;br&gt;安装前 Hexo 前需要先安装 Node.js 和 Git，在后面会描述其安装过程。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="hexo" scheme="http://yoursite.com/categories/hexo/"/>
-    
-    
-      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2016/11/11/hello-world/"/>
-    <id>http://yoursite.com/2016/11/11/hello-world/</id>
-    <published>2016-11-11T03:01:02.000Z</published>
-    <updated>2016-11-12T04:11:03.051Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<a id="more"></a>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
     
     </summary>
     

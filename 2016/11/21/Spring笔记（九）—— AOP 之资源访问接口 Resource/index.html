@@ -98,7 +98,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/11/21/Spring笔记（九）—— AOP 之资源访问接口 Resource/index.html">
 <meta property="og:site_name" content="Lio's Blog">
 <meta property="og:description" content="JDK 提供的访问资源的类（java.net.URL 和 File）不能满足各种底层资源的访问需求，比如缺少从类路径或 Web 容器的上下文中获取资源的操作类。因此，Spring 设计了一个 Resource 接口，为应用提供了更强的访问底层资源的能力。">
-<meta property="og:updated_time" content="2016-11-21T16:27:21.354Z">
+<meta property="og:updated_time" content="2016-11-23T07:32:10.899Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring笔记（九）—— AOP 之资源访问接口 Resource">
 <meta name="twitter:description" content="JDK 提供的访问资源的类（java.net.URL 和 File）不能满足各种底层资源的访问需求，比如缺少从类路径或 Web 容器的上下文中获取资源的操作类。因此，Spring 设计了一个 Resource 接口，为应用提供了更强的访问底层资源的能力。">
@@ -359,7 +359,7 @@
       
 
       
-        <p>JDK 提供的访问资源的类（java.net.URL 和 File）不能满足各种底层资源的访问需求，比如缺少从类路径或 Web 容器的上下文中获取资源的操作类。因此，Spring 设计了一个 Resource 接口，为应用提供了更强的访问底层资源的能力。<br><a id="more"></a> </p>
+        <p>JDK 提供的访问资源的类（java.net.URL 和 File）不能满足各种底层资源的访问需求，比如缺少从类路径或 Web 容器的上下文中获取资源的操作类。因此，Spring 设计了一个 Resource 接口，为应用提供了更强的访问底层资源的能力。<br><a id="more"></a></p>
 <h2 id="资源接口-Resource"><a href="#资源接口-Resource" class="headerlink" title="资源接口 Resource"></a>资源接口 Resource</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Resource</span> <span class="keyword">extends</span> <span class="title">InputStreamSource</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">exists</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isOpen</span><span class="params">()</span></span>;</div><div class="line">    <span class="function">URL <span class="title">getURL</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;</div><div class="line">    <span class="function">File <span class="title">getFile</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;</div><div class="line">    <span class="function">Resource <span class="title">createRelative</span><span class="params">(String relativePath)</span> <span class="keyword">throws</span> IOException</span>;</div><div class="line">    <span class="function">String <span class="title">getFilename</span><span class="params">()</span></span>;</div><div class="line">    <span class="function">String <span class="title">getDescription</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">InputStreamSource</span> </span>&#123;</div><div class="line">    <span class="function">InputStream <span class="title">getInputStream</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>Resource 接口的主要方法：</p>
@@ -470,6 +470,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2016/11/22/Spring笔记（十）—— 事务管理之数据库事务基础知识/" rel="prev" title="Spring笔记（十）—— 事务管理之数据库事务基础知识">
+                Spring笔记（十）—— 事务管理之数据库事务基础知识 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -566,7 +570,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
