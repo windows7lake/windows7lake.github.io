@@ -1,0 +1,870 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java,spring," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Lio's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/avatar_ico.png?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="DataSourceSpring 通过 DataSource 获取数据库连接，DataSource 是 JDBC 规范的一部分，是一个通用连接工厂。它允许容器或框架从应用程序代码中隐藏连接池和事务管理问题。当使用 Spring 的 JDBC 层时，从 JNDI 获取数据源，或者使用第三方提供的连接池实现配置自己的数据源，最受欢迎的实现是 Apache Jakarta Commons DBCP 和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring笔记（十四）—— Spring JDBC 访问数据库之控制数据库连接">
+<meta property="og:url" content="http://yoursite.com/2016/11/26/Spring笔记（十四）—— Spring JDBC 访问数据库之控制数据库连接/index.html">
+<meta property="og:site_name" content="Lio's Blog">
+<meta property="og:description" content="DataSourceSpring 通过 DataSource 获取数据库连接，DataSource 是 JDBC 规范的一部分，是一个通用连接工厂。它允许容器或框架从应用程序代码中隐藏连接池和事务管理问题。当使用 Spring 的 JDBC 层时，从 JNDI 获取数据源，或者使用第三方提供的连接池实现配置自己的数据源，最受欢迎的实现是 Apache Jakarta Commons DBCP 和">
+<meta property="og:updated_time" content="2016-11-30T14:28:36.611Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring笔记（十四）—— Spring JDBC 访问数据库之控制数据库连接">
+<meta name="twitter:description" content="DataSourceSpring 通过 DataSource 获取数据库连接，DataSource 是 JDBC 规范的一部分，是一个通用连接工厂。它允许容器或框架从应用程序代码中隐藏连接池和事务管理问题。当使用 Spring 的 JDBC 层时，从 JNDI 获取数据源，或者使用第三方提供的连接池实现配置自己的数据源，最受欢迎的实现是 Apache Jakarta Commons DBCP 和">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/26/Spring笔记（十四）—— Spring JDBC 访问数据库之控制数据库连接/"/>
+
+
+  <title> Spring笔记（十四）—— Spring JDBC 访问数据库之控制数据库连接 | Lio's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Lio's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">No pains no gains!</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Spring笔记（十四）—— Spring JDBC 访问数据库之控制数据库连接
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-26T19:57:49+08:00" content="2016-11-26">
+              2016-11-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/26/Spring笔记（十四）—— Spring JDBC 访问数据库之控制数据库连接/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/26/Spring笔记（十四）—— Spring JDBC 访问数据库之控制数据库连接/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="DataSource"><a href="#DataSource" class="headerlink" title="DataSource"></a>DataSource</h2><p>Spring 通过 DataSource 获取数据库连接，DataSource 是 JDBC 规范的一部分，是一个通用连接工厂。它允许容器或框架从应用程序代码中隐藏连接池和事务管理问题。当使用 Spring 的 JDBC 层时，从 JNDI 获取数据源，或者使用第三方提供的连接池实现配置自己的数据源，最受欢迎的实现是 Apache Jakarta Commons DBCP 和 C3P0。<br><a id="more"></a><br>通过获得与 DriverManagerDataSource 的连接来获取 JDBC 连接，指定 JDBC 驱动程序的完全限定类名，以便 DriverManager 可以加载驱动程序类，接着提供在 JDBC 驱动程序的 URL，然后提供用户名和密码以连接到数据库。</p>
+<p>如下为在 Java 代码中配置 DriverManagerDataSource 的示例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">DriverManagerDataSource dataSource = <span class="keyword">new</span> DriverManagerDataSource();</div><div class="line">dataSource.setDriverClassName(<span class="string">"org.hsqldb.jdbcDriver"</span>);</div><div class="line">dataSource.setUrl(<span class="string">"jdbc:hsqldb:hsql://localhost:"</span>);</div><div class="line">dataSource.setUsername(<span class="string">"sa"</span>);</div><div class="line">dataSource.setPassword(<span class="string">""</span>);</div></pre></td></tr></table></figure></p>
+<p>相关连的 XML 配置：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DriverManagerDataSource"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClassName"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.driverClassName&#125;"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.url&#125;"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.username&#125;"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.password&#125;"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">"jdbc.properties"</span>/&gt;</span></div></pre></td></tr></table></figure></p>
+<p>DBCP 配置：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"org.apache.commons.dbcp.BasicDataSource"</span> <span class="attr">destroy-method</span>=<span class="string">"close"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClassName"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.driverClassName&#125;"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.url&#125;"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.username&#125;"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.password&#125;"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">"jdbc.properties"</span>/&gt;</span></div></pre></td></tr></table></figure></p>
+<p>C3P0 配置：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"com.mchange.v2.c3p0.ComboPooledDataSource"</span> <span class="attr">destroy-method</span>=<span class="string">"close"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClass"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.driverClassName&#125;"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcUrl"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.url&#125;"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"user"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.username&#125;"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.password&#125;"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">"jdbc.properties"</span>/&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="DataSourceUtils"><a href="#DataSourceUtils" class="headerlink" title="DataSourceUtils"></a>DataSourceUtils</h2><p>DataSourceUtils 类是一个便捷且强大的帮助类，它提供了从 JNDI 获取连接的静态方法，并在必要时关闭连接，它支持线程绑定连接，例如：DataSourceTransactionManager。</p>
+<h2 id="SmartDataSource"><a href="#SmartDataSource" class="headerlink" title="SmartDataSource"></a>SmartDataSource</h2><p>SmartDataSource 接口应由可以提供与关系数据库连接的类实现，它扩展了 DataSource 接口，允许使用它来查询在给定操作之后是否应该关闭连接。</p>
+<h2 id="AbstractDataSource"><a href="#AbstractDataSource" class="headerlink" title="AbstractDataSource"></a>AbstractDataSource</h2><p>AbstractDataSource 是 Spring DataSource 实现的一个抽象基类，如果需要自定义 DataSource 实现，即可继承 AbstractDataSource 类。</p>
+<h2 id="SingleConnectionDataSource"><a href="#SingleConnectionDataSource" class="headerlink" title="SingleConnectionDataSource"></a>SingleConnectionDataSource</h2><p>SingleConnectionDataSource 类是 SmartDataSource（封装了每次使用后未关闭的单个连接） 接口的实现。它能够与简单的 JNDI 环境结合，轻松地在应用程序服务器之外测试代码，与 DriverManagerDataSource 相反，它一直重复使用同一个连接，避免过多创建物理连接。</p>
+<h2 id="DriverManagerDataSource"><a href="#DriverManagerDataSource" class="headerlink" title="DriverManagerDataSource"></a>DriverManagerDataSource</h2><p>DriverManagerDataSource 类是标准 DataSource 接口的实现，它通过 bean 属性配置简单的 JDBC 驱动程序，并且每次都返回一个新的连接。   </p>
+<h2 id="TransactionAwareDataSourceProxy"><a href="#TransactionAwareDataSourceProxy" class="headerlink" title="TransactionAwareDataSourceProxy"></a>TransactionAwareDataSourceProxy</h2><p>TransactionAwareDataSourceProxy 是目标 DataSource 的代理，它包装目标 DataSource 以增强对 Spring 管理事务的认识。在这方面，它类似于由 Java EE 服务器提供的事务 JNDI DataSource。</p>
+<h2 id="DataSourceTransactionManager"><a href="#DataSourceTransactionManager" class="headerlink" title="DataSourceTransactionManager"></a>DataSourceTransactionManager</h2><p>DataSourceTransactionManager 类是单个 JDBC 数据源的 PlatformTransactionManager 实现。它将 JDBC 连接从指定的数据源绑定到当前正在执行的线程，从而潜在地允许每个数据源一个线程连接。需要应用程序代码来通过 DataSourceUtils.getConnection（DataSource） 而不是 Java EE 的标准 DataSource.getConnection 来检索 JDBC 连接。它抛出 unchecked 的 org.springframework.dao 异常，而不是 checked SQLExceptions。<br>DataSourceTransactionManager 类支持自定义隔离级别，并且用于作为 JDBC 语句查询超时应用的超时。为了支持后者，应用程序代码必须对每个创建的语句使用 JdbcTemplate 或调用 DataSourceUtils.applyTransactionTimeout（..） 方法。</p>
+<h2 id="NativeJdbcExtractor"><a href="#NativeJdbcExtractor" class="headerlink" title="NativeJdbcExtractor"></a>NativeJdbcExtractor</h2><p>使用 NativeJdbcExtractor 配置自己的 JdbcTemplate 或 OracleLobHandler 访问与标准 JDBC API 不同的供应商特定的 JDBC 方法。</p>
+<h2 id="初始化-DataSource"><a href="#初始化-DataSource" class="headerlink" title="初始化 DataSource"></a>初始化 DataSource</h2><p>使用 Spring XML 初始化数据库，提供一个指向 DataSource bean 的引用，在 spring-jdbc 命名空间中使用 initialize-database 标签：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">jdbc:initialize-database</span> <span class="attr">data-source</span>=<span class="string">"dataSource"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">jdbc:script</span> <span class="attr">location</span>=<span class="string">"classpath:com/foo/sql/db-schema.sql"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">jdbc:script</span> <span class="attr">location</span>=<span class="string">"classpath:com/foo/sql/db-test-data.sql"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">jdbc:initialize-database</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>然而，为了获得对现有数据的创建和删除的更多控制，XML 命名空间提供了一些附加选项。第一个是用于开启和关闭初始化的标志，这可以根据环境进行设置（例如，从系统属性或环境 bean 中提取布尔值），例如：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">jdbc:initialize-database</span> <span class="attr">data-source</span>=<span class="string">"dataSource"</span> <span class="attr">enabled</span>=<span class="string">"#&#123;systemProperties.INITIALIZE_DATABASE&#125;"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">jdbc:script</span> <span class="attr">location</span>=<span class="string">"..."</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">jdbc:initialize-database</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>第二个选项是更能容忍故障，可以控制初始化程序的能力来忽略执行 SQL 脚本产生的某一错误，例如：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">jdbc:initialize-database</span> <span class="attr">data-source</span>=<span class="string">"dataSource"</span> <span class="attr">ignore-failures</span>=<span class="string">"DROPS"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">jdbc:script</span> <span class="attr">location</span>=<span class="string">"..."</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">jdbc:initialize-database</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h2><p><a href="http://baike.baidu.com/link?url=d7y8v6ipdY1kKXBOoV4NU3MyMZi62nekBGBPcnSN0-LbJ7I5DxGU4C5njmcFPFVXP_JdA_tpAwSOFNOXUoc1a_jPFyg3iDCBPWR-sC3-_OtiW9ZFavHunQzgbXk4Ju-UuIepOOdH2gzsWDznpcvRQ8IgWWk9VW0WFJoZNfC60-AbKDdFV6VK-xNeyXw6EdEy" target="_blank" rel="external">Spring 3.x 企业应用开发实战</a><br><a href="http://docs.spring.io/spring/docs/4.3.5.BUILD-SNAPSHOT/spring-framework-reference/htmlsingle/" target="_blank" rel="external">Spring Framework Reference Documentation</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+            <a href="/tags/spring/" rel="tag">#spring</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/25/Spring笔记（十三）—— Spring JDBC 访问数据库之 JdbcTemplate 及错误处理/" rel="next" title="Spring笔记（十三）—— Spring JDBC 访问数据库之 JdbcTemplate 及错误处理">
+                <i class="fa fa-chevron-left"></i> Spring笔记（十三）—— Spring JDBC 访问数据库之 JdbcTemplate 及错误处理
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/27/Spring笔记（十五）—— Spring JDBC 访问数据库之 SimpleJdbc/" rel="prev" title="Spring笔记（十五）—— Spring JDBC 访问数据库之 SimpleJdbc">
+                Spring笔记（十五）—— Spring JDBC 访问数据库之 SimpleJdbc <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/26/Spring笔记（十四）—— Spring JDBC 访问数据库之控制数据库连接/"
+           data-title="Spring笔记（十四）—— Spring JDBC 访问数据库之控制数据库连接" data-url="http://yoursite.com/2016/11/26/Spring笔记（十四）—— Spring JDBC 访问数据库之控制数据库连接/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Lio Lin" />
+          <p class="site-author-name" itemprop="name">Lio Lin</p>
+          <p class="site-description motion-element" itemprop="description">No pains no gains, Believes oneself, Nothing impossible!</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DataSource"><span class="nav-number">1.</span> <span class="nav-text">DataSource</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DataSourceUtils"><span class="nav-number">2.</span> <span class="nav-text">DataSourceUtils</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SmartDataSource"><span class="nav-number">3.</span> <span class="nav-text">SmartDataSource</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AbstractDataSource"><span class="nav-number">4.</span> <span class="nav-text">AbstractDataSource</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SingleConnectionDataSource"><span class="nav-number">5.</span> <span class="nav-text">SingleConnectionDataSource</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DriverManagerDataSource"><span class="nav-number">6.</span> <span class="nav-text">DriverManagerDataSource</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TransactionAwareDataSourceProxy"><span class="nav-number">7.</span> <span class="nav-text">TransactionAwareDataSourceProxy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DataSourceTransactionManager"><span class="nav-number">8.</span> <span class="nav-text">DataSourceTransactionManager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NativeJdbcExtractor"><span class="nav-number">9.</span> <span class="nav-text">NativeJdbcExtractor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化-DataSource"><span class="nav-number">10.</span> <span class="nav-text">初始化 DataSource</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料："><span class="nav-number">11.</span> <span class="nav-text">参考资料：</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lio Lin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"windows7lake"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
